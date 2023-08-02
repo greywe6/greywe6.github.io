@@ -4,7 +4,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 	'use strict';
 	Lampa.Platform.tv();
         Lampa.Storage.set('source', 'cub');
-        Lampa.Storage.set('parser_use', 'true');
+        //Lampa.Storage.set('parser_use', 'true');
         // Lampa.Storage.set('jackett_url', '');
         // Lampa.Storage.set('jackett_key', '');
         // Lampa.Storage.set('parse_lang', 'lg');
@@ -43,7 +43,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 	}
 	});
 	
-	var version_modss = '3.0', API = 'http://api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = false, user_id = '', uid = 'd75654a4d230e3daf215f7befc4a2684', IP, logged = false;
+	var version_modss = '3.0', API = 'http://api.lampa.stream/', type = '', cards, ping_auth, manifest, menu_list = [], vip = false, user_id = '', uid = 'd75654a4d230e3daf215f7befc4a2684', IP, logged = false;
 	
 	var Modss = {
 		init: function () {
@@ -306,48 +306,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
   			});
 			});
 		}, 
-		
-	  check: function(name, call) {
-      var json = Modss.jack[name];
-      var item = $('.settings-param__status.one');
-      var item2 = $('.settings-param__status.act');
-      var url = (json && json.url || Lampa.Storage.get('jackett_url'));
-      var u = url + '/api/v2.0/indexers/' + (Lampa.Storage.field('jackett_interview') == 'healthy' ? 'status:healthy' : 'all') + '/results?apikey=' + (json && json.key || Lampa.Storage.get('jackett_key'));
-      Pub.network.timeout(10000);
-      var check = function check (ok) {
-        Pub.network["native"](Lampa.Utils.checkHttp(u), function (t) {
-          if(name && !call) item2.removeClass('active error wait').addClass('active');
-          if(call) {
-            if(name && !Modss.jack[name].check) Modss.jack[name].check = true;
-            if(name && !Modss.jack[name].ok) Modss.jack[name].ok = true;
-            call(true);
-          }
-        }, function (a, c) {
-          console.error('Request', 'parser error - ', Lampa.Utils.checkHttp(u));
-          Lampa.Noty.show(Pub.network.errorDecode(a, c) + ' - ' + url);
-          if(name && !call) item2.removeClass('active error wait').addClass('error');
-          if(call) {
-            if(ok && name && !Modss.jack[name].check) Modss.jack[name].check = true;
-            if(ok && name && !Modss.jack[name].ok) Modss.jack[name].ok = false;
-            call(false);
-          }
-        });
-      };
-      if(name && !call) check();
-      else if(call && name && !Modss.jack[name].check) check(true);
-      else {
-        if(name && Modss.jack[name].ok) if(call) call(true);
-        if(name && !Modss.jack[name].ok) if(call) call(false);
-        if(Boolean(Modss.jack[Lampa.Storage.get('jackett_url2')])) item.removeClass('wait').addClass(Modss.jack[Lampa.Storage.get('jackett_url2')].ok ? 'active' : 'error');
-      }
-    },
-    jack:{					
-      j_yourok_ru:      {url:'j.yourok.ru', key:1,lang:'df_lg', interv:'healthy'},
-      jacred_xyz:       {url:'jacred.xyz', key:'',lang:'df_lg', interv:'all'},
-      spawn_pp_ua:      {url:'spawn.pp.ua:59117', key:2,lang:'df', interv:'all'},
-      jacred_ru:        {url:'jacred.ru', key:'',lang:'lg', interv:'healthy'},
-      jac_unknown:      {url:'188.119.113.252:9117', key:1,lang:'lg', interv:'healthy'},
-    },
     showModal: function(text, onselect) {
       Lampa.Modal.open({
         title: '',
@@ -2124,64 +2082,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
     		en: 'Radio'
     	}
     });
-		function FreeJaketOpt() {
-  			Lampa.Arrays.getKeys(Modss.jack).map(function (el){
-  			  jackets[el] = el.replace(/_/g,'.');
-  			});
-  			var params = Lampa.SettingsApi.getParam('parser')
-        if(params){
-           var param = params.find(function (p){
-             return p.param.name == 'jackett_url2';
-           });
-          if(param) Lampa.Arrays.remove(params, param);
-        }
-        Lampa.SettingsApi.addParam({
-  				component: 'parser',
-  				param: {
-  					name: 'jackett_url2', 
-  					type: 'select', 			
-  					values: jackets,
-  					default: 'jacred_ru'				
-  				},
-  				field: {
-  					name: 'Публичные JACKett Ⓜ️', 			
-  					description: 'Обновится после выхода из настроек' 
-  				},
-  				onChange: function (value) { 	
-  					Lampa.Storage.set('jackett_url', Modss.jack[value].url);
-  					Lampa.Storage.set('jackett_key', Modss.jack[value].key);
-  					Lampa.Storage.set('jackett_interview',Modss.jack[value].interv);
-  					Lampa.Storage.set('parse_in_search', false);
-  					Lampa.Storage.set('parse_lang', Modss.jack[value].lang);
-  					Lampa.Settings.update();							
-  			 	},
-  			  onRender: function (item) {
-  			    setTimeout(function() {
-  		        $('div[data-children="parser"]').on('hover:enter', function(){
-  				  		Lampa.Settings.update();							
-  				    });
-  				    $('[data-name="jackett_url2"]').on('hover:enter', function (el){
-    		        Lampa.Select.render().find('.selectbox-item__title').map(function(i, item){
-    		          Modss.check($(item).text().toLowerCase().replace(/\./g,'_'), function(e){
-    		            $(item).css('color', e ? '#23ff00' : '#d10000');
-    		          });
-    		        });
-      		    });
-  				    if(Lampa.Storage.field('parser_use')) {
-    				    item.show();
-    				    if(Boolean(Modss.jack[Lampa.Storage.get('jackett_url2')])) $('.settings-param__name', item).before('<div class="settings-param__status one '+(Modss.jack[Lampa.Storage.get('jackett_url2')].ok ? "active" : "error")+'"></div>');
-    			      $('[data-name="jackett_url"] .settings-param__name').before('<div class="settings-param__status wait act"></div>');
-    			      $('.settings-param__name', item).css('color','#f3d900');
-    				    $('div[data-name="jackett_url2"]').insertAfter('div[data-children="parser"]');
-    				    Modss.check($('.settings-param__value', item).text().toLowerCase().replace(/\./g,'_'), function(e){
-    			        Modss.check(Lampa.Storage.get('jackett_url'));
-                  $($('.settings-param__status', item)).removeClass('active error wait').addClass(e ? 'active' : 'error');
-                });
-  				    } else item.hide();
-            }, 50);
-     	    }
-  			});
-  		}
+
 		Lampa.Listener.follow('full', function (e) {
 			if (e.type == 'complite') {
 				cards = e.data.movie;
@@ -2206,7 +2107,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
      } 
     });
 		Lampa.Storage.listener.follow('change', function (e) {
-		  //if(e.name == 'jackett_key' || e.name == 'jackett_url') Modss.check(e.value);
 		});
 		Lampa.Settings.listener.follow('open', function (e) {
 			if (e.name == 'main') {
@@ -2266,7 +2166,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			  var title = $('[data-name="priority_balanser"] .settings-param__value', e.body);
 			  title.text(title.text().split('<').shift());
 			}
-			if (e.name == 'parser') FreeJaketOpt();
 		});
 		if (Lampa.Manifest.app_digital >= 177) {
       Lampa.Storage.sync('my_col', 'object_object');
