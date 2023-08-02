@@ -9,8 +9,8 @@ Lampa.SettingsApi.addParam({
      values: {
         0:	'Не выбран',
         1:	'localhost:8090',
-	2:	'192.168.100.2:8090',
-	3:	'192.168.100.3:8090',
+	2:	'TS на ноутбуке',
+	3:	'TS на телевизоре LG',
 	4:	'Torrserver 1',
 	5:	'Torrserver 2',
 	6:	'Torrserver 3',
@@ -109,8 +109,8 @@ Lampa.SettingsApi.addParam({
      values: {
         0:	'Не выбран',
         1:	'localhost:8090',
-	2:	'192.168.100.2:8090',
-	3:	'192.168.100.3:8090',
+	2:	'TS на ноутбуке',
+	3:	'TS на телевизоре LG',
 	4:	'Torrserver 1',
 	5:	'Torrserver 2',
 	6:	'Torrserver 3',
