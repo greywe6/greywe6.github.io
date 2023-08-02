@@ -42,7 +42,7 @@ Lampa.SettingsApi.addParam({
 	34:	'Torrserver 31',
 	35:	'Torrserver 35',
      },
-     default: '0'
+     default: '1'
     },
     field: {
      name: 'Осн. ссылка из списка',
