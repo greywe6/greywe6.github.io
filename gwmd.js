@@ -343,8 +343,26 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
       jacred_ru:        {url:'jacred.ru', key:'',lang:'lg', interv:'healthy'},
       jac_unknown:      {url:'188.119.113.252:9117', key:1,lang:'lg', interv:'healthy'},
     },
-
-	
+    showModal: function(text, onselect) {
+      Lampa.Modal.open({
+        title: '',
+        align: 'center',
+        zIndex: 300,
+        html: $('<div class="about">' + text + '</div>'),
+        buttons: [{
+          name: Lampa.Lang.translate('settings_param_no'),
+          onSelect: function onSelect() {
+            Lampa.Modal.close();
+            Lampa.Controller.toggle('content');
+          }
+        }, {
+          name: Lampa.Lang.translate('settings_param_yes'),
+          onSelect: onselect
+        }]
+      });
+    }, 
+    balansPrf: 'videocdn'
+	}; 
 	var Filmix = {
   	network: new Lampa.Reguest(),
   	api_url: 'http://filmixapp.cyou/api/v2/',
