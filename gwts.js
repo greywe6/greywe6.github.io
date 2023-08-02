@@ -200,18 +200,6 @@ Lampa.SettingsApi.addParam({
           }, 0);
         }
    });
-   (function(m, e, t, r, i, k, a) {
-       m[i] = m[i] || function() {
-	       (m[i].a = m[i].a || []).push(arguments)
-       };
-       m[i].l = 1 * new Date();
-       for(var j = 0; j < document.scripts.length; j++) {
-	       if(document.scripts[j].src === r) {
-		       return;
-	       }
-       }
-       k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-   })
 
 //Lampa.Template.add('torserv1_css', "\n    <style>\n	div.settings-param[data-name='torrserver_url'], div.settings-param[data-name='torrserver_url_two'] {padding:0;}\n	div.settings-param[data-name='torrserver_url'] .settings-param__status, div.settings-param[data-name='torrserver_url_two'] .settings-param__status {top:3.7em;z-index:9;}\n	</style>\n"); 
 //$('body').append(Lampa.Template.get('torserv1_css', {}, true));
