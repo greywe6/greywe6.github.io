@@ -12,7 +12,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
         // Lampa.Storage.set('torrserver_use_link', 'one');
         // Lampa.Storage.set('torrserver_url', '');
         // Lampa.Storage.set('jackett_interview', 'all');
-	// Вкл. отображения постеров 
+	// Вкл. отображения постеров TMDB
         Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
         Lampa.Storage.set('tmdb_proxy_api', 'http://cors.lampa32.ru/proxy/');
 	//Вкл. TorrServer на WebOs
