@@ -19,11 +19,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 	window.lampa_settings.torrents_use = true;
 	window.lampa_settings.demo = false;
 	window.lampa_settings.read_only = false;
-
-        //Включение и подключение Парсер 
-	var script = document.createElement ('script');
-        script.src = 'https://greywe6.github.io/gwp.js';
-        document.getElementsByTagName ('head')[0].appendChild (script);
 	
 	if (Lampa.Platform.is('android') && typeof WebAssembly !== 'undefined')
 	//Контент 18+
@@ -2688,6 +2683,7 @@ if(Lampa.Storage.field('SISI_fix') == true) $("[data-action=sisi]").eq(0).show()
 					}
 				});
 			}
+			FreeJaketOpt();
 		}
 		
 		if (window.appready) add();else {
