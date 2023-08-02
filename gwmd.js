@@ -22,15 +22,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 	window.lampa_settings.demo = false;
 	window.lampa_settings.read_only = false;
 
-	//Остальное
-	if (Lampa.Platform.is('android') && typeof WebAssembly !== 'undefined')
-	//Контент 18+
-	Lampa.Utils.putScriptAsync(['https://bwa.to/s'], function () {});
-        Lampa.Utils.putScriptAsync(['http://sisi.am/nyam.serv.js?v21'], function () {});
-	//Lampa.Utils.putScriptAsync(['http://webosapp.club/ffdts.js'], function () {});
-	Lampa.Utils.putScriptAsync(['https://nb557.github.io/plugins/kp_source.js'], function () {});
-	//Lampa.Utils.putScriptAsync(['http://github.freebie.tom.ru/want.js'], function () {});
-	
 	Lampa.Listener.follow('app', function(e) {
 	if(e.type == 'ready') {
         //Удалить кнопку рекламы Премиум в шапке
