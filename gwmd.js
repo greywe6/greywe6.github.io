@@ -22,11 +22,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 	window.lampa_settings.demo = false;
 	window.lampa_settings.read_only = false;
 
-	//Общедоступные торрсервера
-	var script = document.createElement ('script');
-        script.src = 'https://greywe6.github.io/gwts.js';
-        document.getElementsByTagName ('head')[0].appendChild (script);
-
 	//Остальное
 	if (Lampa.Platform.is('android') && typeof WebAssembly !== 'undefined')
 	//Контент 18+
