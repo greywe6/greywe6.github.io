@@ -25,7 +25,7 @@ Lampa.SettingsApi.addParam({
         param: {
           name: 'pva_timeline',
           type: 'trigger', //доступно select,input,trigger,title,static
-          default: true
+          default: false
         },
         field: {
           name: 'Синхронизация таймкодов', 
