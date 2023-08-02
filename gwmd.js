@@ -113,10 +113,10 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			else $('body').find('[data-action="collection"]').remove();
 			menu_item.on('hover:enter', function () {
 				var item = [{
-				/*title: Lampa.Lang.translate('menu_collections')+' '+Lampa.Lang.translate('title_on_the')+ ' filmix',
-					url: 'https://filmix.ac/playlists/rateup',
+				title: Lampa.Lang.translate('menu_collections')+' '+Lampa.Lang.translate('title_on_the')+ ' filmix',
+					url: 'https://filmix.zone/playlists/rateup',
 					source: 'filmix'
-				}, {*/
+				}, {
 						title: Lampa.Lang.translate('menu_collections') + ' ' + Lampa.Lang.translate('title_on_the') + ' rezka',
 						url: 'http://hdrezka.co/collections/',
 						source: 'rezka'
