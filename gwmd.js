@@ -5830,17 +5830,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
         ru: 'Для просмотра в качестве 720p нужно добавить устройство в свой аккаунт на сайте filmix иначе будет заставка на видео.<br><br>Перейти в настройки и добавить?',
         uk: 'Для перегляду в якостi 720p потрібно додати пристрій до свого облікового запису на сайті filmix інакше буде заставка на відео.<br><br>Перейти до налаштувань і додати?',
         en: 'To view in 720p quality, you need to add a device to your account on the filmix website, otherwise there will be a splash screen on the video.<br><br>Go to settings and add?'
-      },
-    	fork_auth_modal_title: {
-    		ru: '1. Авторизируйтесь на: <a style="color:#fff" href="#">http://forktv.me</a><br>2. Потребуется оформить подписку<br>3. В поле "Ваш ID/MAC" добавьте код',
-    		uk: '1. Авторизуйтесь на: <a style="color:#fff" href="#">http://forktv.me</a><br>2. Потрібно оформити передплату<br>3. У полі "Ваш ID/MAC" додайте код',
-    		en: '1. Log in to: <a style="color:#fff" href="#">http://forktv.me</a><br>2. Subscription required<br>3. In the "Your ID / MAC" field, add the code'
-    	},
-    	fork_modal_wait: {
-    		ru: '<b style="font-size:1em">Ожидание идентификации кода</b><hr>После завершения идентификации произойдет перенаправление в обновленный раздел ForkTV',
-    		uk: '<b style="font-size:1em">Очiкуемо ідентифікації коду</b><hr>Після завершення ідентифікації відбудеться перенаправлення в оновлений розділ ForkTV',
-    		en: '<b style="font-size:1em">Waiting for code identification</b><hr>After identification is completed, you will be redirected to the updated ForkTV section'
-    	},
+        },
     	title_status: {
     		ru: 'Статус',
     		uk: 'Статус',
@@ -5975,51 +5965,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
     		ru: 'Позволяет просматривать фильмы, сериалы в режиме Stream',
     		uk: 'Дозволяє переглядати фільми, серіали в режимі Stream',
     		en: 'Allows you to watch movies, series in Stream mode'
-    	},
-    	fork_enable_descr: {
-    		ru: 'Отображает пункт <b>"ForkTV"</b> в главном меню с популярными источниками, торрентами',
-    		uk: 'Відображає пункт <b>"ForkTV"</b> у головному меню з популярними джерелами, торрентами',
-    		en: 'Displays <b>"ForkTV"</b> item in main menu with popular sources, torrents'
-    	},
-    	title_fork_edit_cats: {
-    		ru: 'Изменить разделы',
-    		uk: 'Змінити розділи',
-    		en: 'Edit Sections'
-    	},
-    	title_fork_add_cats: {
-    		ru: 'Добавить разделы',
-    		uk: 'Додати розділи',
-    		en: 'Add Sections'
-    	},
-    	title_fork_clear: {
-    		ru: 'Очистить разделы',
-    		uk: 'Очистити розділи',
-    		en: 'Clear Sections'
-    	},
-    	title_fork_clear_descr: {
-    		ru: 'Будет выполнена очистка всех выбранных разделов',
-    		uk: 'Буде виконано очищення всіх вибраних розділів',
-    		en: 'All selected partitions will be cleared'
-    	},
-    	title_fork_clear_noty: {
-    		ru: 'Разделы успешно очищены',
-    		uk: 'Розділи успішно очищені',
-    		en: 'Partitions cleared successfully'
-    	},
-    	title_fork_reload_code: {
-    		ru: 'Обновить код',
-    		uk: 'Оновити код',
-    		en: 'Update Code'
-    	},
-    	title_fork_current: {
-    		ru: 'Текущий',
-    		uk: 'Поточний',
-    		en: 'Current'
-    	},
-    	title_fork_new: {
-    		ru: 'Новый',
-    		uk: 'Новий',
-    		en: 'New'
     	},
     	title_tv_clear_fav: {
     		ru: 'Очистить избранное',
