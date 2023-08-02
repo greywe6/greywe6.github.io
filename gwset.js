@@ -1,6 +1,7 @@
 (function () {
     'use strict';
         Lampa.Platform.tv();
+	
     //Настройки программы по-умолчанию
         Lampa.Storage.set('helper', false);
         Lampa.Storage.set('source', 'cub');
@@ -11,11 +12,16 @@
         Lampa.Storage.set('video_quality_default', '2160');
 	Lampa.Storage.set('player_launch_trailers', 'youtube');
 	
+    //Видимость постеров TMDB-Proxy
+	Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
+        Lampa.Storage.set('tmdb_proxy_api', 'http://cors.lampa32.ru/proxy/');
+	
     //Вкл. TorrServer на WebOs
 	window.lampa_settings.torrents_use = true;
 	window.lampa_settings.demo = false;
 	window.lampa_settings.read_only = false;
-    //Остальное
+	
+    //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	if(e.type == 'ready') {
         //Удалить кнопку рекламы Премиум в шапке
