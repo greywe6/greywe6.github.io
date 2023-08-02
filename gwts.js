@@ -10,7 +10,7 @@ Lampa.SettingsApi.addParam({
         0:	'Не выбран',
         1:	'localhost:8090',
 	2:	'192.168.100.2:8090',
-	3:	'192.168.100.9:8090',
+	3:	'192.168.100.3:8090',
 	4:	'Torrserver 1',
 	5:	'Torrserver 2',
 	6:	'Torrserver 3',
@@ -53,7 +53,7 @@ Lampa.SettingsApi.addParam({
      if (value == '0') Lampa.Storage.set('torrserver_url', '');
      if (value == '1') Lampa.Storage.set('torrserver_url', 'localhost:8090');
      if (value == '2') Lampa.Storage.set('torrserver_url', '192.168.100.2:8090');
-     if (value == '3') Lampa.Storage.set('torrserver_url', '192.168.100.9:8090');
+     if (value == '3') Lampa.Storage.set('torrserver_url', '192.168.100.3:8090');
      if (value == '4') Lampa.Storage.set('torrserver_url', 'torr.myftp.biz:8090');
      if (value == '5') Lampa.Storage.set('torrserver_url', 'trs.my.to:8595');
      if (value == '6') Lampa.Storage.set('torrserver_url', 'tr.my.to:8595');
@@ -110,7 +110,7 @@ Lampa.SettingsApi.addParam({
         0:	'Не выбран',
         1:	'localhost:8090',
 	2:	'192.168.100.2:8090',
-	3:	'192.168.100.9:8090',
+	3:	'192.168.100.3:8090',
 	4:	'Torrserver 1',
 	5:	'Torrserver 2',
 	6:	'Torrserver 3',
@@ -153,7 +153,7 @@ Lampa.SettingsApi.addParam({
      if (value == '0') Lampa.Storage.set('torrserver_url_two', '');
      if (value == '1') Lampa.Storage.set('torrserver_url_two', 'localhost:8090');
      if (value == '2') Lampa.Storage.set('torrserver_url_two', '192.168.100.2:8090');
-     if (value == '3') Lampa.Storage.set('torrserver_url_two', '192.168.100.9:8090');
+     if (value == '3') Lampa.Storage.set('torrserver_url_two', '192.168.100.3:8090');
      if (value == '4') Lampa.Storage.set('torrserver_url_two', 'torr.myftp.biz:8090');
      if (value == '5') Lampa.Storage.set('torrserver_url_two', 'trs.my.to:8595');
      if (value == '6') Lampa.Storage.set('torrserver_url_two', 'tr.my.to:8595');
