@@ -47,22 +47,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
           });
         }, 200);
       });
-      if (Lampa.Storage.field('mods_tv_butt_ch')) Lampa.Keypad.listener.follow('keydown', function (e) {
-    		var next = (e.code == 427 || e.code == 33 || e.code == 39);
-    		var prev = (e.code == 428 || e.code == 34 || e.code == 37);
-    		var none = !$('.panel--visible .focus').length && Lampa.Controller.enabled().name !== 'select';
-    		if (Lampa.Activity.active() && Lampa.Activity.active().component == 'modss_tv' && Lampa.Player.opened()) {
-    		  //Lampa.Noty.show('code_ '+e.code);
-    			if (prev && none) {
-    		    //Lampa.Noty.show('code_prev');
-    				Lampa.PlayerPlaylist.prev();
-    			}
-    			if (next && none) {
-    			  //Lampa.Noty.show('code_ next');
-    				Lampa.PlayerPlaylist.next();
-    			}
-    		}
-    	});
     	if (!window.FX) {
   			window.FX = {
   				max_qualitie: 480,
@@ -6149,13 +6133,6 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 						icon: '<svg height="57" viewBox="0 0 58 57" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 20.3735V45H26.8281V34.1262H36.724V26.9806H26.8281V24.3916C26.8281 21.5955 28.9062 19.835 31.1823 19.835H39V13H26.8281C23.6615 13 20 15.4854 20 20.3735Z" fill="white"/><rect x="2" y="2" width="54" height="53" rx="5" stroke="white" stroke-width="4"/></svg>'
 					});
 				}
-				if (Lampa.Settings.main().render().find('[data-component="modss_tv_param"]').length == 0) {
-					Lampa.SettingsApi.addComponent({
-						component: 'modss_tv_param',
-						name: 'Modss-TV',
-						icon: '<svg height="57px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" color="#fff" fill="currentColor" class="bi bi-tv"><path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zM13.991 3l.024.001a1.46 1.46 0 0 1 .538.143.757.757 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.464 1.464 0 0 1-.143.538.758.758 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.464 1.464 0 0 1-.538-.143.758.758 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.46 1.46 0 0 1 .143-.538.758.758 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3h11.991zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/></svg>'
-					});
-				}
 				if (Lampa.Settings.main().render().find('[data-component="modss_online_param"]').length == 0) {
 					Lampa.SettingsApi.addComponent({
 						component: 'modss_online_param',
@@ -6164,7 +6141,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 					});
 				}
 				Lampa.Settings.main().update();
-				Lampa.Settings.main().render().find('[data-component="modss_online_param"], [data-component="filmix"], [data-component="rezka_param"], [data-component="pub_param"], [data-component="filmix_param"], [data-component="modss_tv_param"]').addClass('hide');
+				Lampa.Settings.main().render().find('[data-component="modss_online_param"], [data-component="filmix"], [data-component="rezka_param"], [data-component="pub_param"], [data-component="filmix_param"]').addClass('hide');
 			}
 			if (e.name == 'mods_proxy') {
 				$('.settings__title').text(Lampa.Lang.translate('title_proxy') + " MODS's");
