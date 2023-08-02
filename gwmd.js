@@ -2683,7 +2683,6 @@ if(Lampa.Storage.field('SISI_fix') == true) $("[data-action=sisi]").eq(0).show()
 					}
 				});
 			}
-			FreeJaketOpt();
 		}
 		
 		if (window.appready) add();else {
