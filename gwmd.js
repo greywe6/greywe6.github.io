@@ -38,14 +38,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			this.buttBack();
 			this.radio();
 			this.snow();
-			Lampa.Settings.main().render().find('[data-component="plugins"]').unbind('hover:enter').on('hover:enter', function () {
-        Lampa.Extensions.show();
-        setTimeout(function (){
-          $('.extensions__item-author', Lampa.Extensions.render()).map(function (i, e){
-            if(e.textContent == '@modss_group') $(e).html('💎').append('<span class="extensions__item-premium">VIP buy at @modssmy_bot</span>');
-          });
-        }, 200);
-      });
+			
     	if (!window.FX) {
   			window.FX = {
   				max_qualitie: 480,
