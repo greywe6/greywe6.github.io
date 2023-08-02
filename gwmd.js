@@ -16,7 +16,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
         Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
         Lampa.Storage.set('tmdb_proxy_api', 'http://cors.lampa32.ru/proxy/');
 	//Вкл. TorrServer на WebOs
-	window.lampa_settings.parser_use = true;
+	window.lampa_settings.parser = true;
 	window.lampa_settings.torrents_use = true;
 	window.lampa_settings.demo = false;
 	window.lampa_settings.read_only = false;
