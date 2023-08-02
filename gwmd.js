@@ -4,7 +4,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 	'use strict';
 	Lampa.Platform.tv();
         Lampa.Storage.set('source', 'cub');
-        //Lampa.Storage.set('parser_use', 'true');
+        Lampa.Storage.set('parser_use', 'true');
         // Lampa.Storage.set('jackett_url', '');
         // Lampa.Storage.set('jackett_key', '');
         // Lampa.Storage.set('parse_lang', 'lg');
