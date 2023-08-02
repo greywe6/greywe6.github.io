@@ -1,15 +1,15 @@
 (function () {
     'use strict';
-    Lampa.Platform.tv();
-    Lampa.Storage.set('source', 'cub');
-    Lampa.Storage.set('parser_use', 'true');
-    // Lampa.Storage.set('jackett_url', '');
-    // Lampa.Storage.set('jackett_key', '');
-    // Lampa.Storage.set('parse_lang', 'lg');
-    // Lampa.Storage.set('parse_in_search', 'false');
-    // Lampa.Storage.set('torrserver_use_link', 'one');
-    // Lampa.Storage.set('torrserver_url', '');
-    // Lampa.Storage.set('jackett_interview', 'all');
+        Lampa.Platform.tv();
+    //Настройки программы по-умолчанию
+        Lampa.Storage.set('helper', false);
+        Lampa.Storage.set('source', 'cub');
+        Lampa.Storage.set('parser_use', 'true');
+        Lampa.Storage.set('poster_size', 'w500');
+        Lampa.Storage.set('glass_style', 'true');
+        Lampa.Storage.set('glass_opacity', 'blacked');
+        Lampa.Storage.set('video_quality_default', '2160');
+	Lampa.Storage.set('player_launch_trailers', 'youtube');
 	
     //Вкл. TorrServer на WebOs
 	window.lampa_settings.torrents_use = true;
