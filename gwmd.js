@@ -9,14 +9,14 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 	
 	if (Lampa.Platform.is('android') && typeof WebAssembly !== 'undefined')
 	Lampa.Utils.putScriptAsync(['https://bwa.to/s'], function () {});
-        Lampa.Utils.putScriptAsync(['http://sisi.am/nyam.serv.js?v21'], function () {});
+    Lampa.Utils.putScriptAsync(['http://sisi.am/nyam.serv.js?v21'], function () {});
 	//Lampa.Utils.putScriptAsync(['http://webosapp.club/ffdts.js'], function () {});
 	Lampa.Utils.putScriptAsync(['https://nb557.github.io/plugins/kp_source.js'], function () {});
 	//Lampa.Utils.putScriptAsync(['http://github.freebie.tom.ru/want.js'], function () {});
 	
 	Lampa.Listener.follow('app', function(e) {
 		if(e.type == 'ready') {
-                //Удалить кнопку рекламы Премиум в шапке
+        //Удалить кнопку рекламы Премиум в шапке
 		$('#app > div.head > div > div.head__actions > .open--premium').remove();
 		//Удалить кнопку Лента в шапке
 		$('#app > div.head > div > div.head__actions > .open--feed').remove();
@@ -25,8 +25,8 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 		$('#reboot').on('hover:enter hover:click hover:touch', function() {location.reload();});
 		//Свои цвета/стили
 		Lampa.Template.add('stlico_css', "\n   <style>\n .player-panel__timenow{font-size:1.3em;}\n .player-panel__timeend{font-size:1.3em;}\n .full-start-new__buttons .full-start__button:not(.focus) span{display:block;}\n .full-start__button.selector.button--priority svg{color:#FF4242;}\n .menu__item.focus, .menu__item.traverse, .menu__item.hover {color:#000!important;}\n    </style>\n"); 
-    		$('body').append(Lampa.Template.get('stlico_css', {}, true));
-		}
+        $('body').append(Lampa.Template.get('stlico_css', {}, true));
+	}
 	});
 	
 	var version_modss = '3.0', API = 'http://api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = false, user_id = '', uid = 'd75654a4d230e3daf215f7befc4a2684', IP, logged = false;
@@ -88,7 +88,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			else $('body').find('[data-action="Radio_n"]').remove();
 		},
 		
-    sources: function () {
+        sources: function () {
 			var sources;
 			if (Lampa.Params.values && Lampa.Params.values['source']) {
         sources = Object.assign({}, Lampa.Params.values['source']);
@@ -104,9 +104,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
       }
 
       Lampa.Params.select('source', sources, 'tmdb');
-		},
-		
-		
+		},			
 		collections: function () {
 			var menu_item = $('<li class="menu__item selector" data-action="collection"><div class="menu__ico"><img src="./img/icons/menu/catalog.svg"/></div><div class="menu__text">' + Lampa.Lang.translate('title_collections') + '</div></li>');
 			if (Lampa.Storage.get('mods_collection')) $('body').find('.menu .menu__list li:eq(3)').after(menu_item)
