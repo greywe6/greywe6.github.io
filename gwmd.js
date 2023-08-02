@@ -2,12 +2,26 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 
 (function () {
 	'use strict';
+	Lampa.Platform.tv();
+        Lampa.Storage.set('source', 'tmdb');
+        // Lampa.Storage.set('parser_use', 'true');
+        // Lampa.Storage.set('jackett_url', '');
+        // Lampa.Storage.set('jackett_key', '');
+        // Lampa.Storage.set('parse_lang', 'lg');
+        // Lampa.Storage.set('parse_in_search', 'false');
+        // Lampa.Storage.set('torrserver_use_link', 'one');
+        // Lampa.Storage.set('torrserver_url', '');
+        // Lampa.Storage.set('jackett_interview', 'all');
+	// Вкл. отображения постеров 
+        Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
+        Lampa.Storage.set('tmdb_proxy_api', 'http://cors.lampa32.ru/proxy/');
 	//Вкл. TorrServer на WebOs
 	window.lampa_settings.torrents_use = true;
 	window.lampa_settings.demo = false;
 	window.lampa_settings.read_only = false;
 	
 	if (Lampa.Platform.is('android') && typeof WebAssembly !== 'undefined')
+	//Контент 18+
 	Lampa.Utils.putScriptAsync(['https://bwa.to/s'], function () {});
         Lampa.Utils.putScriptAsync(['http://sisi.am/nyam.serv.js?v21'], function () {});
 	//Lampa.Utils.putScriptAsync(['http://webosapp.club/ffdts.js'], function () {});
