@@ -8,7 +8,7 @@ Lampa.SettingsApi.addParam({
      type: 'select',
      values: {
         0:	'Не выбран',
-        1:	'localhost:8090',
+        1:	'TS на этом устройстве',
 	2:	'TS на ноутбуке',
 	3:	'TS на телевизоре LG',
 	4:	'Torrserver 1',
@@ -43,7 +43,7 @@ Lampa.SettingsApi.addParam({
 	33:	'Torrserver 30',
 	34:	'Torrserver 31',
      },
-     default: '0'
+     default: '1'
     },
     field: {
      name: 'Осн. ссылка из списка',
@@ -108,7 +108,7 @@ Lampa.SettingsApi.addParam({
      type: 'select',
      values: {
         0:	'Не выбран',
-        1:	'localhost:8090',
+        1:	'TS на этом устройстве',
 	2:	'TS на ноутбуке',
 	3:	'TS на телевизоре LG',
 	4:	'Torrserver 1',
