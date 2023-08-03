@@ -25,7 +25,6 @@
 	Lampa.Listener.follow('app', function(e) {
 	if(e.type == 'ready') {
         //Удалить кнопку рекламы Премиум в шапке
-	$( '.build' ).css( "display", "none" ) 
 	$('#app > div.head > div > div.head__actions > .open--premium').remove();
 	//Удалить кнопку Лента в шапке
 	$('#app > div.head > div > div.head__actions > .open--feed').remove();
@@ -36,5 +35,33 @@
 	Lampa.Template.add('stlico_css', "\n   <style>\n .player-panel__timenow{font-size:1.3em;}\n .player-panel__timeend{font-size:1.3em;}\n .full-start-new__buttons .full-start__button:not(.focus) span{display:block;}\n .full-start__button.selector.button--priority svg{color:#FF4242;}\n .menu__item.focus, .menu__item.traverse, .menu__item.hover {color:#000!important;}\n    </style>\n"); 
         $('body').append(Lampa.Template.get('stlico_css', {}, true));
 	}
+	value: function build() {
+        var _this = this;
+
+        this.card = Template$1.js('card');
+        this.img = this.card.querySelector('.card__img') || {};
+        this.card.querySelector('.card__title').innerText = this.params.title;
+        this.card.querySelector('.card__age').innerText = this.params.subtitle;
+        this.box = document.createElement('div');
+        this.box.classList.add('card__textbox');
+        this.box.innerText = this.params.text;
+        this.card.querySelector('.card__view').appendChild(this.box);
+        this.card.addEventListener('hover:enter', function () {
+          var tpl = Template$1.get('cub_premium');
+          tpl.find('.cub-premium__title').text(Lang.translate('title_notice'));
+          tpl.find('.cub-premium__descr').eq(0).empty().text(Lang.translate('ad_notice_' + _this.params.type));
+          Modal.open({
+            title: '',
+            size: 'medium',
+            mask: true,
+            html: tpl,
+            onBack: function onBack() {
+              Modal.close();
+              Controller.toggle('content');
+            }
+          });
+        });
+        this.card.addEventListener('destroy', this.visible.bind(this));
+      }
 	});
 })();
