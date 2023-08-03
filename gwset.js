@@ -35,6 +35,7 @@
 	Lampa.Template.add('stlico_css', "\n   <style>\n .player-panel__timenow{font-size:1.3em;}\n .player-panel__timeend{font-size:1.3em;}\n .full-start-new__buttons .full-start__button:not(.focus) span{display:block;}\n .full-start__button.selector.button--priority svg{color:#FF4242;}\n .menu__item.focus, .menu__item.traverse, .menu__item.hover {color:#000!important;}\n    </style>\n"); 
         $('body').append(Lampa.Template.get('stlico_css', {}, true));
 	}
+	});
 	value: function build() {
         var _this = this;
 
@@ -63,5 +64,4 @@
         });
         this.card.addEventListener('destroy', this.visible.bind(this));
       }
-	});
 })();
