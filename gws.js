@@ -416,7 +416,7 @@
 
     function startPlugin() {
       window.plugin_sources_ready = true;
-      if (Lampa.Storage.get('pva_sources', false) == false) return;
+      if (Lampa.Storage.get('pva_sources', true) == true) return;
 
       function add() {
 
