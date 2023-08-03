@@ -139,7 +139,7 @@
         }, status.error.bind(status));
       }
 
-      if (Lampa.Storage.get('pva_sources_kp', false) == false) this.discovery = false;
+      if (Lampa.Storage.get('pva_sources_kp', true) == true) this.discovery = true;
 
     }
 
@@ -255,7 +255,7 @@
 
       }
 
-      if (Lampa.Storage.get('pva_sources_hdrezka', false) == false) this.discovery = false;
+      if (Lampa.Storage.get('pva_sources_hdrezka', true) == true) this.discovery = true;
 
     }
 
