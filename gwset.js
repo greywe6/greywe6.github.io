@@ -25,6 +25,7 @@
 	Lampa.Listener.follow('app', function(e) {
 	if(e.type == 'ready') {
         //Удалить кнопку рекламы Премиум в шапке
+	$( '.build' ).css( "display", "none" ) 
 	$('#app > div.head > div > div.head__actions > .open--premium').remove();
 	//Удалить кнопку Лента в шапке
 	$('#app > div.head > div > div.head__actions > .open--feed').remove();
