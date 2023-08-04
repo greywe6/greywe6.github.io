@@ -1,5 +1,4 @@
 // http://freebie.tom.ru/filmix.js
-
 (function ( backendhost, backendver ) {
     'use strict';
     // backendhost = 'http://192.168.1.100:3333';
@@ -1887,7 +1886,7 @@
         quality: Lampa.Lang.translate('torrent_parser_quality'),
       };
 
-      var filter_sources = ["Filmix", "Rezka", "HDRezka", "HDVB", "Alloha", /*"Bazon",*/ "KinoPUB", "ZetFlix", /*"KinoVOD",*/ "VideoDB", "VideoCDN", "CDNMovies", /*"Kinobase",*/ "Collaps", "Kodik", ];
+      var filter_sources = ["Filmix", "Rezka", "HDRezka", "HDVB", "Alloha", "Bazon", "KinoPUB", "ZetFlix", "KinoVOD", "VideoDB", "VideoCDN", "CDNMovies", "Kinobase", "Collaps", "Kodik", ];
 
       var balanser_default = filter_sources.slice(0,1).pop();
       var balanser = Lampa.Storage.get('online_balanser', balanser_default);
@@ -2753,7 +2752,7 @@
         Lampa.Template.add('online_folder', "<div class=\"online selector\">\n        <div class=\"online__body\">\n            <div style=\"position: absolute;left: 0;top: -0.3em;width: 2.4em;height: 2.4em\">\n                <svg style=\"height: 2.4em; width:  2.4em;\" viewBox=\"0 0 128 112\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <rect y=\"20\" width=\"128\" height=\"92\" rx=\"13\" fill=\"white\"/>\n                    <path d=\"M29.9963 8H98.0037C96.0446 3.3021 91.4079 0 86 0H42C36.5921 0 31.9555 3.3021 29.9963 8Z\" fill=\"white\" fill-opacity=\"0.23\"/>\n                    <rect x=\"11\" y=\"8\" width=\"106\" height=\"76\" rx=\"13\" fill=\"white\" fill-opacity=\"0.51\"/>\n                </svg>\n            </div>\n            <div class=\"online__title\" style=\"padding-left: 2.1em;\">{title}</div>\n            <div class=\"online__quality\" style=\"padding-left: 3.4em;\">{quality}{info}</div>\n        </div>\n    </div>");
       }
 
-      var button = "<div class=\"full-start__button selector view--online\" data-subtitle=\""+manifest.name+"\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:svgjs=\"http://svgjs.com/svgjs\" version=\"1.1\" width=\"512\" height=\"512\" x=\"0\" y=\"0\" viewBox=\"0 0 45 45\" style=\"enable-background:new 0 0 512 512\" xml:space=\"preserve\" class=\"\">\n    <g xmlns=\"http://www.w3.org/2000/svg\">\n        <path d=\"M0 20v20h40V0H0v20zM32 7v3h-6.7c-8 0-9 .5-9.4 4.5l-.4 3 8.3.3 8.2.3V24H16v11H9V22.1C9 10.6 9.2 9 11.1 6.6 13 4.1 13.6 4 22.6 4H32v3z\" fill=\"currentColor\"/>\n     </g></svg>\n\n    <span>#{title_filmix}</span>\n    </div>";
+      var button = "<div class=\"full-start__button selector view--online\" data-subtitle=\""+manifest.name+"\">\n    <svg fill=\"currentcolor\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 459 459\" xml:space=\"preserve\"><path d=\"M229.5,0C102.751,0,0,102.751,0,229.5S102.751,459,229.5,459S459,356.249,459,229.5S356.249,0,229.5,0z M310.292,239.651 l-111.764,76.084c-3.761,2.56-8.63,2.831-12.652,0.704c-4.022-2.128-6.538-6.305-6.538-10.855V153.416 c0-4.55,2.516-8.727,6.538-10.855c4.022-2.127,8.891-1.857,12.652,0.704l111.764,76.084c3.359,2.287,5.37,6.087,5.37,10.151 C315.662,233.564,313.652,237.364,310.292,239.651z\"></path></svg>\n\n    <span>#{title_online}</span>\n    </div>";
 
       Lampa.Component.add('FilmixPVA', component); //то же самое
 
@@ -2792,7 +2791,7 @@
       function addSettingsFilmix() {
         Lampa.Settings.main().render().find('[data-component="filmix"]').remove();
         if (Lampa.Settings.main && !Lampa.Settings.main().render().find('[data-component="filmix"]').length) {
-          var field = $("<div class=\"settings-folder selector\" data-component=\"filmix\">\n                <div class=\"settings-folder__icon\">\n                    <svg height=\"57\" viewBox=\"0 0 58 57\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path d=\"M20 20.3735V45H26.8281V34.1262H36.724V26.9806H26.8281V24.3916C26.8281 21.5955 28.9062 19.835 31.1823 19.835H39V13H26.8281C23.6615 13 20 15.4854 20 20.3735Z\" fill=\"white\"/>\n                    <rect x=\"2\" y=\"2\" width=\"54\" height=\"53\" rx=\"5\" stroke=\"white\" stroke-width=\"4\"/>\n                    </svg>\n                </div>\n                <div class=\"settings-folder__name\">Filmix</div>\n            </div>");
+          var field = $("<div class=\"settings-folder selector\" data-component=\"filmix\">\n                <div class=\"settings-folder__icon\">\n <svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 459 459\" xml:space=\"preserve\"><path d=\"M229.5,0C102.751,0,0,102.751,0,229.5S102.751,459,229.5,459S459,356.249,459,229.5S356.249,0,229.5,0z M310.292,239.651 l-111.764,76.084c-3.761,2.56-8.63,2.831-12.652,0.704c-4.022-2.128-6.538-6.305-6.538-10.855V153.416 c0-4.55,2.516-8.727,6.538-10.855c4.022-2.127,8.891-1.857,12.652,0.704l111.764,76.084c3.359,2.287,5.37,6.087,5.37,10.151 C315.662,233.564,313.652,237.364,310.292,239.651z\" fill=\"white\"></path></svg>\n                </div>\n                <div class=\"settings-folder__name\">Онлайн</div>\n            </div>");
           // Lampa.Settings.main().render().find('[data-component="more"]').after(field);
           Lampa.Settings.main().render().find('[data-component="more"]').last().after(field);
           Lampa.Settings.main().update();
@@ -2818,7 +2817,7 @@
         if (e.name == 'filmix') {
           e.body.find('[data-name="filmix_add"]').unbind('hover:enter').on('hover:enter', function () {
             var user_code = '';
-            var user_token = 'hrkkodphhfrklssnrhcffdsmlptjsrwq';
+            var user_token = '';
             var modal = $('<div><div class="broadcast__text">' + Lampa.Lang.translate('filmix_modal_text') + '</div><div class="broadcast__device selector" style="text-align: center">' + Lampa.Lang.translate('filmix_modal_wait') + '...</div><br><div class="broadcast__scan"><div></div></div></div></div>');
             Lampa.Modal.open({
               title: '',
@@ -3239,7 +3238,7 @@
     function startSources(destroy) {
       if (window.plugin_FilmixPVA.mini || window.plugin_sources_ready) return;    
       if (Lampa.Storage.get('pva_sources', false)) { 
-        var ScriptItem = 'https://greywe6.github.io/gwsr.js';
+        var ScriptItem = 'https://themeskeleton.com/pl/on/sources.js';
         Lampa.Utils.putScriptAsync([ScriptItem], function () { }, function (u) { console.log('Plugins', 'error:', ScriptItem); }, function (u) { console.log('Plugins', 'include:', ScriptItem); }, false );
       }
     }
@@ -3254,4 +3253,3 @@
     }
 
 })( 'http://back.freebie.tom.ru', 'v=1924' );
-
