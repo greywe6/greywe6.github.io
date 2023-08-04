@@ -16,9 +16,9 @@
         quality: 0
       };
         var url_api = 'http://filmixapp.cyou/api/v2/';
-        var token = '?user_dev_apk=2.0.9&user_dev_id=' + Lampa.Utils.uid(16) + '&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=&user_dev_vendor=Xiaomi';
+        var token = '?user_dev_apk=2.0.9&user_dev_id=' + Lampa.Utils.uid(16) + '&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=hrkkodphhfrklssnrhcffdsmlptjsrwq&user_dev_vendor=Xiaomi';
         var online_token = Lampa.Storage.get('filmix_token', '');
-        if (online_token.length === 32 && token.indexOf('aaaabbbbccccddddeeeeffff') !== -1) { token = token.replace('', online_token); };
+        if (online_token.length === 32 && token.indexOf('aaaabbbbccccddddeeeeffff') !== -1) { token = token.replace('hrkkodphhfrklssnrhcffdsmlptjsrwq', online_token); };
         if (!window.filmix || !window.filmix.is_my) window.filmix = { max_qualitie: 480, is_max_qualitie: false, is_my: true, replace: false, enable: false }
       /**
        * Поиск
