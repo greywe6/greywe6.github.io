@@ -3252,4 +3252,4 @@
       startSources();
     }
 
-})( 'http://back.freebie.tom.ru', 'v=1924' );
+})( 'http://back.freebie.tom.ru', 'v=1984' );
