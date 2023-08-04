@@ -1,7 +1,5 @@
 (function ( backendhost, backendver ) {
     'use strict';
-	
-	
 
     var Source = function () {
       this.network = new Lampa.Reguest();
