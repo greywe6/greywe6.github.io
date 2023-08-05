@@ -11,6 +11,7 @@
         Lampa.Storage.set('glass_opacity', 'blacked');
         Lampa.Storage.set('video_quality_default', '2160');
 	    Lampa.Storage.set('player_launch_trailers', 'youtube');
+		Lampa.Storage.set('full_btn_priority', '.full-start__button.selector.view--trailer.button--priority');
 	
     //Видимость постеров TMDB-Proxy
 	Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
