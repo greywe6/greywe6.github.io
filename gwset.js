@@ -11,7 +11,6 @@
         Lampa.Storage.set('glass_opacity', 'blacked');
         Lampa.Storage.set('video_quality_default', '2160');
 	    Lampa.Storage.set('player_launch_trailers', 'youtube');
-		Lampa.Storage.set('full_btn_priority', '.full-start__button.selector.view--trailer.button--priority');
 	
     //Видимость постеров TMDB-Proxy
 	Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
@@ -37,4 +36,19 @@
         $('body').append(Lampa.Template.get('stlico_css', {}, true));
 	}
 	});
+
+	if(Lampa.Controller.enabled().name == 'full_start' && !Lampa.Activity.active().activity.render().find('.view--trailer').length) {
+		if(Lampa.Activity.active().activity.render().find('.button--priority').length){
+		  Lampa.Activity.active().activity.render().find('.full-start-new__buttons').prepend(btn);	
+		  Lampa.Controller.toggle('full_start');
+		  Navigator.focus(btn[0]);
+		} else if((Lampa.Storage.field('online_but_first') && Lampa.Activity.active().activity.render().find('.button--play').length) || !Lampa.Activity.active().activity.render().find('.view--torrent').length){
+		  Lampa.Activity.active().activity.render().find('.button--play').before(btn);		
+		  Lampa.Controller.toggle('full_start');
+		  Navigator.focus(btn[0]);
+		} else {
+		  Lampa.Activity.active().activity.render().find('.view--torrent').before(btn);		
+		  Lampa.Controller.toggle('full_start');
+		} 
+	  } 
 })();
