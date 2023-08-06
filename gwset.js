@@ -37,18 +37,6 @@
 	}
 	});
 
-	if(Lampa.Controller.enabled().name == 'full_start' && !Lampa.Activity.active().activity.render().find('.view--trailer').length) {
-		if(Lampa.Activity.active().activity.render().find('.button--priority').length){
-		  Lampa.Activity.active().activity.render().find('.full-start-new__buttons').prepend(btn);	
-		  Lampa.Controller.toggle('full_start');
-		  Navigator.focus(btn[0]);
-		} else if((Lampa.Storage.field('online_but_first') && Lampa.Activity.active().activity.render().find('.button--play').length) || !Lampa.Activity.active().activity.render().find('.view--torrent').length){
-		  Lampa.Activity.active().activity.render().find('.button--play').before(btn);		
-		  Lampa.Controller.toggle('full_start');
-		  Navigator.focus(btn[0]);
-		} else {
-		  Lampa.Activity.active().activity.render().find('.view--torrent').before(btn);		
-		  Lampa.Controller.toggle('full_start');
-		} 
-	  } 
+	Lampa.Controller.enabled().name == 'full_start' && !Lampa.Activity.active().activity.render().find('.view--trailer').length
+
 })();
