@@ -37,6 +37,5 @@
 	}
 	});
 
-	Lampa.Controller.enabled().name == 'full_start' && !Lampa.Activity.active().activity.render().find('.view--trailer').length
 
 })();
