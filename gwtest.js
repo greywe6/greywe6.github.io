@@ -1,948 +1,689 @@
 (function () {
     'use strict';
 
-    function component(object) {
-      //console.log(object)
-      var network = new Lampa.Reguest();
-      var scroll = new Lampa.Scroll({
-        mask: true,
-        over: true
-      });
-      var rslt = [];
-      var files = new Lampa.Files(object);
-      var filter = new Lampa.Filter(object);
-      var results = [];
-      var filtred = [];
-      var extract = {};
-      
-      var last;
-      var last_filter;
-      var contextmenu_all = [];
-    //   var filter_items = {
-    //     season: [],
-    //     voice: [],
-    //     voice_info: []
-    //   };
-    //   var filter_translate = {
-    //     season: '季',
-    //     voice: '翻译'
-    //   };
-      scroll.minus();
-      scroll.body().addClass('torrent-list');
-      
-
-      this.create = function () {
-        var _this = this;
-
-        this.activity.loader(true);
-        Lampa.Background.immediately(Lampa.Utils.cardImgBackground(object.movie));
-      
-        //console.log(object);
-        parse(object.movie.url);
-
-          function parse(url) {
-              //取得具体页面的详情地址
-              network["native"](url, function (str) {
-                  var str = str.replace(/\n|\r/g, '')
-                  var h =  $(object.detail.videoscontainer.selector, str);
-                  var t = object.detail.title.selector;
-                  var l = object.detail.link.selector;
-
-                  $(h).each(function (i, html) {
-                    var t1 = t ? $(this).find(t) : $(this);
-                    var l1 = l ? $(this).find(l) : $(this);
-                    var r = (object.detail.title.attrName == 'text' || object.detail.title.attrName == '') ? t1.text() :  t1.attr(object.detail.title.attrName);
-                    r = object.detail.title.filter !== '' ? (r.match(new RegExp(object.detail.title.filter)) ? r.match(new RegExp(object.detail.title.filter))[1] : r) : r;
-                    
-                    var host = object.url.indexOf('http') == -1 ? '' : object.url.match(/(http|https):\/\/(www.)?(\w+(\.)?)+/)[0];
-                    var f = (object.detail.link.attrName == 'text' || object.detail.link.attrName == '') ? l1.text() :  l1.attr(object.detail.link.attrName);
-                    f = object.detail.link.filter !== '' ? (f.match(new RegExp(object.detail.link.filter)) ? f.match(new RegExp(object.detail.link.filter))[1] : f) : f;
-                    //var f = l1.attr('href');
-                    //console.log(f.substr(0,1) =='/')
-                    f = f.substr(0,1) =='/' ? host+f : f;
-                    filtred.push({
-                        file: f,
-                        quality: r,
-                        title: object.movie.title,
-                        season: '',
-                        episode: '',
-                        info: '',
-                        sitename: object.title.split(' - ')[0]
-                    });
-                      
-                }); 
-                //_this.filtred();
-                  //console.log(filtred)
-                  // append(_this.filtred());
-                  //_this.build();
-                  _this.showResults();
-                  _this.activity.loader(false);
-
-                  _this.activity.toggle();
-                  filtred = [];
-                  //element.remove();
-              }, function (a, c) {
-                  _this.empty('哦，' + network.errorDecode(a, c) + ' ');
-                  //component.emptyForQuery(select_title);
-              }, false, {
-                  dataType: 'text'
-              });
-
-          };
-
-          filter.onSearch = function (value) {
-              Lampa.Activity.replace({
-                  search: value,
-                  clarification: true
-              });
-          };
-
-          filter.onBack = function () {
-              _this.start();
-          };
-
-          filter.render().find('.selector').on('hover:focus', function (e) {
-              last_filter = e.target;
-          });
-          filter.render().find('.filter--sort').remove();
-          return this.render();
-      };
-
-      this.empty = function (descr) {
-        var empty = new Lampa.Empty({
-          descr: descr
+    function TG(object) {
+        var network = new Lampa.Reguest();
+        var scroll = new Lampa.Scroll({
+            mask: true,
+            over: true,
+            step: 250,
+            end_ratio: 2
         });
-        files.append(empty.render(filter.empty()));
-        this.start = empty.start;
-        this.activity.loader(false);
-        this.activity.toggle();
-      };
+        var items = [];
+        var html = $('<div></div>');
+        var body = $('<div class="freetv category-full"></div>');
+        var info;
+        var last;
+        var waitload;
+        var doubanitem = [];
+        //var cors = Lampa.Utils.checkHttp('proxy.cub.watch/cdn/');
+        var cors = 'https://cors.eu.org/';
+        // var cors = 'https://api.allorigins.win/raw?url=';
 
-    //   this.buildFilterd = function (select_season) {
-    //     var select = [];
 
-    //     var add = function add(type, title) {
-    //       var need = Lampa.Storage.get('online_filter', '{}');
-    //       var items = filter_items[type];
-    //       var subitems = [];
-    //       var value = need[type];
-    //       items.forEach(function (name, i) {
-    //         subitems.push({
-    //           title: name,
-    //           selected: value == i,
-    //           index: i
-    //         });
-    //       });
-    //       select.push({
-    //         title: title,
-    //         subtitle: items[value],
-    //         items: subitems,
-    //         stype: type
-    //       });
-    //     };
 
-    //     filter_items.voice = [];
-    //     filter_items.season = [];
-    //     filter_items.voice_info = [];
-    //     var choice = {
-    //       season: 0,
-    //       voice: 0
-    //     };
-    //     results.slice(0, 1).forEach(function (movie) {
-    //         movie.translations.forEach(function (element) {
-    //           filter_items.voice.push(element.smart_title);
-    //           filter_items.voice_info.push({
-    //             id: element.id
-    //           });
-    //         });
-    //     });
-    //     Lampa.Storage.set('online_filter', object.movie.number_of_seasons ? choice : {});
-    //     select.push({
-    //       title: '重置过滤器',
-    //       reset: true
-    //     });
-
-    //     if (object.movie.number_of_seasons) {
-    //       add('voice', '翻译');
-    //       add('season', '季');
-    //     }
-
-    //     filter.set('filter', select);
-    //     this.selectedFilter();
-    //   };
-
-    //   this.selectedFilter = function () {
-    //     var need = Lampa.Storage.get('online_filter', '{}'),
-    //         select = [];
-
-    //     for (var i in need) {
-    //       select.push(filter_translate[i] + ': ' + filter_items[i][need[i]]);
-    //     }
-
-    //     filter.chosen('filter', select);
-    //   };
-
-      this.extractFile = function (str) {
-        var url = '';
-
-        try {
-          var items = str.split(',').map(function (item) {
-            return {
-              quality: parseInt(item.match(/\[(\d+)p\]/)[1]),
-              file: item.replace(/\[\d+p\]/, '').split(' or ')[0]
+        this.getQueryString = function (link, name) {
+            let reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)", "i");
+            //console.log(link)
+            let r = link.match(reg);
+            if (r != null) {
+                return decodeURIComponent(r[2]);
             };
-          });
-          items.sort(function (a, b) {
-            return b.quality - a.quality;
-          });
-          url = items[0].file;
-          url = 'http:' + url.slice(0, url.length - 32) + '.mp4';
-        } catch (e) {}
+            return null;
+        };
 
-        return url;
-        console.log(url);
-        console.log("播放链接");
-      };
+        this.create = function () {
+            //console.log(object.url)
+            var _this = this;
 
-      this.extractData = function () {
-        var _this2 = this;
+            this.activity.loader(true);
 
-        network.timeout(5000);
-        var movie = results.slice(0, 1)[0];
-        console.log(movie);
-        console.log("解析链接");
-        extract = {};
+            network["native"](cors + object.url, function (str) {
+                //this.build.bind(this)
+                var data = _this.card(str);
+                _this.build(data);
+                // var empty = new Lampa.Empty();
+                // html.append(empty.render());
+                // _this.start = empty.start;
 
-        if (movie) {
-          network["native"]('http:' + movie.iframe_src, function (raw) {
-            console.log(movie.iframe_src)
-            var math = raw.replace(/\n/g, '').match(/id="files" value="(.*?)"/);
+                // _this.activity.loader(false);
 
-            if (math) {
-              var json = Lampa.Arrays.decodeJson(math[1].replace(/&quot;/g, '"'), {});
-              var text = document.createElement("textarea");
-              console.log(json);
-              for (var i in json) {
-                text.innerHTML = json[i];
-                Lampa.Arrays.decodeJson(text.value, {});
-                extract[i] = {
-                  json: Lampa.Arrays.decodeJson(text.value, {}),
-                  file: _this2.extractFile(json[i])
+                //_this.activity.toggle();
+            }, function (a, c) {
+                Lampa.Noty.show(network.errorDecode(a, c));
+            }, false, {
+                dataType: 'text'
+            });
+            return this.render();
+        };
+
+        this.next = function () {
+            var _this2 = this;
+            if (waitload) return;
+            if (object.gotopage) {
+                var postdata = {
+                    before: object.gotopage[0],
+                };
+                waitload = true;
+                object.page++;
+                console.log(object.page)
+                network["native"](cors + object.url + '?before=' + object.gotopage[0], function (str) {
+                    var result = _this2.card(str);
+                    _this2.append(result,true);
+                    if (result.card.length) waitload = false;
+                    // Lampa.Controller.enable('content');
+                }, false, postdata, {
+                    dataType: 'text'
+                });
+            }
+        };
+
+        this.card = function (str) {
+            var _this5 = this;
+
+            var card = [];
+            var page;
+
+            str = str.replace(/\n/g, '');
+            // var h =  $(v+object.quantity, str);
+            // //console.log(h)
+            // total_pages = $(p, str).find('a').length;
+
+            var host = object.url.indexOf('http') == -1 ? '' : object.url.match(/(http|https):\/\/(www.)?(\w+(\.)?)+/)[0];
+            // //console.log($(p, str).find('a').last().attr('href'))
+            // // :last-child
+            // //page = $(p, str).find('a').last().attr('href').indexOf('http') == -1 ? host+$(p, str).find('a').last().attr('href') : $(p, str).find('a').last().attr('href');
+            page = $('.tme_messages_more', str).attr('href') ? $('.tme_messages_more', str).attr('href').match(/[0-9]+(?=[^0-9]*$)(.*)/) : null;
+
+            if (page) {
+                object.gotopage = page;
+            } else {
+                page = '';
+            };
+
+
+            // //console.log(object.search)
+            // if (page) {
+            //     if (page.indexOf('http') == -1) {
+            //         page = host + page;
+            //     };
+            //     if (page.indexOf('#') !== -1) {
+            //         page = object.url;
+            //     };
+            // };
+            //console.log(page)
+            $('div.tgme_widget_message_wrap.js-widget_message_wrap', str).each(function (i, html) {
+                if ($('.tgme_widget_message_text.js-message_text', html).text().match(/https:\/\/www\.aliyundrive\.com\/s\/([a-zA-Z\d]+)/)) {
+                    card.push({
+                        //title: catalogs1[0].list.title.attrName =='text' ? t1.text().replace(/( 第.+?季)/,'') : t1.attr(catalogs1[0].list.title.attrName).replace(/( 第.+?季)/,''),
+                        title: $('.tgme_widget_message_text.js-message_text', html).html().match(/(.+?)<br>/) ? $('.tgme_widget_message_text.js-message_text', html).html().match(/(.+?)<br>/)[1].replace(/(<([^>]+)>)/ig, '').replace(/中文片名：|◎译　　名　|资源标题：|资源名称：|名称：/, ''):'',
+                        original_title: '',
+                        title_org: '',
+                        //url: catalogs1[0].list.link.attrName =='text' ? host+u1.text() : host+u1.attr(catalogs1[0].list.link.attrName),
+                        url: $('.tgme_widget_message_text.js-message_text', html).text().match(/https:\/\/www\.aliyundrive\.com\/s\/([a-zA-Z\d]+)/) ? $('.tgme_widget_message_text.js-message_text', html).text().replace(/4K影视/g, ' ').match(/https:\/\/www\.aliyundrive\.com\/s\/([a-zA-Z\d]+)/)[0] : '',
+                        //img: catalogs1[0].list.thumb.attrName =='text' ? (i1.text().indexOf('http') == -1 ? host+i1.text() : i1.text()) : (i1.attr(catalogs1[0].list.thumb.attrName).indexOf('http') == -1 ? host+i1.attr(catalogs1[0].list.thumb.attrName) : i1.attr(catalogs1[0].list.thumb.attrName)),
+                        img: $('.tgme_widget_message_photo_wrap', html).attr('style') ? $('.tgme_widget_message_photo_wrap', html).attr('style').match(/url\('(.+?)'\)/)[1] : './img/img_broken.svg',
+                        quantity: ' ',
+                        year: '',
+                        update: '',//$('span.pic-text', html).text().indexOf('/' != -1) ? $('span.pic-text', html).text().split('/')[0].replace('已完结','') : $('span.pic-text', html).text().replace('已完结',''),
+                        score: ''//$('span.pic-tag', html).text()
+                    });
+                };
+            });
+            return {
+                card: card.reverse(),
+                page: page,
+                //total_pages: total_pages
+            };
+        };
+
+        this.append = function (data,append) {
+            var _this3 = this;
+            //console.log(data)
+            data.card.forEach(function (element) {
+                //console.log(element)
+                var mytitle = element.title.replace('/', ' ');
+                if (mytitle.indexOf(' ' != -1)) mytitle = mytitle.split(' ')[0]
+                var card = Lampa.Template.get('card', {
+                    title: element.title,
+                    release_year: ''
+                });
+                card.addClass('card--category');
+                //card.addClass('card--collection');
+                var img = card.find('.card__img')[0];
+                img.onload = function () {
+                    card.addClass('card--loaded');
+                };
+                img.onerror = function (e) {
+                    img.src = './img/img_broken.svg';
+                };
+                card.find('.card__img').attr('src', element.img);
+                if (element.rate) {
+                    card.find('.card__view').append('<div class="card__type"></div>');
+                    card.find('.card__type').text(element.rate);
+                };
+                /*card.find('.card__view').append('<div class="card__quality"></div>');
+                card.find('.card__quality').text(element.score);*/
+                if (element.episodes_info) {
+                    card.find('.card__view').append('<div class="card__quality"></div>');
+                    card.find('.card__quality').text(element.episodes_info.replace('更新至', '第'));
                 };
 
-                for (var a in extract[i].json) {
-                  var elem = extract[i].json[a];
+                card.on('hover:focus', function () {
+                    last = card[0];
 
-                  if (elem.folder) {
-                    for (var f in elem.folder) {
-                      var folder = elem.folder[f];
-                      folder.file = _this2.extractFile(folder.file);
-                    }
-                  } else elem.file = _this2.extractFile(elem.file);
-                }
-              }
-            }
-            console.log(extract);
-            console.log("解析结果");
-          }, false, false, {
-            dataType: 'text'
-          });
-        }
-      };
-      //console.log(extract);
+                    scroll.update(card, true);
+                    info.find('.info__title').text(element.title);
+                    info.find('.info__title-original').text(element.episodes_info);
+                    info.find('.info__rate span').text(element.rate);
+                    info.find('.info__rate').toggleClass('hide', !(element.rate > 0));
+                    var maxrow = Math.ceil(items.length / 7) - 1;
+                    // if (Math.ceil(items.indexOf(card) / 7) >= maxrow) _this3.next();
+                    if (scroll.isEnd()) _this3.next();
+                    if (element.img) Lampa.Background.change(cardImgBackground(element.img));
+                    //if (Lampa.Helper) Lampa.Helper.show('tg_detail', '长按住 (ОК) 键查看详情', card);
+                });
+                // card.on('hover:long', function () {
+                // 	//contextmenu();
+                //     Lampa.Modal.open({
+                //         title: '',
+                //         html: Lampa.Template.get('modal_loading'),
+                //         size: 'small',
+                //         mask: true,
+                //         onBack: function onBack() {
+                //             Lampa.Modal.close();
+                //             Lampa.Api.clear();
+                //             Lampa.Controller.toggle('content');
+                //         }
+                //     });
 
-      this.getRemote = function (remote_url) {
-         return $.ajax({
-            type: "GET",
-            url: remote_url,
-            async: false
-         }).responseText;
-      };
-
-    //   this.build = function () {
-    //     var _this3 = this;
-
-    //     //this.buildFilterd();
-    //     this.filtred();
-    //     //this.extractData();
-
-    //     filter.onSelect = function (type, a, b) {
-    //       if (type == 'filter') {
-    //         if (a.reset) {
-    //           _this3.buildFilterd();
-    //         } else {
-    //           if (a.stype == 'season') {
-    //             _this3.buildFilterd(b.index);
-    //           } else {
-    //             var filter_data = Lampa.Storage.get('online_filter', '{}');
-    //             filter_data[a.stype] = b.index;
-    //             a.subtitle = b.title;
-    //             Lampa.Storage.set('online_filter', filter_data);
-    //           }
-    //         }
-    //       }
-
-    //       _this3.applyFilter();
-
-    //       _this3.start();
-    //     };
-
-    //     this.showResults();
-    //   };
-
-      this.filtred = function () {
-        //console.log(filtred[0])
-        //filtred = filtred;
-        //return filtred;
-        // console.log(a)
-        // filtred = [];
-        // filtred = a;
-        // console.log(filtred)
-        // var filter_data = Lampa.Storage.get('online_filter', '{}');
-        //   results.slice(0, 1).forEach(function (movie) {
-        //     movie.media.forEach(function (element) {
-        //       filtred.push({
-        //         title: element.title,
-        //         quality: element.max_quality ,
-        //         translation: element.translation_id,
-        //         sitename: doreg.name
-        //       });
-        //     });
-        //   });
-        // //}
-      };
-
-    //   this.applyFilter = function () {
-    //     this.filtred();
-    //     this.selectedFilter();
-    //     this.reset();
-    //     this.showResults();
-    //     last = scroll.render().find('.torrent-item:eq(0)')[0];
-    //   };
-
-      this.showResults = function (data) {
-        filter.render().addClass('torrent-filter');
-        scroll.append(filter.render());
-        this.append(filtred);
-        files.append(scroll.render());
-        //console.log($(".scroll").find(".scroll__content"))
-        $(".scroll").find(".torrent-filter").remove();
-        //scroll.body().addClass('torrent-list');
-        //   $(".scroll").find(".torrent-filter").css({
-        //       'margin-bottom': '2em',
-        //   });
-      };
-
-      this.reset = function () {
-        last = false;
-        filter.render().detach();
-        scroll.clear();
-      };
-
-      this.getFile = function (element, show_error) {
-
-        var translat = element.file;
-        //var link;
-        if (translat) {
-            return element.file;
-
-        }
-
-        if (show_error) Lampa.Noty.show('无法检索链接');
-      };
-
-
-      this.append = function (items) {
-        var _this4 = this;
-        var viewed = Lampa.Storage.cache('online_view', 5000, []);
-        items.forEach(function (element) {
-            var hash = Lampa.Utils.hash(element.file ? [element.file, element.quality].join('') : object.movie.title);
-            var view = Lampa.Timeline.view(hash);
-            var item = Lampa.Template.get('detail_mod', element);
-            var hash_file = Lampa.Utils.hash(element.file ? [element.file, element.quality].join('') : object.movie.title + 'libio');
-            element.timeline = view;
-            
-            item.append(Lampa.Timeline.render(view));
-
-            if (Lampa.Timeline.details) {
-                item.find('.online__quality').append(Lampa.Timeline.details(view, ' / '));
-            }
-
-            if (viewed.indexOf(hash_file) !== -1) item.append('<div class="torrent-item__viewed">' + Lampa.Template.get('icon_star', {}, true) + '</div>');
-        
-          //item.append(Lampa.Timeline.render(view));
-          item.on('hover:focus', function (e) {
-            last = e.target;
-            scroll.update($(e.target), true);
-          }).on('hover:enter', function () {
-            if(object.movie.id) Lampa.Favorite.add('history', object.movie, 100)
-
-            //var file = _this4.getFile(element, true);
-            var file = element.file;
-                     
-              //!new RegExp("^(http|https)://", "i").test(file)
-              // if (file.indexOf('://') === -1) {
-              if (/^https?:\/\//i.test(file) === false) {
-                  if (file.indexOf('magnet:?') !== -1) {
-                      // if (window.intentShim) {
-                      //   var intentExtra = {
-                      //     title: element.title,
-                      //     poster: object.movie.img,
-                      //     action: "play",
-                      //     data: {
-                      //       lampa: true
-                      //     }
-                      //   };
-                      //   window.plugins.intentShim.startActivity(
-                      //     {
-                      //       action: window.plugins.intentShim.ACTION_VIEW,
-                      //       url: file,
-                      //       extras: intentExtra
-                      //     },
-                      //     function () { },
-                      //     function () { console.log('Failed to open magnet URL via Android Intent') }
-
-                      //   );
-                      // } else {
-                        //Lampa.Noty.show('只能在安卓平台上打开磁力链接。');
-                        //   var SERVER = {
-                        //     "object": {
-                        //         "Title": "",
-                        //         "MagnetUri": "",
-                        //         "poster": ""
-                        //     },
-                        //     "movie": {
-                        //         "title": "",
-                        //     }
-                        // };
-                        // SERVER.object.MagnetUri = file;
-                        // SERVER.movie.title = element.title;
-                        // SERVER.object.poster = object.movie.img;
-                        // Lampa.Android.openTorrent(SERVER);
-
-                        var SERVER1 = {
-                          "title": "",
-                          "MagnetUri": "",
-                          "poster": ""
-                        };
-                        SERVER1.MagnetUri = file;
-                        SERVER1.title = element.title;
-                        SERVER1.poster = object.movie.img;
-
-                        // SERVER.object.MagnetUri = mlink;
-                        // SERVER.movie.title = element.title;
-                        // SERVER.object.poster = element.img;
-                        // console.log(SERVER1)
-                        // Lampa.Android.openTorrent(SERVER);
-                        Lampa.Torrent.start(SERVER1, {
-                          title: element.title,
-                          poster: object.movie.img
-                        });
-
-                      // }
-                  } else {
-                    if (window.intentShim) {
-                        window.plugins.intentShim.startActivity(
-                            {
-                                action: window.plugins.intentShim.ACTION_VIEW,
-                                url: file
-                            },
-                            function () { },
-                            function () { console.log('Failed to open URL via Android Intent') }
-
-                        );
-                    } else {
-                        //Lampa.Noty.show('只能在安卓平台上打开该链接。');
-                        $('<a href="' + file + '"/>')[0].click();
-                    }
-                  };    
-              }
-              else {
-                // console.log(object)
-                // console.log(file.match(/aliyundrive\.com\/s\/([a-zA-Z\d]+)/))
-                  if (/\.(m3u8|mp4|mp3)$/.test(file)) {
-                      var video = {
-                          title: element.title,
-                          url: file,
-                          timeline: view
-                      };
-                      Lampa.Player.play(video);
-                      Lampa.Player.playlist([video]);
-                  } else if (/\.(jpe?g|png|gif|bmp|apk)$/.test(file)) {
-                      if (window.intentShim) {
-                          window.plugins.intentShim.startActivity(
-                              {
-                                  action: window.plugins.intentShim.ACTION_VIEW,
-                                  url: file
-                              },
-                              function () { },
-                              function () { console.log('Failed to open URL via Android Intent') }
-
-                          );
-                      } else {
-                          //Lampa.Noty.show('只能在安卓平台上打开该链接。');
-                          $('<a href="' + file + '"/>')[0].click();
-                      }
-                  } else if (file.match(/aliyundrive\.com\/s\/([a-zA-Z\d]+)/)) {
-                    element.img = object.movie.img;
+                //     _this3.find_douban(element);
+                // });
+                card.on('hover:enter', function (target, card_data) {
+                    //console.log(element)
+                    //element.img = element.cover;
                     element.original_title = '';
+                    element.title = mytitle;
+                    //element.img = object.movie.img;
                     Lampa.Activity.push({
-                        url: file,
+                        url: element.url,
                         title: '阿里云盘播放',
                         component: 'yunpan2',
                         movie: element,
                         page: 1
-                      });
-                  }
-                  else {
-                    //jrkan
-                    var iszhubo = false;
-                    
-                    if (file.indexOf('/play/sm.html') !== -1) {
-                      file = 'https://play.sportsteam365.com/play/' + file.match(/\?id=(.+?)&/)[1] + '.html';
-                      iszhubo = true;
-                    }
+                    });
+                });
+                body.append(card);
+                if (append) Lampa.Controller.collectionAppend(card);
+                items.push(card);
+            });
+        };
 
-                      network.silent(file, function (result) {
-                        var v,videolink;
-                        //jrkan
-                        if (result.indexOf('player/pap.html') !==-1 || iszhubo){
-                          v = result.replace(/\n|\r/g, '').replace(/\\/g,'').match(/\?id=(.+?)('|")/);
-                          videolink = v ? v[1] : '';
-                        }else{
-                          v = result.replace(/\n|\r/g, '').replace(/\\/g,'').match(/https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|](.mp4|.m3u8)/);
-                          videolink = v ? v[0] : '';
-                        }
-                          
-                          if (videolink) {
-                              //Lampa.Modal.close();
-                              var video = {
-                                  title: element.title,
-                                  url: videolink,
-                                  timeline: view
-                              };
-                              Lampa.Player.play(video);
-                              Lampa.Player.playlist([video]);
-                          } else {
-                              //Lampa.Modal.close();
-                              //Lampa.Noty.show('没有找到对应影片。');
-                              Lampa.Iframe.show({
-                                //url: $('.embed-responsive-item', str).attr('src'),
-                                url: file,
-                                onBack: function onBack() {
-                                  Lampa.Controller.toggle('content');
+        this.build = function (data) {
+            var _this2 = this;
+            //info = Lampa.Template.get('info');style="height:5em"
+            Lampa.Template.add('button_category', "<style>.freetv.category-full{padding-bottom:8em;}</style><div class=\"full-start__buttons\"><div class=\"full-start__button selector view--category\"><svg style=\"enable-background:new 0 0 512 512;\" version=\"1.1\" viewBox=\"0 0 24 24\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><g id=\"info\"/><g id=\"icons\"><g id=\"menu\"><path d=\"M20,10H4c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2C22,10.9,21.1,10,20,10z\" fill=\"currentColor\"/><path d=\"M4,8h12c1.1,0,2-0.9,2-2c0-1.1-0.9-2-2-2H4C2.9,4,2,4.9,2,6C2,7.1,2.9,8,4,8z\" fill=\"currentColor\"/><path d=\"M16,16H4c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2C18,16.9,17.1,16,16,16z\" fill=\"currentColor\"/></g></g></svg>   <span>分类</span>\n    </div><div class=\"full-start__button selector open--find\"><svg width=\"24px\" height=\"24px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.5122 4.43902C7.60446 4.43902 4.43902 7.60283 4.43902 11.5026C4.43902 15.4024 7.60446 18.5662 11.5122 18.5662C13.4618 18.5662 15.225 17.7801 16.5055 16.5055C17.7918 15.2251 18.5854 13.4574 18.5854 11.5026C18.5854 7.60283 15.4199 4.43902 11.5122 4.43902ZM2 11.5026C2 6.25314 6.26008 2 11.5122 2C16.7643 2 21.0244 6.25314 21.0244 11.5026C21.0244 13.6919 20.2822 15.7095 19.0374 17.3157L21.6423 19.9177C22.1188 20.3936 22.1193 21.1658 21.6433 21.6423C21.1673 22.1188 20.3952 22.1193 19.9187 21.6433L17.3094 19.037C15.7048 20.2706 13.6935 21.0052 11.5122 21.0052C6.26008 21.0052 2 16.7521 2 11.5026Z\" fill=\"currentColor\"/> </svg></div></div>");
+            Lampa.Template.add('info_web', '<div class="info layer--width"><div class="info__left"><div class="info__title"></div><div class="info__title-original"></div><div class="info__create"></div></div><div class="info__right">  <div id="web_filtr"></div></div></div>');
+            var btn = Lampa.Template.get('button_category');
+            info = Lampa.Template.get('info_web');
+            info.find('#web_filtr').append(btn);
+            info.find('.view--category').on('hover:enter hover:click', function () {
+                _this2.selectGroup();
+            });
+            info.find('.open--find').on('hover:enter hover:click', function () {
+                Lampa.Input.edit({
+                    title: '频道 - 搜索',
+                    value: '',
+                    free: true,
+                    nosave: true
+                }, function (new_value) {
+                    if (new_value) {
+                        //console.log(new_value)
+                        var searchurl = object.url.match(/\?q=(.+)/) ? object.url.replace(object.url.match(/\?q=(.+)/)[1], encodeURIComponent(new_value)) : (object.url.indexOf('q=' == -1) ? object.url + '?q=' + encodeURIComponent(new_value) : object.url.replace('q=', 'q=' + encodeURIComponent(new_value)));
+                        Lampa.Activity.push({
+                            //	url: cors + a.url,
+                            url: searchurl,
+                            title: '频道 - 搜索"' + new_value + '"',
+                            component: 'tg',
+                            page: 1
+                        });
+                    }
+                    else Lampa.Controller.toggle('content');
+                })
+            });
+            this.selectGroup = function () {
+                Lampa.Select.show({
+                    title: '频道',
+                    items: catalogs,
+                    onSelect: function onSelect(a) {
+                        Lampa.Activity.push({
+                            url: a.url,
+                            title: '频道 - ' + a.title,
+                            component: 'tg',
+                            page: 1
+                        });
+                    },
+                    onBack: function onBack() {
+                        Lampa.Controller.toggle('content');
+                    }
+                });
+            };
+            //info.find('.info__rate,.info__right').remove();
+            scroll.render().addClass('layer--wheight').data('mheight', info);
+            if (data.card.length) {
+                html.append(info);
+                scroll.minus();
+                // scroll.onEnd = _this2.next();
+                // scroll.onScroll = _this2.next();
+                // scroll.onWheel = function (step) {
+                //     if (!Lampa.Controller.own(_this2)) _this2.start();
+                //     if (step > 0) Navigator.move('down'); else Navigator.move('up');
+                // };
+                scroll.onEnd = function () {
+                    _this2.next();
+                };
+                html.append(scroll.render());
+                this.append(data);
+                scroll.append(body);
+                this.activity.loader(false);
+                this.activity.toggle();
+            } else {
+                html.append(scroll.render());
+                _this2.empty();
+            }
+        };
+
+        this.empty = function () {
+            var empty = new Lampa.Empty();
+            scroll.append(empty.render());
+            this.start = empty.start;
+            this.activity.loader(false);
+            this.activity.toggle();
+        };
+
+        this.finds = function (find) {
+            var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var element = arguments.length > 1 && arguments[2] !== undefined ? arguments[2] : {};
+            var finded;
+            //console.log(element)
+
+            var s, a = params.title.replace(element.title, '').replace('(' + params.release_year + ')', '').replace(/(Season\s\d)/, '').replace(/‎/g, '').trim();
+
+            if (a === '') {
+                s = element.title.replace(/第(.+)季/, '');
+            } else {
+                s = a;
+            };
+
+            //console.log(s)
+
+            var filtred = function filtred(items) {
+                if (items.length == 1) {
+                    finded = items;
+                    //return items;
+                } else {
+                    finded = items.filter(function (fp) {
+                        // if (params.region == '中国大陆' || params.region == '韩国' || params.region == '中国香港') {
+                        //     //console.log('中文')
+                        //     return ((fp.title || fp.name) == s || params.title.indexOf((fp.title || fp.name)) !== -1)
+                        // } else {
+                        //     return ((fp.original_title || fp.original_name) == s || params.title.indexOf((fp.original_title || fp.original_name)) !== -1)
+                        // }
+                        return ((fp.title || fp.name) == s || params.title.indexOf((fp.title || fp.name)) !== -1 || (fp.original_title || fp.original_name) == s || params.title.indexOf((fp.original_title || fp.original_name)) !== -1)
+                    });
+                    //console.log(finded);
+                }
+            };
+
+            if (params.is_tv) {
+                if (find.tv && find.tv.results.length && !finded) filtred(find.tv.results);
+            } else {
+                if (find.movie && find.movie.results.length) filtred(find.movie.results);
+            };
+
+            return finded ? finded[0] : finded;
+        };
+
+        this.finds1 = function (element, find) {
+            var finded;
+            var filtred = function filtred(items) {
+                for (var i = 0; i < items.length; i++) {
+                    var mytitle = element.title.replace('/', ' ');
+                    if (mytitle.indexOf(' ' != -1)) mytitle = mytitle.split(' ')[0]
+
+                    var item = items[i];
+                    if ((mytitle == (item.title || item.name)) && parseInt(element.year) == (item.first_air_date || item.release_date).split('-').shift()) {
+                        finded = item;
+                        break;
+                    }
+                }
+            };
+            if (find.movie && find.movie.results.length) filtred(find.movie.results);
+            if (find.tv && find.tv.results.length && !finded) filtred(find.tv.results);
+            return finded;
+        };
+        this.find_douban = function (element) {
+            var _this = this;
+            network.clear();
+            network.timeout(10000);
+            network.silent('https://movie.douban.com/j/subject_abstract?subject_id=' + element.id, function (json) {
+                //console.log(JSON.parse(json));
+                //doubanitem = JSON.parse(json);
+                _this.find_tmdb(JSON.parse(json), element);
+            }, function (a, c) {
+                this.empty(network.errorDecode(a, c));
+            }, false, {
+                dataType: 'text'
+            });
+        };
+        this.find_tmdb = function (data, element) {
+            var _this1 = this;
+            var s, str = data.subject;
+
+            network.silent(str.url, function (json) {
+                var s = json.match(/tt(\d+)/, 'g');
+                s = s ? s[0] : s;
+                //console.log(element);
+                //console.log(s)
+                if (s) {
+                    var dom = Lampa.Storage.field('proxy_tmdb') ? 'http://apitmdb.cub.watch/3/' : 'https://api.themoviedb.org/3/';
+                    network.silent(dom + 'find/' + s + '?api_key=4ef0d7355d9ffb5151e987764708ce96&external_source=imdb_id&language=zh-CN', function (json) {
+
+                        var json = str.is_tv ? json.tv_results[0] : json.movie_results[0];
+                        //console.log(json);
+                        if (json) {
+                            Lampa.Activity.push({
+                                url: '',
+                                component: 'full',
+                                id: json.id,
+                                method: str.is_tv ? 'tv' : 'movie',
+                                card: json
+                            });
+                            Lampa.Modal.close();
+                        } else {
+                            var a = str.title.replace(element.title, '').replace('(' + str.release_year + ')', '').replace(/(Season\s\d)/, '').replace(/‎/g, '').trim();
+
+                            if (a === '') {
+                                s = element.title.replace(/第(.+)季/, '');
+                            } else {
+                                s = a.replace('II', '2');
+                            };
+
+                            //console.log(s)
+                            //var mysubtitle = str.sub_title.replace('/', ' ');
+                            //if (mysubtitle.indexOf(' ' != -1)) mysubtitle = mysubtitle.split(' ')[0]
+                            //console.log(s.replace(/\d$/, ''))
+
+                            Lampa.Api.search({
+                                //doubanitem.sub_title
+                                query: encodeURIComponent(s.replace(/\d$/, ''))
+                            }, function (find) {
+                                /*              console.log(find)
+                                              console.log(element);*/
+                                Lampa.Modal.close();
+                                var finded = _this1.finds(find, str, element);
+
+                                if (finded) {
+                                    Lampa.Activity.push({
+                                        url: '',
+                                        component: 'full',
+                                        id: finded.id,
+                                        method: finded.name ? 'tv' : 'movie',
+                                        card: finded
+                                    });
+                                } else {
+                                    Lampa.Noty.show('在TMDB中找不到影片信息。');
+                                    Lampa.Controller.toggle('content');
                                 }
-                              });
-                              $('.iframe__body iframe').removeClass('iframe__window');
-                              $('.iframe__body iframe').addClass('screensaver-chrome__iframe');
-                              //Lampa.Controller.toggle('content');
-                          };
-                      }, function (a, c) {
-                          Lampa.Noty.show(network.errorDecode(a, c));
-                      }, false, {
-                          dataType: 'text'
-                      });
-                      //Lampa.Noty.show('无法检索链接');
-                  }
+                            }, function () {
+                                Lampa.Modal.close();
+                                Lampa.Noty.show('在TMDB中找不到影片信息。');
+                                Lampa.Controller.toggle('content');
+                            });
+                        }
 
 
-                  // Lampa.Iframe.show({
-                  //   //url: $('.embed-responsive-item', str).attr('src'),
-                  //   url: file,
-                  //   onBack: function onBack() {
-                  //     Lampa.Controller.toggle('content');
-                  //   }
-                  // });
-                  // $('.iframe__body iframe').removeClass('iframe__window');
-                  // $('.iframe__body iframe').addClass('screensaver-chrome__iframe');
-              }
-              //jrkan && file.indexOf('https://play.sportsteam365.com') == -1
-              if (viewed.indexOf(hash_file) == -1) {
-                viewed.push(hash_file);
-                item.append('<div class="torrent-item__viewed">' + Lampa.Template.get('icon_star', {}, true) + '</div>');
-                Lampa.Storage.set('online_view', viewed);
-              }
-          });
-          scroll.append(item);
-          _this4.contextmenu({
-            item: item,
-            view: view,
-            viewed: viewed,
-            hash_file: hash_file,
-            element: element,
-            file: function file(call) {
-              call({
-                file: _this4.getFile(element, true),
-              });
-            }
-          });
-        });
-      };
+                    });
+                } else {
+                    var a = str.title.replace(element.title, '').replace('(' + str.release_year + ')', '').replace(/(Season\s\d)/, '').replace(/‎/g, '').trim();
 
-      this.back = function () {
-        Lampa.Activity.backward();
-      };
-
-      this.contextmenu = function (params) {
-        contextmenu_all.push(params);
-        params.item.on('hover:long', function () {
-          function copylink(extra) {
-            if (extra.quality) {
-              var qual = [];
-  
-              for (var i in extra.quality) {
-                qual.push({
-                  title: i,
-                  file: extra.quality[i]
-                });
-              }
-  
-              Lampa.Select.show({
-                title: 'Ссылки',
-                items: qual,
-                onBack: function onBack() {
-                  Lampa.Controller.toggle(enabled);
-                },
-                onSelect: function onSelect(b) {
-                  Lampa.Utils.copyTextToClipboard(b.file, function () {
-                    Lampa.Noty.show(Lampa.Lang.translate('copy_secuses'));
-                  }, function () {
-                    Lampa.Noty.show(Lampa.Lang.translate('copy_error'));
-                  });
-                }
-              });
-            } else {
-              Lampa.Utils.copyTextToClipboard(extra.file, function () {
-                Lampa.Noty.show(Lampa.Lang.translate('copy_secuses'));
-              }, function () {
-                Lampa.Noty.show(Lampa.Lang.translate('copy_error'));
-              });
-            }
-          }
-
-          function download2pikpak(element) {
-            if (element.file.indexOf('magnet:?') !== -1) {
-              Lampa.Modal.open({
-                title: '发送到PikPak',
-                html: Lampa.Template.get('modal_loading'),
-                size: 'small',
-                mask: true,
-                onBack: function onBack() {
-                  Lampa.Modal.close();
-                  Lampa.Api.clear();
-                  Lampa.Controller.toggle('content');
-                }
-              });
-  
-              var p;
-              var info = Lampa.Storage.get("pikpakUserInfo","");
-              
-              if (!info.loginInfo || info.loginInfo.expires < new Date().getTime()) {
-                var url = 'https://user.mypikpak.com/v1/auth/signin';
-                var postdata =
-                {
-                  "client_id": "YNxT9w7GMdWvEOKa",
-                  "client_secret": "dbw2OtmVEeuUvIptb1Coyg",
-                  "password": Lampa.Storage.get('pikpak_userPass', ''),
-                  "username": Lampa.Storage.get('pikpak_userName', '')
-                };
-                
-                $.ajax({
-                  url: url,
-                  type: 'POST',
-                  data: postdata,
-                  async: false,
-                  dataType: 'json',
-                  success: function success(json) {
-                    if (json && (json.access_token || json.type == 'Bearer')) {
-                      var info = {};
-                      info.loginInfo = json;
-                      if (!info.loginInfo.expires && info.loginInfo.expires_in) {
-                        info.loginInfo.expires = new Date().getTime() + 1000 * info.loginInfo.expires_in;
-                      };
-                      Lampa.Storage.set("pikpakUserInfo", info);
+                    if (a === '') {
+                        s = element.title.replace(/第(.+)季/, '');
                     } else {
-                      Lampa.Storage.set("pikpakUserInfo", "");
-                      if (json && json.error) Lampa.Noty.show(json.details[1].message);
-                    }
-                  },
-                  error: function error() {
-                    //Lampa.Noty.show('请在设置中使用正确的用户名和密码登陆PikPak。');
-                  }
-                });
-          
-                info = Lampa.Storage.get("pikpakUserInfo","");
-                
-                if (info.loginInfo) {
-                  p = {
-                    dataType: "json",
-                    headers: {
-                      "content-type": "application/json;charset=utf-8",
-                      authorization: info.loginInfo.token_type + ' ' + info.loginInfo.access_token
-                    },
-                  };
-                } else {
-                  p = {
-                    dataType: "json",
-                    headers: {
-                      "content-type": "application/json;charset=utf-8",
-                    },
-                  };
-                };
-              } else {
-                p = {
-                  dataType: "json",
-                  headers: {
-                    "content-type": "application/json;charset=utf-8",
-                    authorization: info.loginInfo.token_type + ' ' + info.loginInfo.access_token
-                  },
-                };
-              };
-  
-              var postData_ = {
-                kind: "drive#file",
-                name: "",
-                // parent_id: route.params.id || '',
-                upload_type: "UPLOAD_TYPE_URL",
-                url: {
-                  url: element.file
+                        s = a.replace('II', '2');
+                    };
+
+                    //console.log(s)
+                    //var mysubtitle = str.sub_title.replace('/', ' ');
+                    //if (mysubtitle.indexOf(' ' != -1)) mysubtitle = mysubtitle.split(' ')[0]
+                    //console.log(s.replace(/\d$/, ''))
+                    Lampa.Api.search({
+                        //doubanitem.sub_title
+                        query: encodeURIComponent(s.replace(/\d$/, ''))
+                    }, function (find) {
+                        /*              console.log(find)
+                                      console.log(element);*/
+                        Lampa.Modal.close();
+                        var finded = _this1.finds(find, str, element);
+
+                        if (finded) {
+                            Lampa.Activity.push({
+                                url: '',
+                                component: 'full',
+                                id: finded.id,
+                                method: finded.name ? 'tv' : 'movie',
+                                card: finded
+                            });
+                        } else {
+                            Lampa.Noty.show('在TMDB中找不到影片信息。');
+                            Lampa.Controller.toggle('content');
+                        }
+                    }, function () {
+                        Lampa.Modal.close();
+                        Lampa.Noty.show('在TMDB中找不到影片信息。');
+                        Lampa.Controller.toggle('content');
+                    });
+                }
+            }, function (a, c) {
+                //_this1.empty(network.errorDecode(a, c));
+            }, false, {
+                dataType: 'text'
+            });
+
+
+
+        };
+        function cardImgBackground(card_data) {
+            if (Lampa.Storage.field('background')) {
+                return Lampa.Storage.get('background_type', 'complex') == 'poster' && card_data ? card_data : card_data;
+            }
+            return '';
+        };
+        this.getRemote = function (remote_url) {
+            return $.ajax({
+                type: "GET",
+                url: remote_url,
+                async: false
+            }).responseText;
+        };
+        this.start = function () {
+            // Lampa.Controller.add('content', {
+            //     toggle: function toggle() {
+            //         Lampa.Controller.collectionSet(scroll.render());
+            //         Lampa.Controller.collectionFocus(last || false, scroll.render());
+            //     },
+            //     left: function left() {
+            //         if (Navigator.canmove('left')) Navigator.move('left'); else Lampa.Controller.toggle('menu');
+            //     },
+            //     right: function right() {
+            //         Navigator.move('right');
+            //     },
+            //     up: function up() {
+            //         if (Navigator.canmove('up')) Navigator.move('up'); else Lampa.Controller.toggle('head');
+            //     },
+            //     down: function down() {
+            //         if (Navigator.canmove('down')) Navigator.move('down');
+            //     },
+            //     back: function back() {
+            //         Lampa.Activity.backward();
+            //     }
+            // });
+            var _this = this;
+            Lampa.Controller.add('content', {
+                toggle: function toggle() {
+                    Lampa.Controller.collectionSet(scroll.render());
+                    Lampa.Controller.collectionFocus(last || false, scroll.render());
                 },
-                params: {"from":"file"},
-                folder_type: "DOWNLOAD"
-              };
-  
-              network.native(PikPakProxy() + 'https://api-drive.mypikpak.com/drive/v1/files', function (json) {
-                if ("error" in json) {
-                  Lampa.Noty.show('哦，' + json.error_description + '，添加到 PikPak 失败。');
-                } else {
-                  if (json.upload_type === "UPLOAD_TYPE_URL") {
-                    Lampa.Noty.show(element.title + ' 的磁力链接已成功添加到 PikPak。');
-                  };
+                left: function left() {
+                    if (Navigator.canmove('left')) Navigator.move('left');
+                    else Lampa.Controller.toggle('menu');
+                },
+                right: function right() {
+                    // Navigator.move('right');
+                    if (Navigator.canmove('right')) Navigator.move('right');
+                    else _this.selectGroup();
+                },
+                up: function up() {
+                    // if (Navigator.canmove('up')) Navigator.move('up');
+                    // else Lampa.Controller.toggle('head');
+                    if (Navigator.canmove('up')) {
+                        Navigator.move('up');
+                    } else {
+                        if (!info.find('.view--category').hasClass('focus')) {
+                            if (!info.find('.view--category').hasClass('focus')) {
+                                Lampa.Controller.collectionSet(info);
+                                Navigator.move('right')
+                            }
+                        } else Lampa.Controller.toggle('head');
+                    }
+                },
+                down: function down() {
+                    // if (Navigator.canmove('down')) Navigator.move('down');
+                    if (Navigator.canmove('down')) Navigator.move('down');
+                    else if (info.find('.view--category').hasClass('focus')) {
+                        Lampa.Controller.toggle('content');
+                    }
+                },
+                back: function back() {
+                    Lampa.Activity.backward();
                 }
-                Lampa.Modal.close();
-                Lampa.Controller.toggle('content');
-              }, function (a, c) {
-                Lampa.Noty.show('哦: ' + network.errorDecode(a, c));
-                Lampa.Modal.close();
-                Lampa.Controller.toggle('content');
-              }, JSON.stringify(postData_), p);
-            } else {
-              Lampa.Noty.show('不是磁力链接，添加失败。'); 
-            }
-          }
-
-          function PikPakProxy() {
-            var url ;
-            //https://api-pikpak.tjsky.cf/
-            Lampa.Storage.get('pikpak_proxy') ? url = 'https://cors.eu.org/': url = '';
-            return url;
-          };
-
-          var enabled = Lampa.Controller.enabled().name;
-          var menu = [{
-            title: Lampa.Lang.translate('torrent_parser_label_title'),
-            mark: true
-          }, {
-            title: Lampa.Lang.translate('torrent_parser_label_cancel_title'),
-            clearmark: true
-          }, {
-            title: Lampa.Lang.translate('online_mod_clearmark_all'),
-            clearmark_all: true
-          }, {
-            title: Lampa.Lang.translate('time_reset'),
-            timeclear: true
-          }, {
-            title: Lampa.Lang.translate('online_mod_timeclear_all'),
-            timeclear_all: true
-          }];
-  
-          if (Lampa.Platform.is('webos')) {
-            menu.push({
-              title: Lampa.Lang.translate('player_lauch') + ' - Webos',
-              player: 'webos'
             });
-          }
-  
-          if (Lampa.Platform.is('android')) {
-            menu.push({
-              title: Lampa.Lang.translate('player_lauch') + ' - Android',
-              player: 'android'
-            });
-          }
-  
-          menu.push({
-            title: Lampa.Lang.translate('player_lauch') + ' - Lampa',
-            player: 'lampa'
-          });
-  
-          if (params.file) {
-            menu.push({
-              title: '磁力下载到PikPak',
-              pikpak: true
-            });
-            menu.push({
-              title: Lampa.Lang.translate('copy_link'),
-              copylink: true
-            });
-          }
-  
-          if (Lampa.Account.working() && params.element && typeof params.element.season !== 'undefined' && Lampa.Account.subscribeToTranslation) {
-            menu.push({
-              title: Lampa.Lang.translate('online_mod_voice_subscribe'),
-              subscribe: true
-            });
-          }
-  
-          Lampa.Select.show({
-            title: Lampa.Lang.translate('title_action'),
-            items: menu,
-            onBack: function onBack() {
-              Lampa.Controller.toggle(enabled);
-            },
-            onSelect: function onSelect(a) {
-              if (a.clearmark) {
-                Lampa.Arrays.remove(params.viewed, params.hash_file);
-                Lampa.Storage.set('online_view', params.viewed);
-                params.item.find('.torrent-item__viewed').remove();
-              }
-  
-              if (a.clearmark_all) {
-                contextmenu_all.forEach(function (params) {
-                  Lampa.Arrays.remove(params.viewed, params.hash_file);
-                  Lampa.Storage.set('online_view', params.viewed);
-                  params.item.find('.torrent-item__viewed').remove();
-                });
-              }
-  
-              if (a.mark) {
-                if (params.viewed.indexOf(params.hash_file) == -1) {
-                  params.viewed.push(params.hash_file);
-                  params.item.append('<div class="torrent-item__viewed">' + Lampa.Template.get('icon_star', {}, true) + '</div>');
-                  Lampa.Storage.set('online_view', params.viewed);
-                }
-              }
-  
-              if (a.timeclear) {
-                params.view.percent = 0;
-                params.view.time = 0;
-                params.view.duration = 0;
-                Lampa.Timeline.update(params.view);
-              }
-  
-              if (a.timeclear_all) {
-                contextmenu_all.forEach(function (params) {
-                  params.view.percent = 0;
-                  params.view.time = 0;
-                  params.view.duration = 0;
-                  Lampa.Timeline.update(params.view);
-                });
-              }
-  
-              Lampa.Controller.toggle(enabled);
-  
-              if (a.player) {
-                Lampa.Player.runas(a.player);
-                params.item.trigger('hover:enter');
-              }
-  
-              if (a.copylink) {
-                params.file(copylink);
-              }
+            Lampa.Controller.toggle('content');
+        };
 
-              if (a.pikpak) {
-                download2pikpak(params.element);
-              }
-  
-              if (a.subscribe) {
-                Lampa.Account.subscribeToTranslation({
-                  card: object.movie,
-                  season: params.element.season,
-                  episode: params.element.translate_episode_end,
-                  voice: params.element.translate_voice
-                }, function () {
-                  Lampa.Noty.show(Lampa.Lang.translate('online_mod_voice_success'));
-                }, function () {
-                  Lampa.Noty.show(Lampa.Lang.translate('online_mod_voice_error'));
-                });
-              }
-            }
-          });
-        }).on('hover:focus', function () {
-          if (Lampa.Helper) Lampa.Helper.show('detail_detail', '如遇播放卡顿建议长按OK键选择Android播放器。', params.item);
-        });
-      };
+        this.pause = function () { };
 
-      this.start = function () {
-        Lampa.Controller.add('content', {
-          toggle: function toggle() {
-            Lampa.Controller.collectionSet(scroll.render(), files.render());
-            Lampa.Controller.collectionFocus(last || false, scroll.render());
-          },
-          up: function up() {
-            if (Navigator.canmove('up')) {
-              if (scroll.render().find('.selector').slice(2).index(last) == 0 && last_filter) {
-                Lampa.Controller.collectionFocus(last_filter, scroll.render());
-              } else Navigator.move('up');
-            } else Lampa.Controller.toggle('head');
-          },
-          down: function down() {
-            Navigator.move('down');
-          },
-          right: function right() {
-            Navigator.move('right');
-          },
-          left: function left() {
-            if (Navigator.canmove('left')) Navigator.move('left');else Lampa.Controller.toggle('menu');
-          },
-          back: this.back
-        });
-        Lampa.Controller.toggle('content');
-      };
+        this.stop = function () { };
 
-      this.pause = function () {};
+        this.render = function () {
+            return html;
+        };
 
-      this.stop = function () {};
-
-      this.render = function () {
-        return files.render();
-      };
-
-      this.destroy = function () {
-        network.clear();
-        files.destroy();
-        scroll.destroy();
-        results = null;
-        network = null;
-      };
-      
+        this.destroy = function () {
+            network.clear();
+            scroll.destroy();
+            if (info) info.remove();
+            html.remove();
+            body.remove();
+            network = null;
+            items = null;
+            html = null;
+            body = null;
+            info = null;
+            doubanitem = null;
+        };
     }
 
-    function startPlugin() {
-      window.plugin_detail_mod_ready = true;
-      Lampa.Component.add('detail_mod', component);
-      Lampa.Template.add('button_detail_mod', "<div class=\"full-start__button selector view--online\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:svgjs=\"http://svgjs.com/svgjs\" version=\"1.1\" width=\"512\" height=\"512\" x=\"0\" y=\"0\" viewBox=\"0 0 30.051 30.051\" style=\"enable-background:new 0 0 512 512\" xml:space=\"preserve\" class=\"\">\n    <g xmlns=\"http://www.w3.org/2000/svg\">\n        <path d=\"M19.982,14.438l-6.24-4.536c-0.229-0.166-0.533-0.191-0.784-0.062c-0.253,0.128-0.411,0.388-0.411,0.669v9.069   c0,0.284,0.158,0.543,0.411,0.671c0.107,0.054,0.224,0.081,0.342,0.081c0.154,0,0.31-0.049,0.442-0.146l6.24-4.532   c0.197-0.145,0.312-0.369,0.312-0.607C20.295,14.803,20.177,14.58,19.982,14.438z\" fill=\"currentColor\"/>\n        <path d=\"M15.026,0.002C6.726,0.002,0,6.728,0,15.028c0,8.297,6.726,15.021,15.026,15.021c8.298,0,15.025-6.725,15.025-15.021   C30.052,6.728,23.324,0.002,15.026,0.002z M15.026,27.542c-6.912,0-12.516-5.601-12.516-12.514c0-6.91,5.604-12.518,12.516-12.518   c6.911,0,12.514,5.607,12.514,12.518C27.541,21.941,21.937,27.542,15.026,27.542z\" fill=\"currentColor\"/>\n    </g></svg>\n\n    <span>观看</span>\n    </div>");
-      Lampa.Template.add('detail_mod', "<div class=\"online selector\">\n        <div class=\"online__body\">\n<div style='position: absolute;left: 0;top: -0.3em;width: 2.4em;height: 2.4em'>    <svg style='height: 2.4em; width:  2.4em;' viewBox='0 0 128 128' fill='none' xmlns=Lampa.Utils.protocol() + 'www.w3.org/2000/svg'>   <circle cx='64' cy='64' r='56' stroke='white' stroke-width='16'/>   <path d='M90.5 64.3827L50 87.7654L50 41L90.5 64.3827Z' fill='white'/>    </svg></div>            <div class=\"online__title\"  style='padding-left: 2.1em;'>{title}</div>\n            <div class=\"online__quality\"  style='padding-left: 3.4em;'>{sitename} / {quality}</div>\n        </div>\n    </div>");
-    //   Lampa.Listener.follow('full', function (e) {
-    //     if (e.type == 'complite') {
-    //       var btn = Lampa.Template.get('button_detail_mod');
-    //       btn.on('hover:enter', function () {
-    //         Lampa.Activity.push({
-    //           url: '',
-    //           title: '在线观看',
-    //           component: 'detail_mod',
-    //           search: e.data.movie.title,
-    //           search_one: e.data.movie.title,
-    //           search_two: e.data.movie.original_title,
-    //           movie: e.data.movie,
-    //           region: e.object.card.region,
-    //           page: 1
-    //         });
-    //       });
-    //       e.object.activity.render().find('.view--torrent').after(btn);
-    //     }
-    //   });
+    var catalogs = [{
+        title: '阿里云盘发布频道',
+        url: 'https://tx.me/s/Aliyundrive_Share_Channel'
+    }, {
+        title: '阿里云盘发布频道2',
+        url: 'https://tx.me/s/shareAliyun'
+    }, 
+    {
+        title: '阿里云盘4K影视',
+        url: 'https://tx.me/s/Aliyun_4K_Movies'
+    },
+    {
+        title: '肯德基电影院',
+        url: 'https://tx.me/s/XiangxiuNB'
+    }, {
+        title: '全网云盘资源社',
+        url: 'https://tx.me/s/quanziyuanshe'
+    }, {
+        title: '阿里(高品质)影视',
+        url: 'https://tx.me/s/alyp_1'
+    },{
+        title: 'iAliyun',
+        url: 'https://tx.me/s/iAliyun'
+    },,{
+        title: '阿里云影视',
+        url: 'https://tx.me/s/aliyunys'
+    },];
+
+    function startTG() {
+        window.plugin_tg_ready = true;
+        Lampa.Component.add('tg', TG);
+
+        function addSettingsTG() {
+            var ico = '<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M19.553 2.997a2.231 2.231 0 0 0-.7.167h-.003c-.214.085-1.23.512-2.775 1.16l-5.537 2.332C6.565 8.328 2.66 9.976 2.66 9.976l.046-.018s-.269.088-.55.281a1.522 1.522 0 0 0-.44.425 1.248 1.248 0 0 0-.208.833c.068.541.419.866.67 1.045.255.181.498.266.498.266h.006l3.662 1.234c.164.527 1.116 3.656 1.345 4.377.135.43.266.7.43.905.08.105.173.193.284.263a.839.839 0 0 0 .184.08l-.038-.009c.011.003.02.012.028.015.03.008.05.011.088.017.58.176 1.045-.184 1.045-.184l.026-.021 2.162-1.969 3.624 2.78.083.035c.755.332 1.52.147 1.924-.178.407-.328.566-.747.566-.747l.026-.068 2.8-14.347c.08-.354.1-.685.012-1.007a1.355 1.355 0 0 0-.586-.785 1.404 1.404 0 0 0-.8-.203Zm-.076 1.537c-.003.047.006.042-.015.133v.008l-2.774 14.197c-.012.02-.032.065-.088.109-.058.046-.105.076-.349-.021l-4.433-3.398-2.677 2.441.563-3.593 7.242-6.75c.298-.277.199-.336.199-.336.021-.341-.451-.1-.451-.1l-9.132 5.657-.003-.015-4.377-1.474v-.003l-.011-.002a.203.203 0 0 0 .022-.009l.024-.012.023-.008 7.881-3.32c1.989-.838 3.993-1.681 5.534-2.333A605.484 605.484 0 0 1 19.4 4.558c.061-.024.032-.024.076-.024Z" stroke-width="2" fill="white"/></svg>';
+            var menu_item = $('<li class="menu__item selector focus" data-action="channel"><div class="menu__ico">' + ico + '</div><div class="menu__text">频道</div></li>');
+            menu_item.on('hover:enter', function () {
+                Lampa.Select.show({
+                    title: '频道',
+                    items: catalogs,
+                    onSelect: function onSelect(a) {
+                        Lampa.Activity.push({
+                            url: a.url,
+                            title: '频道 - ' + a.title,
+                            component: 'tg',
+                            page: 1
+                        });
+                    },
+                    onBack: function onBack() {
+                        Lampa.Controller.toggle('menu');
+                    }
+                });
+            });
+            $('.menu .menu__list').eq(0).append(menu_item);
+            //$('.menu .menu__list .menu__item.selector').eq(1).after(menu_item);
+        }
+
+        if (window.appready) addSettingsTG()
+        else {
+            Lampa.Listener.follow('app', function (e) {
+                if (e.type == 'ready') addSettingsTG()
+            })
+        }
+
+        // Lampa.Listener.follow('app', function (e) {
+        //     if (e.type == 'ready') {
+        //         var ico = '<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M19.553 2.997a2.231 2.231 0 0 0-.7.167h-.003c-.214.085-1.23.512-2.775 1.16l-5.537 2.332C6.565 8.328 2.66 9.976 2.66 9.976l.046-.018s-.269.088-.55.281a1.522 1.522 0 0 0-.44.425 1.248 1.248 0 0 0-.208.833c.068.541.419.866.67 1.045.255.181.498.266.498.266h.006l3.662 1.234c.164.527 1.116 3.656 1.345 4.377.135.43.266.7.43.905.08.105.173.193.284.263a.839.839 0 0 0 .184.08l-.038-.009c.011.003.02.012.028.015.03.008.05.011.088.017.58.176 1.045-.184 1.045-.184l.026-.021 2.162-1.969 3.624 2.78.083.035c.755.332 1.52.147 1.924-.178.407-.328.566-.747.566-.747l.026-.068 2.8-14.347c.08-.354.1-.685.012-1.007a1.355 1.355 0 0 0-.586-.785 1.404 1.404 0 0 0-.8-.203Zm-.076 1.537c-.003.047.006.042-.015.133v.008l-2.774 14.197c-.012.02-.032.065-.088.109-.058.046-.105.076-.349-.021l-4.433-3.398-2.677 2.441.563-3.593 7.242-6.75c.298-.277.199-.336.199-.336.021-.341-.451-.1-.451-.1l-9.132 5.657-.003-.015-4.377-1.474v-.003l-.011-.002a.203.203 0 0 0 .022-.009l.024-.012.023-.008 7.881-3.32c1.989-.838 3.993-1.681 5.534-2.333A605.484 605.484 0 0 1 19.4 4.558c.061-.024.032-.024.076-.024Z" stroke-width="2"/></svg>';
+        //         var menu_item = $('<li class="menu__item selector focus" data-action="yyds"><div class="menu__ico">' + ico + '</div><div class="menu__text">频道</div></li>');
+        //         menu_item.on('hover:enter', function () {
+        //             Lampa.Select.show({
+        //                 title: '频道',
+        //                 items: catalogs,
+        //                 onSelect: function onSelect(a) {
+        //                     Lampa.Activity.push({
+        //                         url: a.url,
+        //                         title: '频道 - ' + a.title,
+        //                         component: 'tg',
+        //                         page: 1
+        //                     });
+        //                 },
+        //                 onBack: function onBack() {
+        //                     Lampa.Controller.toggle('menu');
+        //                 }
+        //             });
+        //         });
+        //         //$('.menu .menu__list').eq(0).append(menu_item);
+        //         $('.menu .menu__list .menu__item.selector').eq(1).after(menu_item);
+        //     }
+        // });
     }
 
-    if (!window.plugin_detail_mod_ready) startPlugin();
+    if (!window.plugin_tg_ready) startTG();
 
 })();
