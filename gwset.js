@@ -4,7 +4,6 @@
 	
     //Настройки программы по-умолчанию
     Lampa.Storage.set('helper', 'false');
-    Lampa.Storage.set('source', 'cub');
     Lampa.Storage.set('parser_use', 'true');
     Lampa.Storage.set('poster_size', 'w500');
     Lampa.Storage.set('glass_style', 'true');
