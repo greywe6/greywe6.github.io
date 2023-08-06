@@ -4,7 +4,6 @@
 	
     //Настройки программы по-умолчанию
     Lampa.Storage.set('account_use', 'true');
-    Lampa.Storage.set('settings_cub_sync_timecodes', 'true');
     Lampa.Storage.set('helper', 'false');
     Lampa.Storage.set('parser_use', 'true');
     Lampa.Storage.set('poster_size', 'w500');
