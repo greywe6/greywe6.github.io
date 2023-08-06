@@ -1,20 +1,20 @@
 (function () {
     'use strict';
-        Lampa.Platform.tv();
+    Lampa.Platform.tv();
 	
     //Настройки программы по-умолчанию
-        Lampa.Storage.set('helper', 'false');
-        Lampa.Storage.set('source', 'cub');
-        Lampa.Storage.set('parser_use', 'true');
-        Lampa.Storage.set('poster_size', 'w500');
-        Lampa.Storage.set('glass_style', 'true');
-        Lampa.Storage.set('glass_opacity', 'blacked');
-        Lampa.Storage.set('video_quality_default', '2160');
-	    Lampa.Storage.set('player_launch_trailers', 'youtube');
+    Lampa.Storage.set('helper', 'false');
+    Lampa.Storage.set('source', 'cub');
+    Lampa.Storage.set('parser_use', 'true');
+    Lampa.Storage.set('poster_size', 'w500');
+    Lampa.Storage.set('glass_style', 'true');
+    Lampa.Storage.set('glass_opacity', 'blacked');
+    Lampa.Storage.set('video_quality_default', '2160');
+	Lampa.Storage.set('player_launch_trailers', 'youtube');
 	
     //Видимость постеров TMDB-Proxy
 	Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
-        Lampa.Storage.set('tmdb_proxy_api', 'http://cors.lampa32.ru/proxy/');
+    Lampa.Storage.set('tmdb_proxy_api', 'http://cors.lampa32.ru/proxy/');
 	
     //Вкл. TorrServer на WebOs
 	window.lampa_settings.torrents_use = true;
@@ -25,7 +25,7 @@
 	Lampa.Listener.follow('app', function(e) {
 	if(e.type == 'ready') {
         //Удалить кнопку рекламы Премиум в шапке
-	$('#app > div.head > div > div.head__actions > .open--premium').remove();
+    $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	//Удалить кнопку Лента в шапке
 	$('#app > div.head > div > div.head__actions > .open--feed').remove();
 	//Длбавляет кнопку перезагрузки
@@ -33,7 +33,7 @@
 	$('#reboot').on('hover:enter hover:click hover:touch', function() {location.reload();});
 	//Свои цвета/стили
 	Lampa.Template.add('stlico_css', "\n   <style>\n .player-panel__timenow{font-size:1.3em;}\n .player-panel__timeend{font-size:1.3em;}\n .full-start-new__buttons .full-start__button.selector.button--priority:not(.focus) span{display:block;}\n .full-start__button.selector.button--priority svg{color:#76b83f;}\n .full-start__button.selector.view--trailer.button--priority svg{color:#FF4242;}\n .full-start__button.selector.view--online.button--priority svg{color:#00c2ff;}\n .menu__item.focus, .menu__item.traverse, .menu__item.hover {color:#000!important;}\n .online.focus{box-shadow: inset 0.3 0 0 0.2em #FFF!important;margin-left: -.6em!important;margin-right: -.6em!important;}\n .scroll--mask{webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(5%,white),color-stop(95%,white),to(rgba(255,255,255,0)))!important;}\n .scroll--mask{-webkit-mask-image: -webkit-linear-gradient(top,rgba(255,255,255,0) 0%,white 5%,white 95%,rgba(255,255,255,0) 100%)!important;}\n   </style>\n"); 
-        $('body').append(Lampa.Template.get('stlico_css', {}, true));
+    $('body').append(Lampa.Template.get('stlico_css', {}, true));
 	}
 	});
 
