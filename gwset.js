@@ -6,12 +6,14 @@
     Lampa.Storage.set('helper', 'false');
     Lampa.Storage.set('parser_use', 'true');
     Lampa.Storage.set('poster_size', 'w500');
+    Lampa.Storage.set('background_type','simple');
     Lampa.Storage.set('glass_style', 'true');
     Lampa.Storage.set('glass_opacity', 'blacked');
     Lampa.Storage.set('video_quality_default', '2160');
     Lampa.Storage.set('player_launch_trailers', 'youtube');
-    Lampa.Storage.set('webos_subs_params','{}');
+    Lampa.Storage.set('player_timecode', 'ask');
     Lampa.Storage.set('player_size', 'default');
+    Lampa.Storage.set('webos_subs_params','{}');
 	
     //Видимость постеров TMDB-Proxy
 	Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
