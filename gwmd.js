@@ -163,6 +163,30 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 				});
 			}
 		},
+		last_view: function (data) {
+			var episodes = Lampa.TimeTable.get(data);
+			var viewed;
+			episodes.forEach(function (ep) {
+				var hash = Lampa.Utils.hash([ep.season_number, ep.episode_number, data.original_title].join(''));
+				var view = Lampa.Timeline.view(hash);
+				if (view.percent) viewed = {
+					ep: ep,
+					view: view
+				};
+			});
+			if (viewed) {
+				var ep = viewed.ep.episode_number;
+				var se = viewed.ep.season_number;
+				var last_view = 'S' + se + ':E' + ep;
+				if ($('body').find('.full-start__buttons,.full-start-new__buttons').length) {
+					$('.timeline, .card--last_view').remove();
+					$('body').find('.full-start__poster,.full-start-new__poster').append("<div class='card--last_view' style='top:0.6em;right: -.5em;position: absolute;background: #FF4242;color: #fff;padding: 0.3em 0.4em;font-size: 1.2em;-webkit-border-radius: 0.3em;-moz-border-radius: 0.3em;border-radius: 0.3em;'><div style='float:left;margin:-5px 0 -4px -4px' class='card__icon icon--history'></div>" + last_view +"</div>").parent().append('<div class="timeline" style="position:relative;"></div>');
+					$('body').find('.timeline').append(Lampa.Timeline.render(viewed.view));
+				}
+				if ($('body').find('.filter--sort').length) $('body').find('.files__left .time-line, .card--last_view').remove();
+			} else $('body').find('.timeline,.card--last_view').remove();
+			if ($('body').find('.online').length == 0) $('.card--new_ser,.card--viewed').remove();
+		},
 		serialInfo: function (card) {
 			if (Lampa.Storage.field('mods_serial_info') && card.source == 'tmdb' && card.seasons && card.last_episode_to_air) {
 				var last_seria_inseason = card.last_episode_to_air.season_number;
