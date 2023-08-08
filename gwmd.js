@@ -215,7 +215,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
   						add_ = '#{season_new} <b>' + episod_new[last_seria_inseason];
   					} 
 					}
-					new_ser = add_ + '</b> #{torrent_serial_episode} #{season_from} ' + count_eps_last_seas + ' - S' + last_seria_inseason;
+					new_ser = add_ + '</b> #{torrent_serial_episode} #{season_from} ' + count_eps_last_seas + ' - Сезон' + last_seria_inseason;
 				} else new_ser = last_seria_inseason + ' #{season_ended}';
 		
 				if(!$('.card--new_seria', Lampa.Activity.active().activity.render()).length) {
