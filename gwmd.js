@@ -180,7 +180,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 				var last_view = 'S' + se + ':E' + ep;
 				if ($('body').find('.full-start__buttons,.full-start-new__buttons').length) {
 					$('.timeline, .card--last_view').remove();
-					$('body').find('.full-start__poster,.full-start-new__poster').append("<div class='card--last_view' style='top:0.6em;right: -.5em;position: absolute;background: #168FDF;color: #fff;padding: 0.4em 0.4em;font-size: 1.2em;-webkit-border-radius: 0.3em;-moz-border-radius: 0.3em;border-radius: 0.3em;'><div style='float:left;margin:-5px 0 -4px -4px' class='card__icon icon--history'></div>" + last_view +"</div>").parent().append('<div class="timeline" style="position:relative;"></div>');
+					$('body').find('.full-start__poster,.full-start-new__poster').append("<div class='card--last_view' style='top:0.6em;right: -.5em;position: absolute;background: #6F8DDC;color: #fff;padding: 0.3em 0.4em 0.4em;font-size: 1.2em;-webkit-border-radius: 0.3em;-moz-border-radius: 0.3em;border-radius: 0.3em;'><div style='float:left;margin:-5px 0 -4px -4px' class='card__icon icon--history'></div>" + last_view +"</div>").parent().append('<div class="timeline" style="position:relative;"></div>');
 					$('body').find('.timeline').append(Lampa.Timeline.render(viewed.view));
 				}
 				if ($('body').find('.filter--sort').length) $('body').find('.files__left .time-line, .card--last_view').remove();
@@ -215,7 +215,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
   						add_ = '#{season_new} <b>' + episod_new[last_seria_inseason];
   					} 
 					}
-					new_ser = add_ + '</b> #{torrent_serial_episode} #{season_from} ' + count_eps_last_seas + ' - Сезон' + last_seria_inseason;
+					new_ser = add_ + '</b> #{torrent_serial_episode} #{season_from} ' + count_eps_last_seas + ' - Сезон ' + last_seria_inseason;
 				} else new_ser = last_seria_inseason + ' #{season_ended}';
 		
 				if(!$('.card--new_seria', Lampa.Activity.active().activity.render()).length) {
