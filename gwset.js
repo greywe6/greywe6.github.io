@@ -3,6 +3,7 @@
     Lampa.Platform.tv();
 	
     //Настройки программы по-умолчанию
+    $('div.card__type').text('Сериал');
     Lampa.Storage.set('helper', 'false');
     Lampa.Storage.set('account_use', 'true');
     Lampa.Storage.set('parser_use', 'true');
@@ -28,7 +29,6 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	if(e.type == 'ready') {
-        $('div.card__type').text('Сериал');
         //Удалить кнопку рекламы Премиум в шапке
     $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	//Удалить кнопку Лента в шапке
