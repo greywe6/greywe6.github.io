@@ -2275,10 +2275,10 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 					name: Lampa.Lang.translate('title_online_first_but'),
 				},
 				onChange: function (item) {
-					Lampa.Storage.set('full_btn_priority', '');
+					Lampa.Storage.set('full_btn_priority', 'torrent');
 				},
 				onRender: function (item) {
-					if (Lampa.Storage.field('online_mod')) item.show(); 
+					if (Lampa.Storage.field('mods_onl')) item.show(); 
 					else item.hide();
 				}
 			});
