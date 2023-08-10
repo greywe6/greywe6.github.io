@@ -2264,6 +2264,24 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 					name: Lampa.Lang.translate('title_addons')
 				}
 			});
+			Lampa.SettingsApi.addParam({
+				component: 'settings_modss',
+				param: {
+					name: 'online_but_first',
+					type: 'trigger', //доступно select,input,trigger,title,static
+					default: true
+				},
+				field: {
+					name: Lampa.Lang.translate('title_online_first_but'),
+				},
+				onChange: function (item) {
+					Lampa.Storage.set('full_btn_priority', '');
+				},
+				onRender: function (item) {
+					if (Lampa.Storage.field('online_mod')) item.show(); 
+					else item.hide();
+				}
+			});
 
 /* ТВИКИ */
 		Lampa.SettingsApi.addComponent({
