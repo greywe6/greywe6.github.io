@@ -12,7 +12,7 @@
     Lampa.Storage.set('glass_opacity', 'blacked');
     Lampa.Storage.set('video_quality_default', '2160');
     Lampa.Storage.set('player_launch_trailers', 'youtube');
-    Lampa.Storage.set('player_timecode', 'ask');
+    Lampa.Storage.set('player_timecode', '');
     Lampa.Storage.set('player_size', 'default');
     Lampa.Storage.set('webos_subs_params','{}');
 	
