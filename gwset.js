@@ -49,7 +49,7 @@
     $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
     $('.full-start__button.selector.button--play').remove();
 
-    if(back == 'delete') Lampa.Activity.active().activity.render().find('.view--modss_online').remove();
+    if(back == 'delete') Lampa.Activity.active().activity.render().find('.view--online').remove();
 			if(back && back !== 'delete') back.find('span').text(Lampa.Lang.translate(this.title));
 		  if (!back && Lampa.Storage.field('mods_onl')) {
 		    setTimeout(function (){
