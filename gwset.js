@@ -40,15 +40,15 @@
     $('body').append(Lampa.Template.get('stlico_css', {}, true));
     Lampa.Template.add('stlico2_css', "\n   <style>\n .full-start-new__buttons .full-start__button.selector.view--online:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--torrent:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--trailer:not(.focus) span{display:block;}\n .full-start__button.selector.view--torrent svg{color:#76b83f;}\n .full-start__button.selector.view--trailer svg{color:#FF4242;}\n .full-start__button.selector.view--online svg{color:#00c2ff;}\n   </style>");
     $('body').append(Lampa.Template.get('stlico2_css', {}, true));
+    }
+	});
     
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     Lampa.Listener.follow('full', function (e) {
-        if (e.type == 'complite')
-         $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
-         $('.full-start__button.selector.button--play').remove();
+    if (e.type == 'complite')
+    $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
+    $('.full-start__button.selector.button--play').remove();
     });
-    }
-	});
 
 
 })();
