@@ -15,7 +15,7 @@
     Lampa.Storage.set('player_timecode', 'ask');
     Lampa.Storage.set('player_size', 'default');
     Lampa.Storage.set('webos_subs_params','{}');
-    Lampa.Storage.set('full_btn_priority', 'view--torrent');
+    Lampa.Storage.set('full_btn_priority', '.button--play');
 	
     //Видимость постеров TMDB-Proxy
 	Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
