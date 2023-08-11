@@ -48,8 +48,7 @@
     if (e.type == 'complite')
     $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
     $('.full-start__button.selector.button--play').remove();
-    
-    if(Lampa.Storage.field('online_but_first')) Navigator.focus(btn[0]);
+    Navigator.focus(btn[0]);
 
     });
 
