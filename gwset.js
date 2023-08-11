@@ -28,7 +28,7 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	if(e.type == 'ready') {
-        $('#app > div.wrap > div.wrap__content > div > div > div > div > div > div > div > div > div > div > div.full-start-new__right > full-start-new__buttons').remove();
+        $('#app > div.wrap > div.wrap__content > div > div.full-start-new__right > full-start-new__buttons').remove();
         //Удалить кнопку рекламы Премиум в шапке
     $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	//Удалить кнопку Лента в шапке
