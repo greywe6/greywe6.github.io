@@ -1,6 +1,12 @@
 (function () {
     'use strict';
     Lampa.Platform.tv();
+
+    Lampa.Listener.follow('full', function (e) {
+        if (e.type == 'complite')
+         $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
+         $('.full-start__button.selector.button--play').remove(); 
+       });
 	
     //Настройки программы по-умолчанию
     Lampa.Storage.set('helper', 'false');
