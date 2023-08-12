@@ -44,10 +44,11 @@
 	});
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
-    /*Lampa.Listener.follow('full', function (e) {
-    if (e.type == 'complite')
+    Lampa.Listener.follow('full', function (e) {
+    if (e.type == 'complite') {
     $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
     $('.full-start__button.selector.button--play').remove();
-    });*/
+    }
+    });
 
 })();
