@@ -48,7 +48,7 @@
     if (e.type == 'complite') {
     //$('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
     //$('.full-start__button.selector.button--play').remove();
-    e.object.activity.render().find('.full-start__button.selector.button--play').before('.full-start__button.selector.view--trailer.button--priority');
+    e.object.activity.render().find('.button--play').before('.button--priority');
     }
     });
 
