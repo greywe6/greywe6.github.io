@@ -4926,7 +4926,7 @@
       });
       var files = new Lampa.Files(object);
       var filter = new Lampa.Filter(object);
-      var balanser = Lampa.Storage.get('online_mod_balanser', 'collaps');
+      var balanser = Lampa.Storage.get('online_mod_balanser', 'videocdn');
       var last_bls = Lampa.Storage.field('online_mod_save_last_balanser') === false ? {} : Lampa.Storage.cache('online_mod_last_balanser', 200, {});
       var balanser_timer;
 	  var contextmenu_all = [];
@@ -4953,11 +4953,11 @@
           balanser = last_select_balanser[object.movie.id];
           Lampa.Storage.set('online_mod_last_balanser', last_select_balanser);
         } else {
-          balanser = Lampa.Storage.get('online_mod_balanser', 'collaps');
+          balanser = Lampa.Storage.get('online_mod_balanser', 'videocdn');
         }
 
         if (!sources[balanser]) {
-          balanser = 'collaps';
+          balanser = 'videocdn';
         }
 
         return new sources[balanser](this, object);
@@ -5033,7 +5033,7 @@
 
 
       if (filter_sources.indexOf(balanser) == -1) {
-        balanser = 'collaps';
+        balanser = 'filmix';
         Lampa.Storage.set('online_mod_balanser', balanser);
       }
 
