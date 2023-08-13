@@ -6440,9 +6440,8 @@
           _this.start();
         };
 
-        filter.render().find('.selector').on('hover:focus', function (e) {
-          last_filter = e.target;
-          scroll.update($(e.target), true);
+        filter.render().find('.selector').on('hover:enter', function () {
+        clearInterval(balanser_timer);
         });
 
         filter.onSelect = function (type, a, b) {
@@ -6450,7 +6449,19 @@
             if (a.reset) {
               if (extended) sources[balanser].reset();else _this.start();
             } else {
-              sources[balanser].filter(type, a, b);
+              if (a.stype == 'source') {
+
+                balanser = filter_sources[b.index];
+                Lampa.Storage.set('online_balanser', balanser);
+                last_bls[object.movie.id] = balanser;
+                Lampa.Storage.set('online_last_balanser', last_bls);
+
+                _this.search();
+
+                setTimeout(Lampa.Select.close, 10);
+              } else {
+                sources[balanser].filter(type, a, b);
+              }
             }
           } else if (type == 'sort') {
             balanser = a.source;
@@ -6461,16 +6472,23 @@
               Lampa.Storage.set('online_mod_last_balanser', last_bls);
             }
 
-            _this.search();
+            _this.changeBalanser();
 
             setTimeout(Lampa.Select.close, 10);
           }
         };
-
+		if (object.movie.number_of_seasons) filter.render().find('.filter--filter').show();
+  	    else filter.render().find('.filter--filter').hide();
+         filter.render().find('.filter--sort').on('hover:enter', function () {
+  			$('body').find('.selectbox__title').text(Lampa.Lang.translate('online_mod_balanser'));
+  		});
         filter.render().find('.filter--sort span').text(Lampa.Lang.translate('online_mod_balanser'));
         filter.render();
         files.append(scroll.render());
         scroll.append(filter.render());
+		filter.render().find('.filter--search').find('.filter--filter').after(filter.render());
+        scroll.body().addClass('torrent-list');
+        scroll.minus(files.render().find('.explorer__files-head'));
         this.search();
         return this.render();
       };
