@@ -2284,7 +2284,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			},
 			onChange: function(value) {
 				//Действия при изменении подпункта
-				var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: inset 0.3 0 0 0.2em #00c2ff!important;border-color: #00c2ff!important;-webkit-border-color: #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
+				var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.4em #FFF!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
 				var green2 = '<div id="green_style"><style>.scroll--mask{webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(5%,white),color-stop(95%,white),to(rgba(255,255,255,0)))!important;}</style></div>';
 				var green3 = '<div id="greenn_style"><style>.scroll--mask{-webkit-mask-image: -webkit-linear-gradient(top,rgba(255,255,255,0) 0%,white 5%,white 95%,rgba(255,255,255,0) 100%)!important;}</style></div>';
 				var green4 = '<div id="speedd_style"><style>div.value--speed span{opacity: 0%!important;display: none;}</style></div>';
@@ -2521,7 +2521,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 /*End Положение часов в плеере */
 
 /* Активация торрентов при старте */
-var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: inset 0.3 0 0 0.2em #00c2ff!important;border-color: #00c2ff!important;-webkit-border-color: #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
+var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.4em #FFF!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
 var green2 = '<div id="green_style"><style>.scroll--mask{webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(5%,white),color-stop(95%,white),to(rgba(255,255,255,0)))!important;}</style></div>';
 var green3 = '<div id="greenn_style"><style>.scroll--mask{-webkit-mask-image: -webkit-linear-gradient(top,rgba(255,255,255,0) 0%,white 5%,white 95%,rgba(255,255,255,0) 100%)!important;}</style></div>';
 var green4 = '<div id="speedd_style"><style>div.value--speed span{opacity: 0%!important;display: none;}</style></div>';
