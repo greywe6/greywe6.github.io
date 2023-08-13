@@ -2271,6 +2271,38 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			name: 'Модификации', //Задаём название меню
 			icon: '<svg viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M527.579429 186.660571a119.954286 119.954286 0 1 1-67.949715 0V47.542857a33.938286 33.938286 0 0 1 67.949715 0v139.190857z m281.380571 604.598858a119.954286 119.954286 0 1 1 67.949714 0v139.190857a33.938286 33.938286 0 1 1-67.949714 0v-139.190857z m-698.441143 0a119.954286 119.954286 0 1 1 67.949714 0v139.190857a33.938286 33.938286 0 0 1-67.949714 0v-139.190857zM144.457143 13.531429c18.797714 0 34.011429 15.213714 34.011428 33.938285v410.038857a33.938286 33.938286 0 0 1-67.949714 0V47.542857c0-18.724571 15.213714-33.938286 33.938286-33.938286z m0 722.139428a60.269714 60.269714 0 1 0 0-120.466286 60.269714 60.269714 0 0 0 0 120.466286z m698.514286-722.139428c18.724571 0 33.938286 15.213714 33.938285 33.938285v410.038857a33.938286 33.938286 0 1 1-67.949714 0V47.542857c0-18.724571 15.213714-33.938286 34.011429-33.938286z m0 722.139428a60.269714 60.269714 0 1 0 0-120.466286 60.269714 60.269714 0 0 0 0 120.466286z m-349.403429 228.717714a33.938286 33.938286 0 0 1-33.938286-33.938285V520.411429a33.938286 33.938286 0 0 1 67.949715 0v410.038857a33.938286 33.938286 0 0 1-34.011429 33.938285z m0-722.139428a60.269714 60.269714 0 1 0 0 120.539428 60.269714 60.269714 0 0 0 0-120.539428z" fill="#ffffff"/></g></svg>'
 		});
+		Lampa.SettingsApi.addParam({
+			component: 'settings_modss',
+			param: {
+				name: 'TORRENT_fix',
+				type: 'trigger', //доступно select,input,trigger,title,static
+				default: true
+			},
+			field: {
+				name: 'Контрастная рамка на онлайне и торрентах', //Название подпункта меню
+				description: 'Улучшает восприятие при выборе контента' //Комментарий к подпункту
+			},
+			onChange: function(value) {
+				//Действия при изменении подпункта
+				var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: inset 0.3 0 0 0.2em #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
+				var green2 = '<div id="green_style"><style>.scroll--mask{webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(5%,white),color-stop(95%,white),to(rgba(255,255,255,0)))!important;}</style></div>';
+				var green3 = '<div id="greenn_style"><style>.scroll--mask{-webkit-mask-image: -webkit-linear-gradient(top,rgba(255,255,255,0) 0%,white 5%,white 95%,rgba(255,255,255,0) 100%)!important;}</style></div>';
+				var green4 = '<div id="speedd_style"><style>div.value--speed span{opacity: 0%!important;display: none;}</style></div>';
+				if(Lampa.Storage.field('TORRENT_fix') == true) {
+					$('body').append(green1);
+					$('body').append(green2);
+					$('body').append(green3);
+					$('body').append(green4);
+				}
+				if(Lampa.Storage.field('TORRENT_fix') == false) {
+					$('#gree_style').remove();
+					$('#green_style').remove();
+					$('#greenn_style').remove();
+					$('#speedd_style').remove();
+				}
+				//Lampa.Settings.update();
+			}
+		});
 
 /* Отключение неиспользуемой раскладки клавиатуры */
 	Lampa.SettingsApi.addParam({
@@ -2487,6 +2519,18 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 				}
 	});		
 /*End Положение часов в плеере */
+
+/* Активация торрентов при старте */
+var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: inset 0.3 0 0 0.2em #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
+var green2 = '<div id="green_style"><style>.scroll--mask{webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(5%,white),color-stop(95%,white),to(rgba(255,255,255,0)))!important;}</style></div>';
+var green3 = '<div id="greenn_style"><style>.scroll--mask{-webkit-mask-image: -webkit-linear-gradient(top,rgba(255,255,255,0) 0%,white 5%,white 95%,rgba(255,255,255,0) 100%)!important;}</style></div>';
+var green4 = '<div id="speedd_style"><style>div.value--speed span{opacity: 0%!important;display: none;}</style></div>';
+if(Lampa.Storage.field('TORRENT_fix') == true) {
+	$('body').append(green1);
+	$('body').append(green2);
+	$('body').append(green3);
+	$('body').append(green4);
+}
 
 /* Отключение языков при старте */
 		setInterval(function() {
