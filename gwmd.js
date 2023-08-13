@@ -2284,21 +2284,12 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			},
 			onChange: function(value) {
 				//Действия при изменении подпункта
-				var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
-				var green2 = '<div id="green_style"><style>.scroll--mask{webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(5%,white),color-stop(95%,white),to(rgba(255,255,255,0)))!important;}</style></div>';
-				var green3 = '<div id="greenn_style"><style>.scroll--mask{-webkit-mask-image: -webkit-linear-gradient(top,rgba(255,255,255,0) 0%,white 5%,white 95%,rgba(255,255,255,0) 100%)!important;}</style></div>';
-				var green4 = '<div id="speedd_style"><style>div.value--speed span{opacity: 0%!important;display: none;}</style></div>';
+				var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #FFF!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
 				if(Lampa.Storage.field('TORRENT_fix') == true) {
 					$('body').append(green1);
-					$('body').append(green2);
-					$('body').append(green3);
-					$('body').append(green4);
 				}
 				if(Lampa.Storage.field('TORRENT_fix') == false) {
 					$('#gree_style').remove();
-					$('#green_style').remove();
-					$('#greenn_style').remove();
-					$('#speedd_style').remove();
 				}
 				//Lampa.Settings.update();
 			}
@@ -2521,15 +2512,9 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 /*End Положение часов в плеере */
 
 /* Активация торрентов при старте */
-var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
-var green2 = '<div id="green_style"><style>.scroll--mask{webkit-mask-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(5%,white),color-stop(95%,white),to(rgba(255,255,255,0)))!important;}</style></div>';
-var green3 = '<div id="greenn_style"><style>.scroll--mask{-webkit-mask-image: -webkit-linear-gradient(top,rgba(255,255,255,0) 0%,white 5%,white 95%,rgba(255,255,255,0) 100%)!important;}</style></div>';
-var green4 = '<div id="speedd_style"><style>div.value--speed span{opacity: 0%!important;display: none;}</style></div>';
+var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #FFF!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
 if(Lampa.Storage.field('TORRENT_fix') == true) {
 	$('body').append(green1);
-	$('body').append(green2);
-	$('body').append(green3);
-	$('body').append(green4);
 }
 
 /* Отключение языков при старте */
