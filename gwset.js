@@ -51,10 +51,4 @@
     }
     });*/
 
-    this.setBtnInPriority = function (btn) {
-          Storage.set('button--play', '');
-          last = html.find('.full_btn_priority')[0];
-          Controller.toggle('full_start');
-        });
-
 })();
