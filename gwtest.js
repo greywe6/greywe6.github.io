@@ -5643,17 +5643,17 @@
   function kinopub(component, _object) {
     var network = new Lampa.Reguest();
     var extract = {};
-    var results = [];
-    var backend = 'http://back.freebie.tom.ru/lampa/kinopuburl?v=2010';
     var object = _object;
     var select_title = '';
-    var select_id = '';
-    var balanser_id = '';
+    Lampa.Storage.field('online_mod_prefer_http') === true;
+    var prox = component.proxy('kinopub');
+    var embed = prox + 'https://api.service-kp.com/v1/';
+    var token = Utils.decodeSecret([76, 91, 92, 0, 67, 85, 66, 68, 0, 95, 84, 92, 2, 11, 77, 64, 0, 3, 94, 91, 84, 68, 70, 83, 13, 92, 90, 79, 2, 78, 5, 5]);
     var filter_items = {};
     var choice = {
       season: 0,
       voice: 0,
-      quality: 0
+      voice_name: ''
     };
 
     function kinopub_api_search(api, callback, error) {
