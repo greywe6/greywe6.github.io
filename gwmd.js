@@ -2284,7 +2284,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 			},
 			onChange: function(value) {
 				//Действия при изменении подпункта
-				var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
+				var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #fff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
 				if(Lampa.Storage.field('TORRENT_fix') == true) {
 					$('body').append(green1);
 				}
@@ -2512,7 +2512,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 /*End Положение часов в плеере */
 
 /* Активация торрентов при старте */
-var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #00c2ff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
+var green1 = '<div id="gree_style"><style>.online.focus{box-shadow: 0 0 0 0.3em #fff!important;margin-left: -.6em!important;margin-right: -.6em!important;}</style></div>';
 if(Lampa.Storage.field('TORRENT_fix') == true) {
 	$('body').append(green1);
 }
