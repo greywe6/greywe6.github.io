@@ -51,4 +51,19 @@
     }
     });*/
 
+    this.setBtnInPriority = function (btn) {
+        var cont = html.find('.full-start-new__buttons');
+        var clon = btn.clone();
+        cont.find('.button--priority').remove();
+        clon.addClass('button--priority').removeClass('view--torrent').on('hover:enter', function () {
+          btn.trigger('hover:enter');
+        }).on('hover:long', function () {
+          clon.remove();
+          Storage.set('button--play', '');
+          last = html.find('.full_btn_priority')[0];
+          Controller.toggle('full_start');
+        });
+        cont.prepend(clon);
+      };
+
 })();
