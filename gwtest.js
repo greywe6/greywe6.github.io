@@ -6378,9 +6378,9 @@
       };
 
       var sources = {
+        kinobase: new kinobase(this, object),
         videocdn: new videocdn(this, object),
         cdnmovies: new cdnmovies(this, object),
-        kinobase: new kinobase(this, object),
         collaps: new collaps(this, object),
         rezka: new rezka(this, object),
         rezka2: new rezka2(this, object),
@@ -6399,7 +6399,7 @@
         voice: Lampa.Lang.translate('torrent_parser_voice'),
         source: Lampa.Lang.translate('settings_rest_source')
       };
-      var filter_sources = ['cdnmovies', 'videocdn', 'kinobase', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
+      var filter_sources = ['kinobase', 'videocdn', 'cdnmovies', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
 
       if (Utils.isDebug()) {
         filter_sources.push('hdvb');
