@@ -585,7 +585,7 @@
                   var num = parseInt(episode.num);
                   if (isNaN(num)) num = episode.num;
                   filtred.push({
-                    title: 'S' + episode.season_num + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + num + ' - ' + (episode.title || episode.ru_title || episode.en_title || episode.orig_title),
+                    title: 'Сезон' + ' ' + episode.season_num + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + num + ' - ' + (episode.title || episode.ru_title || episode.en_title || episode.orig_title),
                     quality: media.max_quality + 'p',
                     info: ' / ' + filter_items.voice[choice.voice],
                     season: episode.season_num,
@@ -1150,7 +1150,7 @@
           var voice = getChoiceVoice();
           extract.episode.forEach(function (episode) {
             items.push({
-              title: 'S' + ses + ' / ' + episode.name,
+              title: 'Сезон' + ' ' + ses + ' / ' + episode.name,
               quality: '360p ~ 1080p',
               info: ' / ' + voice.name,
               season: parseInt(ses),
@@ -1900,7 +1900,7 @@
           extract.episode.forEach(function (episode) {
             if (episode.season_id == season_id) {
               filtred.push({
-                title: 'S' + episode.season_id + ' / ' + episode.name,
+                title: 'Сезон ' + ' ' + episode.season_id + ' / ' + episode.name,
                 quality: '360p ~ 1080p',
                 info: ' / ' + voice,
                 season: parseInt(episode.season_id),
@@ -2261,7 +2261,7 @@
                 var episode = parseInt(title);
                 if (isNaN(episode)) episode = index + 1;
                 filtred.push({
-                  title: 'S' + season + ' / ' + title,
+                  title: 'Сезон' + ' ' + season + ' / ' + title,
                   quality: items[0].quality + 'p' + (quality_type ? ' - ' + quality_type : ''),
                   info: info ? ' / ' + info : '',
                   season: season,
@@ -3421,7 +3421,7 @@
                     var episode_num = parseInt(se.title.match(/\d+/));
                     var season_num = parseInt(data.title.match(/\d+/));
                     filtred.push({
-                      title: 'S' + season_num + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode_num,
+                      title: 'Сезон' + ' ' + season_num + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode_num,
                       quality: '360p ~ 1080p',
                       info: ' / ' + Lampa.Utils.shortText(eps.title, 50),
                       season: season_num,
@@ -4057,7 +4057,7 @@
                 episode.folder.forEach(function (media) {
                   if (filter_items.voice_info[choice.voice] && media.translation == filter_items.voice_info[choice.voice].id) {
                     filtred.push({
-                      title: 'S' + media.season + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + media.episode,
+                      title: 'Сезон' + ' ' + media.season + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + media.episode,
                       quality: media.quality + 'p',
                       info: ' / ' + Lampa.Utils.shortText(filter_items.voice[choice.voice], 50),
                       season: media.season,
@@ -4438,7 +4438,7 @@
                 if (keys == choice.season + 1) {
                   translation.seasons[keys].forEach(function (episode) {
                     filtred.push({
-                      title: 'S' + episode.season + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode.episode,
+                      title: 'Сезон' + ' ' + episode.season + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode.episode,
                       quality: '360p ~ 1080p' + (results[keyt].quality ? ' - ' + results[keyt].quality : ''),
                       info: ' / ' + filter_items.voice[choice.voice],
                       season: episode.season,
@@ -5400,7 +5400,7 @@
 
             for (var episode_id in episodes) {
               var link = episodes[episode_id];
-              var title = 'S' + season_id + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode_id;
+              var title = 'Сезон' + ' ' + season_id + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode_id;
               filtred.push({
                 title: title,
                 orig_title: translation.title_orig || translation.title || select_title,
@@ -6107,7 +6107,7 @@
               });
               voice_name = component.uniqueNamesShortText(voice_names, 80);
             }
-            var title = 'S' + season.number + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode.number + (episode.title ? ' - ' + episode.title : '');
+            var title = 'Сезон' + ' ' + season.number + ' / ' + Lampa.Lang.translate('torrent_serial_episode') + ' ' + episode.number + (episode.title ? ' - ' + episode.title : '');
             filtred.push({
               title: title,
               orig_title: extract.title || select_title,
