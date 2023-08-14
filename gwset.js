@@ -41,6 +41,8 @@
     Lampa.Template.add('stlico2_css', "\n   <style>\n .full-start-new__buttons .full-start__button.selector.view--online:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--torrent:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--trailer:not(.focus) span{display:block;}\n .full-start__button.selector.view--torrent svg{color:#76b83f;}\n .full-start__button.selector.view--trailer svg{color:#FF4242;}\n .full-start__button.selector.view--online svg{color:#00c2ff;}\n   </style>");
     $('body').append(Lampa.Template.get('stlico2_css', {}, true));
 
+
+    //Убрать из меню разделы АНИМЕ и ЛЕНТА
     if(e.type == 'ready'){
         setTimeout(function(){
             $("[data-action=anime]").eq(0).remove();
