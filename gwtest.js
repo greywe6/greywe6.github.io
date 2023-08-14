@@ -6399,7 +6399,7 @@
         voice: Lampa.Lang.translate('torrent_parser_voice'),
         source: Lampa.Lang.translate('settings_rest_source')
       };
-      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
+      var filter_sources = ['cdnmovies', 'kinobase', 'videocdn', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
 
       if (Utils.isDebug()) {
         filter_sources.push('hdvb');
@@ -7980,7 +7980,7 @@
     Lampa.Params.trigger('online_mod_proxy_other', false);
     Lampa.Params.trigger('online_mod_proxy_videocdn', false);
     Lampa.Params.trigger('online_mod_proxy_rezka', false);
-    Lampa.Params.trigger('online_mod_proxy_rezka2', false);
+    Lampa.Params.trigger('online_mod_proxy_rezka2', true);
     Lampa.Params.trigger('online_mod_proxy_kinobase', false);
     Lampa.Params.trigger('online_mod_proxy_collaps', false);
     Lampa.Params.trigger('online_mod_proxy_cdnmovies', false);
