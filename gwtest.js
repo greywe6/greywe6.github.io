@@ -6299,6 +6299,7 @@
       var filter = new Lampa.Filter(object);
       var balanser = Lampa.Storage.get('online_mod_balanser', 'filmix');
       var last_bls = Lampa.Storage.field('online_mod_save_last_balanser') === false ? {} : Lampa.Storage.cache('online_mod_last_balanser', 200, {});
+      var balanser_timer;
       var contextmenu_all = [];
 
       if (last_bls[object.movie.id]) {
@@ -6440,10 +6441,9 @@
           _this.start();
         };
 
-        filter.render().find('.selector').on('hover:focus', function (e) {
-          last_filter = e.target;
-          scroll.update($(e.target), true);
-        });
+        filter.render().find('.selector').on('hover:enter', function () {
+          clearInterval(balanser_timer);
+          });
 
         filter.onSelect = function (type, a, b) {
           if (type == 'filter') {
@@ -7033,6 +7033,7 @@
       this.reset = function () {
         contextmenu_all = [];
         last = false;
+        clearInterval(balanser_timer);
         scroll.render().find('.empty').remove();
         filter.render().detach();
         scroll.clear();
