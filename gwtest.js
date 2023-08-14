@@ -6413,10 +6413,18 @@
           }
         };
 
+        if (object.movie.number_of_seasons) filter.render().find('.filter--filter').show();
+  	    else filter.render().find('.filter--filter').hide();
+         filter.render().find('.filter--sort').on('hover:enter', function () {
+  			$('body').find('.selectbox__title').text(Lampa.Lang.translate('online_mod_balanser'));
+  		  });
         filter.render().find('.filter--sort span').text(Lampa.Lang.translate('online_mod_balanser'));
         filter.render();
         files.append(scroll.render());
         scroll.append(filter.render());
+		    filter.render().find('.filter--search').find('.filter--filter').after(filter.render());
+        scroll.body().addClass('torrent-list');
+        scroll.minus(files.render().find('.explorer__files-head'));
         this.search();
         return this.render();
       };
