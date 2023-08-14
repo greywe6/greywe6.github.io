@@ -7314,18 +7314,45 @@
 
 
       this.empty = function (msg) {
-        var empty = Lampa.Template.get('list_empty');
-        if (msg) empty.find('.empty__descr').text(msg);
-        scroll.append(empty);
+        var html = Lampa.Template.get('modss_does_not_answer', {});
+        html.find('.online-empty__buttons').remove();
+        html.find('.online-empty__title').text(Lampa.Lang.translate('empty_title_two'));
+        html.find('.online-empty__time').text(Lampa.Lang.translate('empty_text'));
+        scroll.append(html);
         this.loading(false);
       };
-      /**
-       * Показать пустой результат по ключевому слову
-       */
 
+      this.emptyForQuery = function () {
+        var _this6 = this;
 
-      this.emptyForQuery = function (query) {
-        this.empty(Lampa.Lang.translate('online_mod_query_start') + ' (' + query + ') ' + Lampa.Lang.translate('online_mod_query_end'));
+        this.reset();
+        var html = Lampa.Template.get('modss_does_not_answer', {
+          balanser: balanser
+        });
+        var tic = 10;
+        html.find('.cancel').on('hover:enter', function () {
+          clearInterval(balanser_timer);
+        });
+        html.find('.change').on('hover:enter', function () {
+          clearInterval(balanser_timer);
+          filter.render().find('.filter--sort').trigger('hover:enter');
+        });
+        scroll.append(html);
+        this.loading(false);
+        balanser_timer = setInterval(function () {
+          tic--;
+          html.find('.timeout').text(tic);
+
+          if (tic == 0) {
+            clearInterval(balanser_timer);
+            var keys = Lampa.Arrays.getKeys(sources);
+            var indx = keys.indexOf(balanser);
+            var next = keys[indx + 1];
+            if (!next) next = keys[0];
+            balanser = next;
+            if (Lampa.Activity.active().activity == _this6.activity) _this6.changeBalanser(balanser);
+          }
+        }, 1000);
       };
 
       this.getLastEpisode = function (items) {
