@@ -41,15 +41,14 @@
     Lampa.Template.add('stlico2_css', "\n   <style>\n .full-start-new__buttons .full-start__button.selector.view--online:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--torrent:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--trailer:not(.focus) span{display:block;}\n .full-start__button.selector.view--torrent svg{color:#76b83f;}\n .full-start__button.selector.view--trailer svg{color:#FF4242;}\n .full-start__button.selector.view--online svg{color:#00c2ff;}\n   </style>");
     $('body').append(Lampa.Template.get('stlico2_css', {}, true));
 
-
-    //Убрать из меню АНИМЕ
-    setTimeout(function(){
-        $("[data-action=anime]").eq(0).remove();
-        $("[data-action=feed]").eq(0).remove();
-    },10); 
+    if(e.type == 'ready'){
+        setTimeout(function(){
+            $("[data-action=anime]").eq(0).remove();
+            $("[data-action=feed]").eq(0).remove();
+        },10); 
     }
-
-    
+    }
+	});
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     /*Lampa.Listener.follow('full', function (e) {
