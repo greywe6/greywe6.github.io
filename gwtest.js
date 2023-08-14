@@ -6305,6 +6305,60 @@
         balanser = last_bls[object.movie.id];
       }
 
+      this.changeBalanser = function (balanser_name) {
+        var last_select_balanser = Lampa.Storage.cache('online_mod_last_balanser', 3000, {});
+        last_select_balanser[object.movie.id] = balanser_name;
+        Lampa.Storage.set('online_mod_last_balanser', last_select_balanser);
+        var to  = this.getChoice(balanser_name);
+        var from = this.getChoice();
+        if(from.voice_name) to.voice_name = from.voice_name;
+        this.saveChoice(to, balanser_name);
+        Lampa.Activity.replace();
+        };
+    
+        this.createSource = function () {
+          var last_select_balanser = Lampa.Storage.cache('online_mod_last_balanser', 3000, {});
+  
+          if (last_select_balanser[object.movie.id]) {
+            balanser = last_select_balanser[object.movie.id];
+            Lampa.Storage.set('online_mod_last_balanser', last_select_balanser);
+          } else {
+            balanser = Lampa.Storage.get('online_mod_balanser', 'videocdn');
+          }
+  
+          if (!sources[balanser]) {
+            balanser = 'videocdn';
+          }
+  
+          return new sources[balanser](this, object);
+        };
+    
+        this.getChoice = function (for_balanser) {
+        var data = Lampa.Storage.cache('online_mod_choice_' + (for_balanser || balanser), 3000, {});
+        var save = data[selected_id || object.movie.id] || {};
+        Lampa.Arrays.extend(save, {
+          season: 0,
+          voice: 0,
+          voice_name: '',
+          voice_id: 0,
+          episodes_view: {},
+          movie_view: ''
+        });
+        return save;
+        };
+        this.extendChoice = function () {
+        extended = true;
+        source.extendChoice(this.getChoice());
+        };
+        this.saveChoice = function (choice, for_balanser) {
+        var data = Lampa.Storage.cache('online_mod_choice_' + (for_balanser || balanser), 3000, {});
+        data[selected_id || object.movie.id] = choice;
+        Lampa.Storage.set('online_mod_choice_' + (for_balanser || balanser), data);
+        var last_select_balanser = Lampa.Storage.cache('online_mod_last_balanser', 3000, {});
+        last_select_balanser[object.movie.id] = (for_balanser || balanser);
+        Lampa.Storage.set('online_mod_last_balanser', last_select_balanser);
+        };
+
       this.proxy = function (name) {
         var proxy1 = 'http://prox.lampa.stream/';
         var proxy2 = 'https://cors.nb557.workers.dev/';
