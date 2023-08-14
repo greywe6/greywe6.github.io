@@ -7019,7 +7019,6 @@
           reset: true
         });
         Lampa.Storage.set('online_mod_filter', choice);
-        add('source', 'Балансер');
         if (filter_items.voice && filter_items.voice.length) add('voice', Lampa.Lang.translate('torrent_parser_voice'));
         if (filter_items.season && filter_items.season.length) add('season', Lampa.Lang.translate('torrent_serial_season'));
         filter.set('filter', select);
