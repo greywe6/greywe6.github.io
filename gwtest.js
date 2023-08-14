@@ -7192,6 +7192,9 @@
             title: Lampa.Lang.translate('torrent_parser_label_cancel_title'),
             clearmark: true
           }, {
+            title: Lampa.Lang.translate('online_mod_clearfull_all'),
+            clearfull_all: true
+          }, {
             title: Lampa.Lang.translate('online_mod_clearmark_all'),
             clearmark_all: true
           }, {
@@ -7242,6 +7245,19 @@
               Lampa.Controller.toggle(enabled);
             },
             onSelect: function onSelect(a) {
+              if (a.clearfull_all) {
+                contextmenu_all.forEach(function (params) {
+                  Lampa.Arrays.remove(params.viewed, params.hash_file);
+                  Lampa.Storage.set('online_view', params.viewed);
+                  params.item.find('.torrent-item__viewed').remove();
+                  params.view.percent = 0;
+                  params.view.time = 0;
+                  params.view.duration = 0;
+                  Lampa.Timeline.update(params.view);
+                });
+              }
+
+
               if (a.clearmark) {
                 Lampa.Arrays.remove(params.viewed, params.hash_file);
                 Lampa.Storage.set('online_view', params.viewed);
@@ -7492,6 +7508,14 @@
         en: 'Hold the "OK" key to bring up the context menu',
         zh: '按住“确定”键调出上下文菜单'
       },
+      online_mod_clearfull_all{
+        ru: 'Сбросить всё',
+        uk: 'Сбросить всё',
+        be: 'Сбросить всё',
+        en: 'Сбросить всё',
+        zh: 'Сбросить всё'
+      },
+      }
       online_mod_clearmark_all: {
         ru: 'Снять отметку у всех',
         uk: 'Зняти позначку у всіх',
