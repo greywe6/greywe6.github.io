@@ -53,12 +53,10 @@
 	});
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
-    Lampa.Listener.follow('full', function (e) {
+    Lampa.Listener.follow('full', (e)=>{
     if (e.type == 'complite') {
-        setTimeout(function(){
     $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
     $('.full-start__button.selector.button--play').remove();
-    },10); 
     }
     });
 
