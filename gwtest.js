@@ -5648,7 +5648,6 @@
       Lampa.Storage.field('online_mod_prefer_http') === true;
       var prox = component.proxy('kinopub');
       var embed = prox + 'https://api.service-kp.com/v1/';
-      var token = Utils.decodeSecret([76, 91, 92, 0, 67, 85, 66, 68, 0, 95, 84, 92, 2, 11, 77, 64, 0, 3, 94, 91, 84, 68, 70, 83, 13, 92, 90, 79, 2, 78, 5, 5]);
       var filter_items = {};
       var choice = {
         season: 0,
@@ -6399,7 +6398,7 @@
         voice: Lampa.Lang.translate('torrent_parser_voice'),
         source: Lampa.Lang.translate('settings_rest_source')
       };
-      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
+      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb', 'kinopub'];
 
       if (Utils.isDebug()) {
         filter_sources.push('hdvb');
