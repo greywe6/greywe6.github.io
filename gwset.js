@@ -54,7 +54,9 @@
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     Lampa.Listener.follow('full', function (e) {
         if (e.type == 'complite') {
-            $('.hide.buttons--container > div').prependTo('.view--trailer');
+            $('.hide.buttons--container > div').prependTo('.full-start-new__buttons', function () {
+                last = $(this)[0];
+              });
             //$('.full-start__button.selector.button--play').remove();
         }
     });
