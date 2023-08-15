@@ -495,4 +495,4 @@
 
     if (!window.plugin_sources_ready) startPlugin();
 
-})( 'http://back.freebie.tom.ru', 'v=0' );
+})( 'http://back.freebie.tom.ru', 'v=2010' );
