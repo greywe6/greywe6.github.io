@@ -7816,8 +7816,6 @@
             page: 1
           });
         });
-        $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
-        $('.full-start__button.selector.button--play').remove();
         e.object.activity.render().find('.view--torrent').before(btn);
       }
     }); ///////FILMIX/////////
