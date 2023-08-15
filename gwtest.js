@@ -7817,6 +7817,7 @@
           });
         });
         e.object.activity.render().find('.view--torrent').after(btn);
+        e.object.activity.render().find('.view--trailer').after(btn);
       }
     }); ///////FILMIX/////////
 
