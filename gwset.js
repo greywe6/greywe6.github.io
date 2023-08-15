@@ -47,18 +47,18 @@
                 $("[data-action=anime]").eq(0).remove();
                 //Убрать раздел ЛЕНТА из МЕНЮ
                 $("[data-action=feed]").eq(0).remove();
+                $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
+                $('.full-start__button.selector.button--play').remove();
             },10);
         }
 	});
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
-    Lampa.Listener.follow('full', function (e) {
+    /*Lampa.Listener.follow('full', function (e) {
         if (e.type == 'complite') {
-            $('.hide.buttons--container > div').prependTo('.full-start-new__buttons', function () {
-                last = $(this)[0];
-              });
-            //$('.full-start__button.selector.button--play').remove();
+            $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
+            $('.full-start__button.selector.button--play').remove();
         }
-    });
+    });*/
 
 })();
