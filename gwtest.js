@@ -6399,7 +6399,7 @@
         voice: Lampa.Lang.translate('torrent_parser_voice'),
         source: Lampa.Lang.translate('settings_rest_source')
       };
-      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
+      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'collaps', 'rezka', 'rezka2', 'filmix'];
 
       if (Utils.isDebug()) {
         filter_sources.push('hdvb');
