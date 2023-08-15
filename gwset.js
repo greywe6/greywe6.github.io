@@ -47,8 +47,6 @@
                 $("[data-action=anime]").eq(0).remove();
                 //Убрать раздел ЛЕНТА из МЕНЮ
                 $("[data-action=feed]").eq(0).remove();
-                $('.hide.buttons--container > div').prependTo('.full-start-new__buttons');
-                $('.full-start__button.selector.button--play').remove();
             },10);
         }
 	});
