@@ -5643,6 +5643,7 @@
     function kinopub(component, _object) {
       var network = new Lampa.Reguest();
       var extract = {};
+      var backend = 'http://back.freebie.tom.ru/lampa/kinopuburl?v=2010';
       var object = _object;
       var select_title = '';
       Lampa.Storage.field('online_mod_prefer_http') === true;
