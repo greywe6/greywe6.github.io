@@ -54,6 +54,11 @@
         }
         
 	});
+    this.create = function () {
+        var _this = this;
+        if (new_html && data.movie.name) html.find('.full-start-new__poster').addClass('card--tv').hide('<div class="card__type">TV</div>');
+        if (new_html && data.movie.name) html.find('.full-start__poster').addClass('card--tv').append('<div class="card__type">Сериал</div>');
+    }
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     /*Lampa.Listener.follow('full', function (e) {
