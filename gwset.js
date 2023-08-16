@@ -54,7 +54,7 @@
                 $(this).html() >= 6 ? $(this).css('color', 'green') : null;
            });*/
 
-           $('.info__rate span').addClass('colorize');
+           $('div.info__rate > span').addClass('colorize');
 
            $(this).css('.colorize', $(this).text() < 8 ? 'red' : 'initial');
 
