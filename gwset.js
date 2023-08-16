@@ -46,7 +46,7 @@
             $('body').append(Lampa.Template.get('rating_mod_css', {}, true));
 
 
-            $("div.info__rate span").each(function() {
+            $("div>full-start__rate").each(function() {
                 $(this).html() < 3 ? $(this).css('color', 'red') : null;
                 
                 ($(this).html() >= 3 && $(this).html() < 6) ? $(this).css('color', 'yellow') : null;
