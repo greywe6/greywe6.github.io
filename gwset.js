@@ -54,7 +54,7 @@
                 $(this).html() >= 6 ? $(this).css('color', 'green') : null;
            });*/
 
-           $('#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__deta > div.info__rate > span').addClass('colorize');
+           $('#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__deta > div.info__rate').addClass('coloz');
 
            $(this).css('.colorize', $(this).text() < 8 ? 'red' : 'initial');
 
