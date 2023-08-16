@@ -46,13 +46,15 @@
             $('body').append(Lampa.Template.get('rating_mod_css', {}, true));
 
 
-            $(".full-start__rate>div:first-child").each(function() {
+            /*$(".full-start__rate>div:first-child").each(function() {
                 $(this).html() < 3 ? $(this).css('color', 'red') : null;
                 
                 ($(this).html() >= 3 && $(this).html() < 6) ? $(this).css('color', 'yellow') : null;
                 
                 $(this).html() >= 6 ? $(this).css('color', 'green') : null;
-           });
+           });*/
+
+           $(this).css('.full-start__rate>div:first-child', $(this).text() < 8 ? 'red' : 'initial');
 
 
 
