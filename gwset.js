@@ -29,7 +29,6 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
-            $('.full-start__poster').addClass('card--tv').append('<div class="card__type">Сериал</div>');
             //Удалить кнопку рекламы Премиум в шапке
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	        //Удалить кнопку Лента в шапке
