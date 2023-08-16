@@ -52,10 +52,7 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
-	});
-
-    var Modss = {
-        last_view: function (data) {
+        function (data) {
 			var episodes = Lampa.TimeTable.get(data);
 			var viewed;
 			episodes.forEach(function (ep) {
@@ -79,7 +76,7 @@
 			} else $('body').find('.timeline,.card--last_view').remove();
 			if ($('body').find('.online').length == 0) $('.card--new_ser,.card--viewed').remove();
 		},
-		serialInfo: function (card) {
+		function (card) {
 			if (Lampa.Storage.field('mods_serial_info') && card.source == 'tmdb' && card.seasons && card.last_episode_to_air) {
 				var last_seria_inseason = card.last_episode_to_air.season_number;
 				var air_new_episode = card.last_episode_to_air.episode_number;
@@ -119,7 +116,7 @@
   		  }
 			}
 		}, 
-    }
+	});
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     /*Lampa.Listener.follow('full', function (e) {
