@@ -219,7 +219,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 				} else new_ser = last_seria_inseason + ' #{season_ended}';
 		
 				if(!$('.card--new_seria', Lampa.Activity.active().activity.render()).length) {
-  				if(window.innerWidth > 585) $('.full-start__left', Lampa.Activity.active().activity.render()).append("<div class='card--new_seria' style='margin-top: 2.2em;width:auto;background: #FF4242;color: #fff;bottom:.6em;padding: 0.3em 0.4em 0.4em;font-size: 1.2em;-webkit-border-radius: 0.3em;-moz-border-radius: 0.3em;border-radius: 0.3em;'>" + Lampa.Lang.translate(new_ser) + "</div>");
+  				if(window.innerWidth > 585) $('.full-start__left', Lampa.Activity.active().activity.render()).append("<div class='card--new_seria' style='margin-top: 2.2em;width:auto;min-width:10px;background: #FF4242;color: #fff;bottom:.6em;padding: 0.3em 0.4em 0.4em;font-size: 1.2em;-webkit-border-radius: 0.3em;-moz-border-radius: 0.3em;border-radius: 0.3em;'>" + Lampa.Lang.translate(new_ser) + "</div>");
   			  else {
   			    if($('.card--new_seria', Lampa.Activity.active().activity.render()).length)$('.full-start__tags', Lampa.Activity.active().activity.render()).append('<div class="full-start__tag card--new_seria"><img src="./img/icons/menu/movie.svg" /> <div>'+ Lampa.Lang.translate(new_ser) +'</div></div>');
   			    else $('.full-start-new__details', Lampa.Activity.active().activity.render()).append('<span class="full-start-new__split">●</span><div class="card--new_seria"><div>'+ Lampa.Lang.translate(new_ser) +'</div></div>');
