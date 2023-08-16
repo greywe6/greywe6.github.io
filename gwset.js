@@ -41,7 +41,7 @@
             //Доп. стили кнопок
             Lampa.Template.add('stlico2_css', "\n   <style>\n .full-start-new__buttons .full-start__button.selector.view--online:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--torrent:not(.focus) span{display:block;}\n .full-start-new__buttons .full-start__button.selector.view--trailer:not(.focus) span{display:block;}\n .full-start__button.selector.view--torrent svg{color:#76b83f;}\n .full-start__button.selector.view--trailer svg{color:#FF4242;}\n .full-start__button.selector.view--online svg{color:#168FDF;}\n   </style>");
             $('body').append(Lampa.Template.get('stlico2_css', {}, true));
-            Lampa.Template.add('rating_css', "\n   <style>\n .full-start__rate.rate--imdb{font-size: 3.2em;font-weight: 700;line-height: 1.2;}\n .full-start__rate.rate--kp{font-size: 3.2em;font-weight: 700;line-height: 1.2;}\n   </style>");
+            Lampa.Template.add('rating_css', "\n   <style>\n .full-start__rate>div:first-child{font-size: 3.2em;font-weight: 700;line-height: 1.2;}\n .full-start__rate>div:last-child{position: absolute;bottom: -0.6em;right: 0;background-color: #fff;color: #000;padding: 0.3em;border-radius: 0.2em;}\n  </style>");
             $('body').append(Lampa.Template.get('rating_css', {}, true));
             //Прячем ненужные разделы в МЕНЮ
             setTimeout(function(){
