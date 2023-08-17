@@ -54,13 +54,16 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
+        if (quality) {
+            html.find('.tag--countries').removeClass('hide').find('> div').text(countries);
+          }
         
 	});
 
     function create$d(data) {
     this.create = function () {
         if (quality) {
-            html.find('.tag--countries').removeClass('hide').find('> div').text(quality);
+            html.find('.tag--countries').removeClass('hide').find('> div').text(countries);
           }
 
         }
