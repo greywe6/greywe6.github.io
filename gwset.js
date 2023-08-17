@@ -9,7 +9,7 @@
     Lampa.Storage.set('parser_use', 'true');//Использовать парсер - Вкл.
     Lampa.Storage.set('poster_size', 'w500');//Разрешение постеров TMDB - Высокое
     Lampa.Storage.set('background_type','simple');//Тип фона - Простой
-    Lampa.Storage.set('card_interfice_type','old');//Интерфейс карточек - Старый
+    Lampa.Storage.set('card_interfice_type','');//Интерфейс карточек
     Lampa.Storage.set('glass_style', 'true');//Стекло - Вкл.
     Lampa.Storage.set('glass_opacity', 'blacked');//Прозрачность стекла - Затемнённая
     Lampa.Storage.set('video_quality_default', '2160');//Качество видео по-умолчанию - 2160p
