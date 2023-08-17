@@ -59,7 +59,7 @@
 
     $(document).ready(function() {
 	
-		if($(".full-start__tag tag--countries").is(":empty")) {
+		if($(".full-start__tag.tag--countries").is(":empty")) {
 	
 			$(".full-start__tags").hide();
 		
