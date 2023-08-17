@@ -45,19 +45,7 @@
             Lampa.Template.add('rating_mod_css', "\n   <style>\n .full-start__title-original{color:#eeeeee;}\n .full-start__tags{padding-bottom: 2.1em!important;}\n .info__rate{background: rgba(0,0,0,.26)!important;}\n .full-start__rate{margin: 0;border-radius: 1em;font-size: .75em;margin-right: 1.5em;position: relative;}\n .full-start__rate>div:first-child{background: rgba(0,0,0,.1)!important;font-size: 3.2em;font-weight: 700;line-height: 1.2;padding: 0.77em 1.01em 0.92em;}\n div{display:block;}\n .full-start__rate>div:last-child{position: absolute;bottom: -0.6em;right: 0;background-color: #171717;color: #fff;padding: 0.31em 0.33em 0.33em 0.34em;border-radius: 0.23em;font-size: 1.0em;}\n .full-start .info__rate>div{background-color: #171717;color: #fff;}\n  </style>");
             $('body').append(Lampa.Template.get('rating_mod_css', {}, true));
 
-            if($("#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__tags > div.full-start__tag.tag--countries > div").is(":empty")) {
-	
-                $("#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__tags > div.full-start__tag.tag--countries > div").addClass("hide");
             
-            }
-
-            if($("#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__tags > div.full-start__tag.tag--countries > div").text() == "") {
-	
-                $("#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__tags > div.full-start__tag.tag--countries").hide();
-            
-            }
-
-
             //Прячем ненужные разделы в МЕНЮ
             setTimeout(function(){
                 //Убрать раздел АНИМЕ из МЕНЮ
@@ -68,6 +56,17 @@
         }
         
 	});
+
+    function create$d(data) {
+    this.create = function () {
+        if (quality) {
+            html.find('.tag--countries').removeClass('hide').find('> div').text(quality);
+          }
+
+        }
+    };
+
+    
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     /*Lampa.Listener.follow('full', function (e) {
