@@ -180,7 +180,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 				var last_view = 'S' + se + ':E' + ep;
 				if ($('body').find('.full-start__buttons,.full-start-new__buttons').length) {
 					$('.timeline, .card--last_view').remove();
-					$('body').find('.full-start__poster,.full-start-new__poster').append("<div class='card--last_view' style='top:0.8em;right: -.5em;position: absolute;background: #1b7db9;color: #fff;padding: 0.3em 0.4em 0.4em;font-size: 1.2em;-webkit-border-radius: 0.6em;-moz-border-radius: 0.6em;border-radius: 0.6em;'><div style='float:left;margin:-4px 0 -4px -4px' class=''></div>" + last_view +"</div>");
+					$('body').find('.full-start__poster,.full-start-new__poster').append("<div class='card--last_view' style='top:0.8em;right: -.5em;position: absolute;background: #1b7db9;color: #fff;padding: 0.3em 0.4em 0.4em;font-size: 1.3em;-webkit-border-radius: 0.6em;-moz-border-radius: 0.6em;border-radius: 0.6em;'><div style='float:left;margin:-4px 0 -4px -4px' class=''></div>" + last_view +"</div>");
 					$('body').find('.timeline').append(Lampa.Timeline.render(viewed.view));
 				}
 				if ($('body').find('.filter--sort').length) $('body').find('.files__left .time-line, .card--last_view').remove();
@@ -219,7 +219,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 				} else new_ser = last_seria_inseason + ' #{season_ended}';
 		
 				if(!$('.card--new_seria', Lampa.Activity.active().activity.render()).length) {
-  				if(window.innerWidth > 585) $('.full-start__poster,.full-start-new__poster', Lampa.Activity.active().activity.render()).append("<div class='card--new_seria' style='right: -0.8em;position: absolute;background: #ecdb00;color: #000;bottom:.6em;padding: 0.2em 0.3em 0.3em;font-size: 1.3em;-webkit-border-radius: 0.6em;-moz-border-radius: 0.6em;border-radius: 0.6em;'>" + Lampa.Lang.translate(new_ser) + "</div>");
+  				if(window.innerWidth > 585) $('.full-start__poster,.full-start-new__poster', Lampa.Activity.active().activity.render()).append("<div class='card--new_seria' style='right: -0.8em;position: absolute;background: #ecdb00;color: #000;bottom:.6em;padding: 0.3em 0.4em 0.4em;font-size: 1.3em;-webkit-border-radius: 0.6em;-moz-border-radius: 0.6em;border-radius: 0.6em;'>" + Lampa.Lang.translate(new_ser) + "</div>");
   			  else {
   			    if($('.card--new_seria', Lampa.Activity.active().activity.render()).length)$('.full-start__tags', Lampa.Activity.active().activity.render()).append('<div class="full-start__tag card--new_seria"><img src="./img/icons/menu/movie.svg" /> <div>'+ Lampa.Lang.translate(new_ser) +'</div></div>');
   			    else $('.full-start-new__details', Lampa.Activity.active().activity.render()).append('<span class="full-start-new__split">●</span><div class="card--new_seria"><div>'+ Lampa.Lang.translate(new_ser) +'</div></div>');
