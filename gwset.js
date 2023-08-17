@@ -54,9 +54,6 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
-        if (quality) {
-            html.find('.tag--countries').addClass('hide').find('> div').text(countries);
-          }
         
 	});
 
