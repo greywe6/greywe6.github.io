@@ -61,7 +61,7 @@
 	
 		if($(".full-start__tag.tag--countries").is(":empty")) {
 	
-			$(".full-start__tags").hide();
+			$(".full-start__tag.tag--countries").addClass("hide");
 		
 		}
 		
