@@ -44,6 +44,8 @@
             $('body').append(Lampa.Template.get('stlico2_css', {}, true));
             /*Lampa.Template.add('rating_mod_css', "\n   <style>\n .info__rate{background: rgba(0,0,0,.26)!important;}\n .full-start__rate{margin: 0;border-radius: 1em;font-size: .75em;margin-right: 1.5em;position: relative;}\n .full-start__rate>div:first-child{background: rgba(0,0,0,.1)!important;font-size: 3.2em;font-weight: 700;line-height: 1.2;padding: 0.77em 1.01em 0.92em;}\n div{display:block;}\n .full-start__rate>div:last-child{position: absolute;bottom: -0.6em;right: 0;background-color: #171717;color: #fff;padding: 0.31em 0.33em 0.33em 0.34em;border-radius: 0.23em;font-size: 1.0em;}\n .full-start .info__rate>div{background-color: #171717;color: #fff;}\n  </style>");
             $('body').append(Lampa.Template.get('rating_mod_css', {}, true));*/
+            Lampa.Template.add('rating2_mod_css', "\n   <style>\n .info__rate{background: rgba(0,0,0,.15);border-radius: 0.3em;}\n .info__rate span{}\n </style>");
+            $('body').append(Lampa.Template.get('rating2_mod_css', {}, true));
 
             
             //Прячем ненужные разделы в МЕНЮ
