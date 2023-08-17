@@ -55,7 +55,7 @@
             },10);
         }
         if (quality) {
-            html.find('.tag--countries').removeClass('hide').find('> div').text(countries);
+            html.find('.tag--countries').addClass('hide').find('> div').text(countries);
           }
         
 	});
@@ -63,7 +63,7 @@
     function create$d(data) {
     this.create = function () {
         if (quality) {
-            html.find('.tag--countries').removeClass('hide').find('> div').text(countries);
+            html.find('.tag--countries').addClass('hide').find('> div').text(countries);
           }
 
         }
