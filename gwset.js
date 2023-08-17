@@ -9,13 +9,13 @@
     Lampa.Storage.set('parser_use', 'true');//Использовать парсер - Вкл.
     Lampa.Storage.set('poster_size', 'w500');//Разрешение постеров TMDB - Высокое
     Lampa.Storage.set('background_type','simple');//Тип фона - Простой
-    //Lampa.Storage.set('card_interfice_type','');//Интерфейс карточек
+    Lampa.Storage.set('card_interfice_type','old');//Интерфейс карточек
     Lampa.Storage.set('glass_style', 'true');//Стекло - Вкл.
     Lampa.Storage.set('glass_opacity', 'blacked');//Прозрачность стекла - Затемнённая
     Lampa.Storage.set('video_quality_default', '2160');//Качество видео по-умолчанию - 2160p
-    //Lampa.Storage.set('player_timecode', '');//Тайм-код - Продолжить
+    Lampa.Storage.set('player_timecode', '');//Тайм-код - Продолжить
     Lampa.Storage.set('player_size', 'default');//Размер видео - По-умолчанию
-    //Lampa.Storage.set('webos_subs_params','{}');//Сброс субтитров
+    Lampa.Storage.set('webos_subs_params','{}');//Сброс субтитров
 	
     //Видимость постеров TMDB-Proxy
 	Lampa.Storage.set('tmdb_proxy_image', 'http://imagetmdb.com');
