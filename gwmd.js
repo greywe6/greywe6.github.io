@@ -180,7 +180,7 @@ Date.now||(Date.now=function(){return(new Date.getTime())}),function(){"use stri
 				var last_view = 'S' + se + ':E' + ep;
 				if ($('body').find('.full-start__buttons,.full-start-new__buttons').length) {
 					$('.timeline, .card--last_view').remove();
-					$('body').find('.full-start__poster,.full-start-new__poster').append("<div class='card--last_view' style='top:0.8em;right: -.5em;position: absolute;background: #1b7db9;color: #fff;padding: 0.3em 0.4em 0.4em;font-size: 1.3em;-webkit-border-radius: 0.6em;-moz-border-radius: 0.6em;border-radius: 0.6em;'><div style='float:left;margin:-4px 0 -4px -4px' class=''></div>" + last_view +"</div>");
+					$('body').find('.full-start__poster,.full-start-new__poster').append("<div class='card--last_view' style='top:0.8em;right: -.5em;position: absolute;background: #1b7db9;color: #fff;padding: 0.3em 0.4em 0.4em;font-size: 1.3em;-webkit-border-radius: 0.6em;-moz-border-radius: 0.6em;border-radius: 0.6em;'><div style='float:left;margin:-4px 0 -4px -4px' class='card__icon icon--history'></div>" + last_view +"</div>");
 					$('body').find('.timeline').append(Lampa.Timeline.render(viewed.view));
 				}
 				if ($('body').find('.filter--sort').length) $('body').find('.files__left .time-line, .card--last_view').remove();
