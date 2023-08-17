@@ -60,16 +60,6 @@
         
 	});
 
-    function create$d(data) {
-    this.create = function () {
-        if (quality) {
-            html.find('.tag--countries').addClass('hide').find('> div').text(countries);
-          }
-
-        }
-    };
-
-    
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     /*Lampa.Listener.follow('full', function (e) {
