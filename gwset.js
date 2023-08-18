@@ -52,12 +52,13 @@
                 $("[data-action=anime]").eq(0).remove();
                 //Убрать раздел ЛЕНТА из МЕНЮ
                 $("[data-action=feed]").eq(0).remove();
+                $('.card--loaded').first().hide();
             },10);
         }
 
-        if($('div.tag--countries > div').text() == ''){
+        /*if($('div.tag--countries > div').text() == ''){
             $('div.tag--countries').addClass('hide');
-          } 
+          } */
         
 	});
 
