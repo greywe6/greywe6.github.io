@@ -29,10 +29,17 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
-            $(".info__rate span").each(function()
-                  {
-                    $(this).value = 7.0 ? $(this).css('color','red');
-                  });
+            $('div.info__rate span').each(function() {
+                var $elem = $(this),
+                    val = $elem.html(),
+                    color = (val = 7.0) 
+                        ? 'red' 
+                        : (val >= 15 && val < 45) 
+                            ? 'green' 
+                            : 'yellow';
+              
+                $elem.css('color', color);
+            });
             //Удалить кнопку рекламы Премиум в шапке
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	        //Удалить кнопку Лента в шапке
