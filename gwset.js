@@ -29,7 +29,7 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
-            $('div.info__rate span').each(function() {
+            $('.info__rate span').each(function() {
                 var $elem = $(this),
                     val = $elem.html(),
                     color = (val = 7.0) 
