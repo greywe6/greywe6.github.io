@@ -56,10 +56,8 @@
         }
 
         if($('div.tag--countries > div').text() == ' '){
-            $('div.tag--countries').css({'display': 'none'});
-          } else {
-            $('div.tag--countries').css({'display': 'block'});
-          }
+            $('div.tag--countries').addClass('hide');
+          } 
         
 	});
 
