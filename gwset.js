@@ -29,12 +29,12 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
-            $('.info__rate span').each(function() {
+            $('#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__deta > div.info__rate > span').each(function() {
                 var $elem = $(this),
                     val = $elem.html(),
                     color = (val = 7.0) 
                         ? 'red' 
-                        : (val >= 15 && val < 45) 
+                        : (val >= 8 && val < 7) 
                             ? 'green' 
                             : 'yellow';
               
