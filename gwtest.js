@@ -1,11 +1,16 @@
-//НАСТРОЙКИ ПРОГРАММЫ LAMPA by greyweb
-$.fn.colorize = function () {
-   return this.each(function() {
-      var $this = $(this), number = $this.text();
-   	  $this.css({color: number = 7.0 ? "red"
-                      : number < 45 ? "green"
-                      : "yellow"});
-   });
-};
+(function () {
+      var rating = $(".info__rate span").text();
 
-$("div.info__rate > span").colorize();
+    if (content == "7.0") {
+
+        $(this).css("color", "#000000");
+    }
+   if (content == "5.0") {
+
+        $(this).css("color", "#252525");
+    }
+   if (content == "8.0") {
+
+        $(this).css("color", "#f45678");
+    }
+}();
