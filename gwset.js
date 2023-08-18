@@ -55,10 +55,10 @@
             },10);
         }
 
-        if($('.full-start__tag.tag--countries > div').text() == ' '){
-            $('.full-start__tag.tag--countries').css({'display': 'none'});
+        if($('div.tag--countries > div').text() == ' '){
+            $('div.tag--countries').css({'display': 'none'});
           } else {
-            $('.full-start__tag.tag--countries').css({'display': 'block'});
+            $('div.tag--countries').css({'display': 'block'});
           }
         
 	});
