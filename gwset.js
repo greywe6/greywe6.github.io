@@ -57,21 +57,6 @@
         
 	});
 
-    function changeBackground() {
-        let div = $('.full-start__rate.rate--imdb')[0];
-        if (div.innerText >= 7.0) {
-          $('.full-start__rate.rate--imdb').css({
-            "color": "red"
-          });
-        } else {
-          $('.full-start__rate.rate--imdb').css({
-            "color": "green"
-          });
-        }
-      
-      }
-      
-      changeBackground();
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     /*Lampa.Listener.follow('full', function (e) {
