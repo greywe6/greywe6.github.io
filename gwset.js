@@ -30,11 +30,11 @@
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
             $('#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__deta > div.info__rate > span').each(function() {
-                $(this).text() < 3.0 ? $(this).css('color', 'red') : null;
+                $(this).text(rating) < 3.0 ? $(this).css('color', 'red') : null;
               
-                ($(this).text() >= 7.0 && $(this).text() < 10.0) ? $(this).css('color', 'green'): null;
+                ($(this).text(rating) >= 7.0 && $(this).text(rating) < 10.0) ? $(this).css('color', 'green'): null;
               
-                $(this).text() >= 3.0 ? $(this).css('color', 'yellow') : null;
+                $(this).text(rating) >= 3.0 ? $(this).css('color', 'yellow') : null;
               });
             //Удалить кнопку рекламы Премиум в шапке
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
