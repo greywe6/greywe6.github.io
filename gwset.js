@@ -40,6 +40,7 @@
               
                 $elem.css('color', color);
             });
+            $('body').append(Lampa.Template.get('color', {}, true));
             //Удалить кнопку рекламы Премиум в шапке
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	        //Удалить кнопку Лента в шапке
