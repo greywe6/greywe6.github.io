@@ -30,7 +30,7 @@
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
             //Удалить кнопку рекламы Премиум в шапке
-            $('.card.selector.layer--visible.layer--render.card--loaded').first().hide();
+            $('div.card--loaded').first().hide();
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	        //Удалить кнопку Лента в шапке
 	        $('#app > div.head > div > div.head__actions > .open--feed').remove();
