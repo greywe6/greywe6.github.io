@@ -55,7 +55,7 @@
             },10);
         }
 
-        if($('div.tag--countries > div').text() == ' '){
+        if($('div.tag--countries > div').text() == ''){
             $('div.tag--countries').addClass('hide');
           } 
         
