@@ -57,6 +57,21 @@
         
 	});
 
+    function changeBackground() {
+        let div = $('.info__rate span')[0];
+        if (div.innerText >= 7.0) {
+          $('.info__rate span').css({
+            "color": "red"
+          });
+        } else {
+          $('.info__rate span').css({
+            "color": "green"
+          });
+        }
+      
+      }
+      
+      changeBackground();
 
     //Убирает общую кнопку Онлайн и достаёт все кнопки из блока
     /*Lampa.Listener.follow('full', function (e) {
