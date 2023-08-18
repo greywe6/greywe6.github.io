@@ -1,16 +1,10 @@
 (function () {
-      var rating = $(".info__rate span").text();
-
-    if (content == "7.0") {
-
-        $(this).css("color", "#000000");
+     ;[].forEach.call(document.querySelectorAll(".info__rate span"),function(elem){
+    var arr={
+        7.0:"blue",
+        6.0:"green",
+        5.0:"gold"
     }
-   if (content == "5.0") {
-
-        $(this).css("color", "#252525");
-    }
-   if (content == "8.0") {
-
-        $(this).css("color", "#f45678");
-    }
+    elem.style.backgroundColor=arr[elem.innerHTML.toLowerCase().trim()]
+})
 }();
