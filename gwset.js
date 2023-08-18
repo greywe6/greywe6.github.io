@@ -30,6 +30,7 @@
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
             //Удалить кнопку рекламы Премиум в шапке
+            $('#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div:nth-child(1) > div.items-line__body > div > div > div > div:nth-child(1)').hide();
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	        //Удалить кнопку Лента в шапке
 	        $('#app > div.head > div > div.head__actions > .open--feed').remove();
@@ -52,7 +53,6 @@
                 $("[data-action=anime]").eq(0).remove();
                 //Убрать раздел ЛЕНТА из МЕНЮ
                 $("[data-action=feed]").eq(0).remove();
-                $('.card--loaded').first().hide();
             },10);
         }
 
