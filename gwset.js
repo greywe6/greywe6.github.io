@@ -58,13 +58,13 @@
 	});
 
     function changeBackground() {
-        let div = $('.info__rate span')[0];
+        let div = $('.full-start__rate.rate--imdb')[0];
         if (div.innerText >= 7.0) {
-          $('.info__rate span').css({
+          $('.full-start__rate.rate--imdb').css({
             "color": "red"
           });
         } else {
-          $('.info__rate span').css({
+          $('.full-start__rate.rate--imdb').css({
             "color": "green"
           });
         }
