@@ -2,7 +2,7 @@
 $.fn.colorize = function () {
    return this.each(function() {
       var $this = $(this), number = $this.text();
-   	  $this.css({color: number < 15 ? "red"
+   	  $this.css({color: number = 7.0 ? "red"
                       : number < 45 ? "green"
                       : "yellow"});
    });
