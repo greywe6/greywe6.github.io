@@ -29,6 +29,10 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
+            $(".info__rate span").each(function()
+                  {
+                    $(this).value = 7.0 ? $(this).css('color','red');
+                  });
             //Удалить кнопку рекламы Премиум в шапке
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	        //Удалить кнопку Лента в шапке
