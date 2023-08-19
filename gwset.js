@@ -2,6 +2,8 @@
 (function () {
     'use strict';
     Lampa.Platform.tv();
+
+    html.find('.tag--countries').addClass('hide').find('> div').text(countries);
 	
     //Настройки программы по-умолчанию
     Lampa.Storage.set('helper', 'false');//Показывать подсказки - Откл.
@@ -54,7 +56,6 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
-        html.find('.tag--countries').removeClass('hide').find('> div').text(countries);
 	});
 
 
