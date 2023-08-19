@@ -54,11 +54,11 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
-        var ln = $.trim($('div.tag--countries > div').text()); /* trim is important here to remove any white space inside the div */
-        if (ln.length === 0) 
-        {
-            $('div.tag--countries').hide();
-        }
+        document.querySelectorAll(".full-start__tag.tag--countries > div").forEach(function (el) {
+            if (el.textContent.trim() === '') {
+                el.parentNode.style.display = "none";
+            }
+        });
         
 	});
 
