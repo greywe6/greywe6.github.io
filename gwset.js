@@ -3,8 +3,6 @@
     'use strict';
     Lampa.Platform.tv();
 
-    html.find('.tag--countries').addClass('hide').find('> div').text(countries);
-	
     //Настройки программы по-умолчанию
     Lampa.Storage.set('helper', 'false');//Показывать подсказки - Откл.
     Lampa.Storage.set('account_use', 'true');//Синхронизация - Вкл.
