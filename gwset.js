@@ -54,6 +54,9 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
+        if($('.full-start__tag.tag--countries > div').html()==''){
+            $('.full-start__tag.tag--countries').hide();
+           }
         
 	});
 
