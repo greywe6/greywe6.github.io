@@ -54,11 +54,6 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
-        document.querySelectorAll(".full-start__tag.tag--countries > div").forEach(function (el) {
-            if (el.textContent.trim() === '') {
-                el.parentNode.style.display = "none";
-            }
-        });
         
 	});
 
