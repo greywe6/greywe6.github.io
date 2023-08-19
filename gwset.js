@@ -29,7 +29,7 @@
     //Украшение и дополнение стилей
 	Lampa.Listener.follow('app', function(e) {
 	    if(e.type == 'ready') { 
-            //$(document).ready(function() { $('div:empty').remove(); }); 
+            $(document).ready(function() { $('div.full-start__tag.tag--countries > div:empty').remove(); }); 
             //Удалить кнопку рекламы Премиум в шапке
             $('#app > div.head > div > div.head__actions > .open--premium').remove();
 	        //Удалить кнопку Лента в шапке
