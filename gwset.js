@@ -54,7 +54,7 @@
                 $("[data-action=feed]").eq(0).remove();
             },10);
         }
-        if($('.full-start__tag.tag--countries > div').html()==''){
+        if($('#app > div.wrap.layer--height.layer--width > div.wrap__content.layer--height.layer--width > div > div > div > div.activity__body > div > div > div > div > div.full-start > div.full-start__body > div.full-start__left > div.full-start__tags > div.full-start__tag.tag--countries > div').html()==''){
             $('.full-start__tag.tag--countries').hide();
            }
         
