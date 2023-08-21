@@ -7031,6 +7031,7 @@
       var filter = new Lampa.Filter(object);
       var balanser = Lampa.Storage.get('online_mod_balanser', 'filmix');
       var last_bls = Lampa.Storage.field('online_mod_save_last_balanser') === false ? {} : Lampa.Storage.cache('online_mod_last_balanser', 200, {});
+      var balanser_timer;
       var contextmenu_all = [];
 
       if (last_bls[object.movie.id]) {
@@ -8093,6 +8094,7 @@
           }
         }, 1000);
       };
+      
       this.getLastEpisode = function (items) {
         var last_episode = 0;
         items.forEach(function (e) {
