@@ -7115,12 +7115,12 @@
         videocdn: new videocdn(this, object),
         cdnmovies: new cdnmovies(this, object),
         kinobase: new kinobase(this, object),
+        videodb: new videodb(this, object),
+        zetflix: new zetflix(this, object),
         collaps: new collaps(this, object),
         rezka: new rezka(this, object),
         rezka2: new rezka2(this, object),
         filmix: new filmix(this, object),
-        videodb: new videodb(this, object),
-        zetflix: new zetflix(this, object),
         anilibria: new anilibria(this, object),
         kodik: new kodik(this, object),
         kinopub: new kinopub(this, object),
@@ -7135,7 +7135,7 @@
         voice: Lampa.Lang.translate('torrent_parser_voice'),
         source: Lampa.Lang.translate('settings_rest_source')
       };
-      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'collaps', 'rezka', 'rezka2', 'filmix', 'videodb', 'zetflix', 'anilibria', 'kodik'];
+      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'videodb', 'zetflix', 'collaps', 'rezka', 'rezka2', 'filmix'];
 
       if (Utils.isDebug()) {
         filter_sources.push('kinopub');
@@ -8094,7 +8094,7 @@
           }
         }, 1000);
       };
-      
+
       this.getLastEpisode = function (items) {
         var last_episode = 0;
         items.forEach(function (e) {
@@ -8164,12 +8164,12 @@
         sources.videocdn.destroy();
         sources.cdnmovies.destroy();
         sources.kinobase.destroy();
+        sources.videodb.destroy();
+        sources.zetflix.destroy();
         sources.collaps.destroy();
         sources.rezka.destroy();
         sources.rezka2.destroy();
         sources.filmix.destroy();
-        sources.videodb.destroy();
-        sources.zetflix.destroy();
         sources.anilibria.destroy();
         sources.kodik.destroy();
         sources.kinopub.destroy();
