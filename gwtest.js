@@ -7029,7 +7029,7 @@
       });
       var files = new Lampa.Files(object);
       var filter = new Lampa.Filter(object);
-      var balanser = Lampa.Storage.get('online_mod_balanser', 'filmix');
+      var balanser = Lampa.Storage.get('online_mod_balanser', 'videocdn');
       var last_bls = Lampa.Storage.field('online_mod_save_last_balanser') === false ? {} : Lampa.Storage.cache('online_mod_last_balanser', 200, {});
       var balanser_timer;
       var contextmenu_all = [];
@@ -7144,7 +7144,7 @@
 
 
       if (filter_sources.indexOf(balanser) == -1) {
-        balanser = 'filmix';
+        balanser = 'videocdn';
         Lampa.Storage.set('online_mod_balanser', balanser);
       }
 
