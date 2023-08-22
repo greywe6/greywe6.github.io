@@ -7145,7 +7145,7 @@
         voice: Lampa.Lang.translate('torrent_parser_voice'),
         source: Lampa.Lang.translate('settings_rest_source')
       };
-      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'videodb', 'zetflix', 'collaps', 'rezka', 'rezka2', 'filmix', 'filmix2', 'hdvb'];
+      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'videodb', 'zetflix', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
 
       if (Utils.isDebug()) {
         filter_sources.push('kinopub');
