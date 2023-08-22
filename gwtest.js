@@ -1,4 +1,4 @@
-//17.08.2023 - Fix zetflix
+//22.08.2023 - Change default balancer to videocdn
 
 (function () {
     'use strict';
@@ -3569,10 +3569,11 @@
       }
     }
 
-    function filmix(component, _object) {
+    function filmix(component, _object, _debug) {
       var network = new Lampa.Reguest();
       var extract = {};
       var object = _object;
+      var debug = _debug;
       var embed = 'http://filmixapp.cyou/api/v2/';
       var select_title = '';
       var prefer_http = Lampa.Storage.field('online_mod_prefer_http') === true;
@@ -3587,6 +3588,11 @@
       var secret_timestamp = null;
 
       function decodeSecretToken(callback) {
+        if (!debug) {
+          if (callback) callback();
+          return;
+        }
+
         var timestamp = new Date().getTime();
         var cache_timestamp = timestamp - 1000 * 60 * 10;
 
@@ -3595,7 +3601,7 @@
           return;
         }
 
-        secret_url = Utils.decodeSecret([80, 68, 77, 68, 9, 22, 27, 5, 4, 22, 7, 23, 5, 4, 0, 26, 1, 4, 15, 31, 95, 81, 93, 90, 27]);
+        secret_url = Utils.decodeSecret([80, 68, 77, 68, 9, 22, 27, 1, 13, 12, 30, 11, 2, 29, 11, 6, 9, 26, 10, 1, 12, 27, 85, 92, 90, 83, 27]);
         var url = Utils.decodeSecret([80, 68, 77, 68, 64, 3, 27, 31, 86, 79, 81, 23, 64, 92, 22, 64, 85, 89, 72, 31, 81, 85, 64, 81, 82, 89, 89, 81, 72, 23, 64, 75, 77]);
 
         if (!url.startsWith('http')) {
@@ -3626,8 +3632,11 @@
         };
       }
 
-      var token = Lampa.Storage.get('filmix_token', '');
-      var dev_token = '?user_dev_apk=2.0.1&user_dev_id=1d07ba88e4b45d30&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=' + (token || 'aaaabbbbccccddddeeeeffffaaaabbbb') + '&user_dev_vendor=Xiaomi';
+      var dev_id = debug ? '' : '1d07ba88e4b45d30';
+      var token = debug ? '' : Lampa.Storage.get('filmix_token', '');
+      var token2 = debug ? Utils.decodeSecret([15, 1, 12, 6, 86, 1, 80, 86, 7, 93, 81, 95, 2, 6, 91, 80, 83, 12, 14, 83, 93, 87, 2, 14, 1, 86, 6, 10, 5, 92, 86, 11]) : token;
+      var dev_token = '?user_dev_apk=2.0.1&user_dev_id=' + dev_id + '&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=' + (token || 'aaaabbbbccccddddeeeeffffaaaabbbb') + '&user_dev_vendor=Xiaomi';
+      var dev_token2 = '?user_dev_apk=2.0.1&user_dev_id=' + dev_id + '&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=' + (token2 || 'aaaabbbbccccddddeeeeffffaaaabbbb') + '&user_dev_vendor=Xiaomi';
       /**
        * Начать поиск
        * @param {Object} _object 
@@ -3733,7 +3742,7 @@
       this.find = function (filmix_id) {
         var url = embed;
 
-        if (!window.filmix.is_max_qualitie && token) {
+        if (!debug && !window.filmix.is_max_qualitie && token) {
           window.filmix.is_max_qualitie = true;
           network.clear();
           network.timeout(10000);
@@ -3750,7 +3759,7 @@
         function end_search(filmix_id) {
           network.clear();
           network.timeout(10000);
-          network.silent(url + 'post/' + filmix_id + dev_token, function (found) {
+          network.silent(url + 'post/' + filmix_id + (secret ? dev_token2 : dev_token), function (found) {
             if (found && Object.keys(found).length) success(found);else component.emptyForQuery(select_title);
           }, function (a, c) {
             component.empty(network.errorDecode(a, c));
@@ -6522,7 +6531,7 @@
       var network = new Lampa.Reguest();
       var extract = {};
       var results = [];
-      var backend = 'http://back.freebie.tom.ru/lampa/hdvburl?v=2016';
+      var backend = 'http://back.freebie.tom.ru/lampa/hdvburl?v=2021';
       var object = _object;
       var select_title = '';
       var select_id = '';
@@ -7124,6 +7133,7 @@
         anilibria: new anilibria(this, object),
         kodik: new kodik(this, object),
         kinopub: new kinopub(this, object),
+        filmix2: new filmix(this, object, true),
         hdvb: new hdvb(this, object)
       };
       var last;
@@ -7135,10 +7145,11 @@
         voice: Lampa.Lang.translate('torrent_parser_voice'),
         source: Lampa.Lang.translate('settings_rest_source')
       };
-      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'videodb', 'zetflix', 'collaps', 'rezka', 'rezka2', 'filmix', 'hdvb'];
+      var filter_sources = ['videocdn', 'cdnmovies', 'kinobase', 'videodb', 'zetflix', 'collaps', 'rezka', 'rezka2', 'filmix', 'filmix2', 'hdvb'];
 
       if (Utils.isDebug()) {
         filter_sources.push('kinopub');
+        filter_sources.push('filmix2');
         filter_sources.push('hdvb');
       } // шаловливые ручки
 
@@ -7516,7 +7527,7 @@
             sources[balanser].search(object, +object.movie.kinopoisk_id);
           } else if (!object.clarification && object.movie.imdb_id && ['rezka', 'collaps', 'videodb', 'zetflix', 'kodik', 'hdvb'].indexOf(balanser) >= 0) {
             if (Lampa.Storage.field('online_mod_skip_kp_search') === true) vcdn_search_imdb();else kp_search_imdb();
-          } else if (['rezka2', 'kinobase', 'filmix', 'cdnmovies', 'anilibria', 'kodik', 'kinopub'].indexOf(balanser) >= 0) {
+          } else if (['rezka2', 'kinobase', 'filmix', 'filmix2', 'cdnmovies', 'anilibria', 'kodik', 'kinopub'].indexOf(balanser) >= 0) {
             _this2.extendChoice();
 
             sources[balanser].search(object);
@@ -7525,7 +7536,7 @@
           }
         };
 
-        if (!object.movie.imdb_id && (object.movie.source == 'tmdb' || object.movie.source == 'cub') && ['kinobase', 'filmix', 'anilibria'].indexOf(balanser) == -1) {
+        if (!object.movie.imdb_id && (object.movie.source == 'tmdb' || object.movie.source == 'cub') && ['kinobase', 'filmix', 'filmix2', 'anilibria'].indexOf(balanser) == -1) {
           var tmdburl = (object.movie.name ? 'tv' : 'movie') + '/' + object.movie.id + '/external_ids?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru';
           var baseurl = typeof Lampa.TMDB !== 'undefined' ? Lampa.TMDB.api(tmdburl) : 'http://api.themoviedb.org/3/' + tmdburl;
           network.clear();
@@ -8173,6 +8184,7 @@
         sources.anilibria.destroy();
         sources.kodik.destroy();
         sources.kinopub.destroy();
+        sources.filmix2.destroy();
         sources.hdvb.destroy();
         window.removeEventListener('resize', minus);
       };
