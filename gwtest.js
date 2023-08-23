@@ -1,4 +1,4 @@
-//22.08.2023 - Change default balancer to videocdn
+//23.08.2023 - Debug
 
 (function () {
     'use strict';
@@ -3601,7 +3601,7 @@
           return;
         }
 
-        secret_url = Utils.decodeSecret([80, 68, 77, 68, 9, 22, 27, 1, 13, 12, 30, 11, 2, 29, 11, 6, 9, 26, 10, 1, 12, 27, 85, 92, 90, 83, 27]);
+        secret_url = Utils.decodeSecret([80, 68, 77, 68, 9, 22, 27, 4, 1, 22, 1, 12, 26, 2, 12, 12, 30, 5, 0, 8, 22, 82, 86, 87, 87, 31]);
         var url = Utils.decodeSecret([80, 68, 77, 68, 64, 3, 27, 31, 86, 79, 81, 23, 64, 92, 22, 64, 85, 89, 72, 31, 81, 85, 64, 81, 82, 89, 89, 81, 72, 23, 64, 75, 77]);
 
         if (!url.startsWith('http')) {
