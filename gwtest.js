@@ -1,4 +1,4 @@
-//23.08.2023 - Debug
+//27.08.2023 - Fix rezka voice choice
 
 (function () {
     'use strict';
@@ -835,7 +835,12 @@
         network.timeout(10000);
         network["native"](embed + 'embed/' + id, function (str) {
           extractData(str);
-          if (extract.voice.length) call(getChoiceVoice());else component.emptyForQuery(select_title);
+          if (extract.voice.length) {
+            var voice = getChoiceVoice();
+            choice.voice_id = voice.id;
+            choice.voice_name = voice.name;
+            call(voice);
+          } else component.emptyForQuery(select_title);
         }, function (a, c) {
           if (a.status == 404 && a.responseText && a.responseText.indexOf('Видео не найдено') !== -1 || a.status == 0 && a.statusText !== 'timeout') {
             component.emptyForQuery(select_title);
