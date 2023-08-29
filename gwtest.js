@@ -1,4 +1,4 @@
-//28.08.2023 - Fix rezka2 voice name (language)
+//27.08.2023 - Fix rezka voice choice
 
 (function () {
     'use strict';
@@ -619,7 +619,7 @@
             translations.forEach(function (translation_id) {
               var element = temp[translation_id];
               filtred.push({
-                title: element.translation.title || element.translation.short_title || element.translation.shorter_title || select_title,
+                title: element.translation.title || select_title,
                 quality: element.max_quality + 'p' + (element.source_quality ? ' - ' + element.source_quality.toUpperCase() : ''),
                 info: '',
                 max_quality: element.max_quality,
@@ -1565,13 +1565,9 @@
 
         if (voices) {
           var select = $(voices[1]);
-          var title = ($(this).attr('title') || $(this).text() || '').trim();
-            $('img', this).each(function () {
-              var lang = ($(this).attr('title') || $(this).attr('alt') || '').trim();
-              if (lang && title.indexOf(lang) == -1) title += ' (' + lang + ')';
-            });
+          $('.b-translator__item', select).each(function () {
             extract.voice.push({
-              name: title,
+              name: $(this).attr('title') || $(this).text(),
               id: $(this).attr('data-translator_id'),
               is_camrip: $(this).attr('data-camrip'),
               is_ads: $(this).attr('data-ads'),
@@ -3641,10 +3637,11 @@
         };
       }
 
-      var dev_id = '1d07ba88e4b45d30';
-      var token = Lampa.Storage.get('filmix_token', '');
+      var dev_id = debug ? '' : '1d07ba88e4b45d30';
+      var token = debug ? '' : Lampa.Storage.get('filmix_token', '');
+      var token2 = debug ? Utils.decodeSecret([15, 1, 12, 6, 86, 1, 80, 86, 7, 93, 81, 95, 2, 6, 91, 80, 83, 12, 14, 83, 93, 87, 2, 14, 1, 86, 6, 10, 5, 92, 86, 11]) : token;
       var dev_token = '?user_dev_apk=2.0.1&user_dev_id=' + dev_id + '&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=' + (token || 'aaaabbbbccccddddeeeeffffaaaabbbb') + '&user_dev_vendor=Xiaomi';
-      var abuse_token = '?user_dev_apk=2.0.1&user_dev_id=&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=7152e8df3eaf65bdc86cdc175f225eb8&user_dev_vendor=Xiaomi';
+      var dev_token2 = '?user_dev_apk=2.0.1&user_dev_id=' + dev_id + '&user_dev_name=Xiaomi&user_dev_os=12&user_dev_token=' + (token2 || 'aaaabbbbccccddddeeeeffffaaaabbbb') + '&user_dev_vendor=Xiaomi';
       /**
        * Начать поиск
        * @param {Object} _object 
@@ -3656,7 +3653,7 @@
 
         object = _object;
         select_title = object.search || object.movie.title;
-        if (this.wait_similars && data && data[0].is_similars) return find(data[0].id);
+        if (this.wait_similars && data && data[0].is_similars) return this.find(data[0].id);
         var search_date = object.search_date || !object.clarification && (object.movie.release_date || object.movie.first_air_date || object.movie.last_air_date) || '0000';
         var search_year = parseInt((search_date + '').slice(0, 4));
         var orig = object.movie.original_title || object.movie.original_name;
@@ -3731,7 +3728,7 @@
               }
             }
 
-            if (cards.length == 1 && is_sure) find(cards[0].id);else if (json.length) {
+            if (cards.length == 1 && is_sure) _this.find(cards[0].id);else if (json.length) {
               _this.wait_similars = true;
               json.forEach(function (c) {
                 c.is_similars = true;
@@ -3747,7 +3744,7 @@
         });
       };
 
-      function find(filmix_id, abuse) {
+      this.find = function (filmix_id) {
         var url = embed;
 
         if (!debug && !window.filmix.is_max_qualitie && token) {
@@ -3767,15 +3764,13 @@
         function end_search(filmix_id) {
           network.clear();
           network.timeout(10000);
-          network.silent(url + 'post/' + filmix_id + (abuse ? abuse_token : dev_token), function (found) {
-            if (found && Object.keys(found).length) {
-              if (!abuse && checkAbuse(found)) find(filmix_id, true);else success(found);
-            } else component.emptyForQuery(select_title);
+          network.silent(url + 'post/' + filmix_id + (secret ? dev_token2 : dev_token), function (found) {
+            if (found && Object.keys(found).length) success(found);else component.emptyForQuery(select_title);
           }, function (a, c) {
             component.empty(network.errorDecode(a, c));
           });
         }
-      }
+      };
 
       this.extendChoice = function (saved) {
         Lampa.Arrays.extend(choice, saved, true);
@@ -3833,34 +3828,6 @@
         filter();
         append(filtred());
       }
-
-      function checkAbuse(data) {
-        var pl_links = data.player_links || {};
-
-        if (pl_links.movie && Object.keys(pl_links.movie).length > 0) {
-
-          for (var ID in pl_links.movie) {
-            var file = pl_links.movie[ID];
-            var stream_url = file.link || '';
-            if (prefer_http) stream_url = stream_url.replace('https://', 'http://');
-
-            if (file.translation === 'Заблокировано правообладателем!' && stream_url.indexOf('/abuse_') !== -1) {
-              var found = stream_url.match(/^(https?:\/\/).*(\.com\/s\/[^\/]*\/)/);
-
-              if (found) {
-                if (!(secret_timestamp && secret && secret_url)) {
-                  secret_url = found[1];
-                  secret = found[2];
-                }
-
-                return true;
-              }
-            }
-          }
-        }
-
-        return false;
-      }
       /**
        * Получить информацию о фильме
        * @param {Arrays} data
@@ -3869,7 +3836,7 @@
 
       function extractData(data) {
         extract = {};
-        var filmix_max_qualitie = debug ? 2160 : window.filmix.max_qualitie;
+        var filmix_max_qualitie = secret ? 2160 : window.filmix.max_qualitie;
         var pl_links = data.player_links || {};
 
         if (pl_links.playlist && Object.keys(pl_links.playlist).length > 0) {
